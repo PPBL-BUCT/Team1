@@ -1,15 +1,16 @@
-package com.jzj.socket;
+package com.socket;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ClsMainServer {
-	//public static List<SocketTransceiver> userList = new ArrayList<SocketTransceiver>();
+ public class ClsMainServer {
+    public static List<SocketTransceiver> userlist=new ArrayList<SocketTransceiver>();
 	public static void main(String[] args) {
-		
 		int port = 1234;
-		TcpServer server = new TcpServer(port) {
+		TcpServer server = new TcpServer(port) {//TcpServer 类的变量server=新建一个对象TcpServer 
 
 			@Override
 			public void onConnect(SocketTransceiver client) {
-				printInfo(client, "Connect");
+				printInfo(client, "Connect"); 
 			}
 
 			@Override
@@ -17,11 +18,25 @@ public class ClsMainServer {
 				System.out.println("Client Connect Failed");
 			}
 
-			@Override
-			public void onReceive(SocketTransceiver client, String s) {
-
-				printInfo(client, "Send Data: " + s);
-				client.send(s);
+			public void onReceive(SocketTransceiver client, String s, int type) {
+				if(type==0) {
+					//通知用户某人上线
+					//把client对象存起来
+				for(int i =0;i<userlist.size();i++) {
+					userlist.get(i).send("用户"+client.name+ "上线了");
+				     }
+				userlist.add(client);
+				}else if(type==1) {
+					for(int i=0;i<userlist.size();i++) {
+					     userlist.get(i).send("用户"+client.name+"下线了");
+					}
+					userlist.remove(client);
+				}else if(type==2) {
+					for(int i=0;i<userlist.size();i++) {
+					     userlist.get(i).send(client.name+":"+s);
+					}
+				}
+				
 			}
 
 			@Override
@@ -32,6 +47,11 @@ public class ClsMainServer {
 			@Override
 			public void onServerStop() {
 				System.out.println("--------Server Stopped--------");
+			}
+
+			public void onReceive(SocketTransceiver client, String s) {
+				// TODO Auto-generated method stub
+				
 			}
 		};
 		System.out.println("--------Server Started--------");

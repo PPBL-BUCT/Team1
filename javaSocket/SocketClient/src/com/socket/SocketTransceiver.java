@@ -1,4 +1,4 @@
-package com.jzj.socket;
+package com.socket;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -19,7 +19,6 @@ public abstract class SocketTransceiver implements Runnable {
 	protected DataInputStream in;
 	protected DataOutputStream out;
 	private boolean runFlag;
-	protected int type;
 
 	/**
 	 * 实例化
@@ -101,7 +100,7 @@ public abstract class SocketTransceiver implements Runnable {
 		while (runFlag) {
 			try {
 				final String s = in.readUTF();
-				this.onReceive(addr, s, type);
+				this.onReceive(addr, s);
 			} catch (IOException e) {
 				// 连接被断开(被动)
 				runFlag = false;
@@ -131,7 +130,7 @@ public abstract class SocketTransceiver implements Runnable {
 	 * @param s
 	 *            收到的字符串
 	 */
-	public abstract void onReceive(InetAddress addr, String s,int type);
+	public abstract void onReceive(InetAddress addr, String s);
 
 	/**
 	 * 连接断开
