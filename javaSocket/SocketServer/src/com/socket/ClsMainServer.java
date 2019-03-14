@@ -17,23 +17,22 @@ import java.util.List;
 			public void onConnectFailed() {
 				System.out.println("Client Connect Failed");
 			}
-
-			public void onReceive(SocketTransceiver client, String s, int type) {
-				if(type==0) {
+			@Override
+			public void onReceive(SocketTransceiver client, String s) {
+				//client.send("收到"+client.getName()+"发的"+s);
+				String[] msg = s.split("qzjk");
+				if(msg[0].equals("0")) {
 					//通知用户某人上线
 					//把client对象存起来
+					client.setName(msg[1]);
 				for(int i =0;i<userlist.size();i++) {
-					userlist.get(i).send("用户"+client.name+ "上线了");
+					userlist.get(i).send("用户"+client.getName()+ "上线了");
 				     }
 				userlist.add(client);
-				}else if(type==1) {
+				}
+				else if(msg[0].equals("2")) {
 					for(int i=0;i<userlist.size();i++) {
-					     userlist.get(i).send("用户"+client.name+"下线了");
-					}
-					userlist.remove(client);
-				}else if(type==2) {
-					for(int i=0;i<userlist.size();i++) {
-					     userlist.get(i).send(client.name+":"+s);
+					     userlist.get(i).send(client.getName()+":"+s);
 					}
 				}
 				
@@ -42,6 +41,11 @@ import java.util.List;
 			@Override
 			public void onDisconnect(SocketTransceiver client) {
 				printInfo(client, "Disconnect");
+				for(int i=0;i<userlist.size();i++) {
+				     userlist.get(i).send("用户"+client.getName()+"下线了");
+				}
+				userlist.remove(client);
+					
 			}
 
 			@Override
@@ -49,10 +53,6 @@ import java.util.List;
 				System.out.println("--------Server Stopped--------");
 			}
 
-			public void onReceive(SocketTransceiver client, String s) {
-				// TODO Auto-generated method stub
-				
-			}
 		};
 		System.out.println("--------Server Started--------");
 		server.start();

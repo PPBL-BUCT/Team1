@@ -1,5 +1,7 @@
 package com.socket;
 
+import java.util.Scanner;
+
 public class ClsMainClient {
 
 	public static void main(String[] args) {
@@ -27,17 +29,30 @@ public class ClsMainClient {
 		};
 		
 		//c1.connect("127.0.0.1", 1234);
+		Scanner sc = new Scanner(System.in);
+		System.out.println("请输入名字：");
+		String a=sc.nextLine();
+		c1.setName(a);
+		c1.connect("127.0.0.1", 1234);
+		delay();
 		while (true) {
-			//TODO 刘涛
-			//在这里写
-			//1 请用户输入名字
-			//2 得到名字之后给服务器发消息，类型是0，意思是你上线了
-			//3下线先给服务器发消息，类型1
-			//捕捉特定输入，下线指令
-			//收到啥，就打印啥
-			//关于流程上不懂得，先在群里找李大成写的那个任务分解，再在群里问，最后再问我
+			if (c1.isConnected()) {
+				c1.getTransceiver().send("0qzjk"+a);
+				break;
+			}
+		}
+		System.out.println("连上了");
+		while (true) {
+			a=sc.nextLine();
+			c1.getTransceiver().send("2qzjk"+a);
 		}
 	}
-
+	static void delay() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

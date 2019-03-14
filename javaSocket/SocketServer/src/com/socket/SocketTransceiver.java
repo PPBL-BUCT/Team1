@@ -18,9 +18,8 @@ public abstract class SocketTransceiver implements Runnable {
 	protected InetAddress addr;
 	protected DataInputStream in;
 	protected DataOutputStream out;
-	protected String name;
 	private boolean runFlag;
-	protected int type;
+	private String name;
 
 	/**
 	 * 实例化
@@ -102,7 +101,7 @@ public abstract class SocketTransceiver implements Runnable {
 		while (runFlag) {
 			try {
 				final String s = in.readUTF();
-				this.onReceive(addr, s, type);
+				this.onReceive(addr, s);
 			} catch (IOException e) {
 				// 连接被断开(被动)
 				runFlag = false;
@@ -132,7 +131,7 @@ public abstract class SocketTransceiver implements Runnable {
 	 * @param s
 	 *            收到的字符串
 	 */
-	public abstract void onReceive(InetAddress addr, String s,int type);
+	public abstract void onReceive(InetAddress addr, String s);
 
 	/**
 	 * 连接断开
@@ -143,4 +142,12 @@ public abstract class SocketTransceiver implements Runnable {
 	 *            连接到的Socket地址
 	 */
 	public abstract void onDisconnect(InetAddress addr);
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

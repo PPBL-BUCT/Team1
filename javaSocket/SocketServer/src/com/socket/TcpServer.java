@@ -13,7 +13,7 @@ import java.util.List;
  * @author jzj1993
  * @since 2015-2-22
  */
-public abstract class TcpServer implements Runnable { //多线程创建的两种方式：thread 和 runnable
+public abstract class TcpServer implements Runnable {
 
 	private int port;
 	private boolean runFlag;
@@ -24,12 +24,11 @@ public abstract class TcpServer implements Runnable { //多线程创建的两种
 	 * 
 	 * @param port
 	 *            监听的端口
-	 */ 
+	 */
 	public TcpServer(int port) {
 		this.port = port;
 	}
 
-	
 	/**
 	 * 启动服务器
 	 * <p>
@@ -92,8 +91,8 @@ public abstract class TcpServer implements Runnable { //多线程创建的两种
 		SocketTransceiver client = new SocketTransceiver(socket) {
 
 			@Override
-			public void onReceive(InetAddress addr, String s, int type) {
-				TcpServer.this.onReceive(this, s, type);//onReceive在主函数中定义
+			public void onReceive(InetAddress addr, String s) {
+				TcpServer.this.onReceive(this, s);
 			}
 
 			@Override
@@ -134,7 +133,7 @@ public abstract class TcpServer implements Runnable { //多线程创建的两种
 	 * @param s
 	 *            字符串
 	 */
-	public abstract void onReceive(SocketTransceiver client, String s, int type);
+	public abstract void onReceive(SocketTransceiver client, String s);
 
 	/**
 	 * 客户端：连接断开
