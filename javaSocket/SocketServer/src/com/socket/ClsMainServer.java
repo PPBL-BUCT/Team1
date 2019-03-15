@@ -20,8 +20,8 @@ import java.util.List;
 			@Override
 			public void onReceive(SocketTransceiver client, String s) {
 				//client.send("收到"+client.getName()+"发的"+s);
-				String[] msg = s.split("qzjk");
-				if(msg[0].equals("0")) {
+				String[] msg = s.split("qzjk");//按照分隔符分开
+				if(msg[0].equals("0")) {//分隔符前的字符相当于type
 					//通知用户某人上线
 					//把client对象存起来
 					client.setName(msg[1]);
