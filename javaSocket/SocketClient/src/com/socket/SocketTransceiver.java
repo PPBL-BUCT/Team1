@@ -19,6 +19,7 @@ public abstract class SocketTransceiver implements Runnable {
 	protected DataInputStream in;
 	protected DataOutputStream out;
 	private boolean runFlag;
+	private String nameString;
 
 	/**
 	 * 实例化
@@ -141,4 +142,14 @@ public abstract class SocketTransceiver implements Runnable {
 	 *            连接到的Socket地址
 	 */
 	public abstract void onDisconnect(InetAddress addr);
+
+	public String getNameString() {
+		return nameString;
+	}
+
+	public void setNameString(String nameString) {
+		this.nameString = nameString;
+	}
+
+	
 }

@@ -32,7 +32,7 @@ import java.util.List;
 				}
 				else if(msg[0].equals("2")) {
 					for(int i=0;i<userlist.size();i++) {
-					     userlist.get(i).send(client.getName()+":"+s);
+					     userlist.get(i).send(client.getName()+":"+msg[1]);
 					}
 				}
 				
