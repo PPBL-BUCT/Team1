@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.venus.domain.User;
 
-public interface UserService {  
-    
+public interface UserService {
+
 	User selectUserById(Integer userId);
-    
-    List<User> selectAllUser();
-}  
+
+	List<User> selectAllUser();
+}

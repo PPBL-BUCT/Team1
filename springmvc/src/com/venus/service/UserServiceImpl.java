@@ -8,20 +8,20 @@ import org.springframework.stereotype.Service;
 import com.venus.dao.UserDao;
 import com.venus.domain.User;
 
-@Service  
-public class UserServiceImpl implements UserService{  
-    @Autowired  
-    private UserDao userDao;  
-  
-    public User selectUserById(Integer userId) {  
-        return userDao.selectUserById(userId);  
-          
-    }
+@Service
+public class UserServiceImpl implements UserService {
+	@Autowired
+	private UserDao userDao;
+
+	public User selectUserById(Integer userId) {
+		return userDao.selectUserById(userId);
+
+	}
 
 	@Override
 	public List<User> selectAllUser() {
 		// TODO Auto-generated method stub
 		return userDao.selectAllUser();
-	}  
-  
-}  
+	}
+
+}
