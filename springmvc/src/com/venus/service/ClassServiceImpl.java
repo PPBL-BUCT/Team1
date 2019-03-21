@@ -3,21 +3,20 @@ package com.venus.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.venus.dao.ClassDao;
-import com.venus.dao.UserDao;
 import com.venus.domain.Class1;
-import com.venus.domain.User;
 
-public class ClassServiceImpl implements ClassService{
-	@Autowired  
-    private ClassDao classDao;  
-	
-	
+@Service
+public class ClassServiceImpl implements ClassService {
+	@Autowired
+	private ClassDao classDao;
+
 	@Override
 	public Class1 selectById(Integer id) {
 		return classDao.selectById(id);
-		 
+
 	}
 
 	@Override

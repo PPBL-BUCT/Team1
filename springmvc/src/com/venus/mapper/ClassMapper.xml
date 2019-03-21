@@ -16,7 +16,7 @@
     </select>
     
     <!-- 查询所有记录 -->  
-    <select id="selectAllUser" resultMap="BaseResultMap">  
+    <select id="selectAll" resultMap="BaseResultMap">  
         SELECT * FROM class
     </select>  
     

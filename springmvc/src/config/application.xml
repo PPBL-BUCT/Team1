@@ -51,7 +51,7 @@
     <!-- 配置Mybatis的文件 ，mapperLocations配置**Mapper.xml文件位置，configLocation配置mybatis-config文件位置-->  
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
         <property name="dataSource" ref="dataSource" />  
-        <property name="mapperLocations" value="classpath*:com/venus/mapper/**/*.xml"/>    
+        <property name="mapperLocations" value="classpath*:com/venus/mapper/*.xml"/>    
         <property name="configLocation" value="classpath:config/mybatis/mybatis-config.xml" />  
     </bean>  
   
