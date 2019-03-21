@@ -1,12 +1,12 @@
 mysql -uroot -proot
 
-DROP USER 'bankdb'@'%';
+DROP USER 'root'@'%';
 
-CREATE USER 'bankdb'@'%' IDENTIFIED BY "bankdb";
+CREATE USER 'root'@'%' IDENTIFIED BY "root";
 
 flush privileges;
 
-SET PASSWORD FOR 'bankdb'@'%'=PASSWORD('bankdb');
+SET PASSWORD FOR 'root'@'%'=PASSWORD('');
 
 drop database springdb;
 

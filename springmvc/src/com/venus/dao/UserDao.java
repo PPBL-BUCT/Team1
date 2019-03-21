@@ -9,4 +9,6 @@ public interface UserDao {
     public User selectUserById(Integer userId);  
     
     public List<User> selectAllUser();  
+    
+    
 }  
