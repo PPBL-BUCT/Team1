@@ -31,6 +31,13 @@ public class ClassController {
 		return mav;
 	}
 
+	@RequestMapping("toAddClass.do")
+	public ModelAndView toAdd(HttpServletRequest request,
+			HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView("class_edit"); // html文件名
+		return mav;
+	}
+
 	@RequestMapping(value = "ClassList.do")
 	@ResponseBody
 	public DataGrid ClassList(HttpServletRequest request,

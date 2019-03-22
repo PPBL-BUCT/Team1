@@ -35,11 +35,14 @@ public class ClassServiceImpl implements ClassService {
 	@Override
 	public String deleteById(Integer id) {
 		// 先从数据库取出来
-
+		Class1 class1 = classDao.selectById(id);
 		// 判断人数是否为0
-
+		if (class1.getNumber() > 0) {
+			return "人数大于0，无法删除";
+		}
 		// 可以删的话把class的status改为0
-
+		class1.setStatus(0);
+		classDao.update(class1);
 		// 如果任何一步出错就return "错误提醒"
 		return null;
 	}

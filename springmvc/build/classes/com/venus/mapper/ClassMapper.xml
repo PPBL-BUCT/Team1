@@ -18,7 +18,7 @@
     
     <!-- 查询所有记录 -->  
     <select id="selectAll" resultMap="BaseResultMap">  
-        SELECT * FROM class
+        SELECT * FROM class where status=1
     </select>  
     
     <!-- 查询数据条目 -->
@@ -44,7 +44,7 @@
                 status = #{status,jdbcType=INTEGER},
             </if>
             <if test="yearValue != null ">
-                yearValue = #{yearValue,jdbcType=INTEGER},
+                yearValue = #{yearValue,jdbcType=INTEGER}
             </if>
         where id = #{id,jdbcType=INTEGER}
     </update>
