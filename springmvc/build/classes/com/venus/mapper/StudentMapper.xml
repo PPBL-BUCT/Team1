@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.venus.dao.StudentDao">     
+<!--设置domain类和数据库中表的字段一一对应，注意数据库字段和domain类中的字段名称不致，此处一定要！-->  
+        <resultMap id="BaseResultMap" type="com.venus.domain.Student">  
+        <id column="id" property="Id" jdbcType="INTEGER" />  
+        <result column="name" property="Name" jdbcType="VARCHAR" />  
+        <result column="classId" property="ClassId" jdbcType="INTEGER" />  
+        <result column="sex" property="Sex" jdbcType="VARCHAR" />  
+        <result column="birthday" property="Birthday" jdbcType="DATE" />  
+        <result column="nation" property="Nation" jdbcType="VARCHAR" />  
+        <result column="status" property="Stutas" jdbcType="INTEGER" />  
+    </resultMap>  
+    <!-- 查询单条记录 -->  
+    <select id="selectStudentById" parameterType="java.lang.Integer" resultMap="BaseResultMap">  
+        SELECT * FROM student WHERE id = #{Id}  
+    </select>
+    
+    <!-- 查询所有记录 -->  
+    <select id="selectAllStudent" resultMap="BaseResultMap">  
+        SELECT * FROM student
+    </select>  
+
+
+    <!-- 增加学生信息 -->
+    <insert id="addStudent" parameterType="com.venus.domain.Student"
+        useGeneratedKeys="true" keyProperty="id">
+       INSERT INTO student VALUES(#{id}, #{name}, #{classId}, #{sex}, #{birthday},#{nation},#{status})
+    </insert>
+    
+    <!-- 删除学生信息 -->
+    <delete id="deleteStudent" parameterType="com.venus.domain.Student">
+      UPDATE student set status=0 WHERE id = #{id}
+    </delete>
+    
+    <!-- 修改学生信息 -->
+    <update id="updateStudent" parameterType="com.venus.domain.Student">
+      UPDATE student id = #{Id}, name = #{Name},
+        classId = #{ClassId}, sex = #{sex}, birthday = #{birthday},nation=#{Nation}，status=#{Status} WHERE id = #{id}
+    </update>
+    
+</mapper>
+    
+    
+    
