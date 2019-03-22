@@ -1,20 +1,22 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=GB18030"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 
 <html>
 <head>
 
     <!-- 引入JQ和Bootstrap -->
-	<script src="../springmvc/js/jquery.min.js"></script>
-	<script src="../springmvc/js/bootstrap.min.js"></script>
-	<script src="../springmvc/js/bootstrap-table.min.js"></script>
-	<script src="../springmvc/js/jquery.bootstrap-growl.js"></script>
-	<script src="../springmvc/js/jquery.datagrid-toolbar.js"></script>
-	
-	
-	<link rel="stylesheet" href="../springmvc/js/bootstrap.min.css">
-	<link rel="stylesheet" href="../springmvc/js/bootstrap-select.min.css">
-	<link rel="stylesheet" href="../springmvc/js/bootstrap-table.min.css">
+    <script src="../springmvc/js/jquery.min.js"></script>
+    <script src="../springmvc/js/bootstrap.min.js"></script>
+    <script src="../springmvc/js/bootstrap-table.min.js"></script>
+    <script src="../springmvc/js/jquery.bootstrap-growl.js"></script>
+    <script src="../springmvc/js/jquery.datagrid-toolbar.js"></script>
+    
+    
+    <link rel="stylesheet" href="../springmvc/js/bootstrap.min.css">
+    <link rel="stylesheet" href="../springmvc/js/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../springmvc/js/bootstrap-table.min.css">
 
     <title>学生管理系统 - 班级编辑页面</title>
 

@@ -19,7 +19,7 @@
     
     <!-- 查询所有记录 -->  
     <select id="selectAllStudent" resultMap="BaseResultMap">  
-        SELECT * FROM student
+        SELECT * FROM student WHERE status=1
     </select>  
 
 
@@ -35,10 +35,38 @@
     </delete>
     
     <!-- 修改学生信息 -->
-    <update id="updateStudent" parameterType="com.venus.domain.Student">
+   <!--   <update id="updateStudent" parameterType="com.venus.domain.Student">
       UPDATE student id = #{id}, name = #{name},
         classId = #{classId}, sex = #{sex}, birthday = #{birthday},nation=#{nation}，status=#{status} WHERE id = #{id}
+    </update>-->
+    
+    <update id="update" parameterType="com.venus.domain.Student">
+        update student set
+            <if test="name != null ">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="id != null ">
+                id = #{id,jdbcType=INTEGER},
+            </if>
+            <if test="classId != null ">
+                classId = #{classId,jdbcType=INT},
+            </if>
+            <if test="sex != null ">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null ">
+                birthday = #{birthday,dbcType=DATE},
+            </if>
+            <if test="nation != null ">
+                nation = #{nation,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null ">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            
+        where id = #{id,jdbcType=INTEGER}
     </update>
+    
     
 </mapper>
     

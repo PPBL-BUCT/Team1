@@ -39,5 +39,5 @@
 
    <!-- 对模型视图添加前后缀 -->  
      <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"  
-      p:prefix="/WEB-INF/view/" p:suffix=".html"/>  
+      p:prefix="/WEB-INF/view/" p:suffix=".jsp"/>  
 </beans>

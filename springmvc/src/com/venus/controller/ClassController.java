@@ -33,9 +33,17 @@ public class ClassController {
 
 	@RequestMapping("toAddClass.do")
 	public ModelAndView toAdd(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response,
+			@RequestParam(value = "id", required = true) Integer id) {
 		ModelAndView mav = new ModelAndView("class_edit"); // html文件名
-		return mav;
+		if (id == 0) {
+			return mav;
+		} else {
+			Class1 class1 = classService.selectById(id);
+			mav.addObject("class1", class1);
+			return mav;
+		}
+
 	}
 
 	@RequestMapping(value = "ClassList.do")
@@ -73,6 +81,8 @@ public class ClassController {
 	public JsonData addClass(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute Class1 vo) {
 		JsonData json = new JsonData();
+		vo.setStatus(1);
+		vo.setNumber(0);
 		String msg = classService.insert(vo);
 		if (msg != null) {
 			json.setSuccess(false);
