@@ -13,6 +13,7 @@ public class StudentServiceImpl implements StudentService {
 	@Autowired
 	private StudentDao studentDao;
 
+	@Override
 	public Student selectStudentById(Integer id) {
 		return studentDao.selectStudentById(id);
 
@@ -34,7 +35,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     public void deleteStudent(int id) {
-        studentDao.deleteStudent(id);
+        //studentDao.deleteStudent(id);
+    	        // 先从数据库取出来
+    			Student student = studentDao.selectStudentById(Integer Id);
+    			student.setStatus(0);
+    			studentDao.update(class1);
+    			return null;
     }
 
     public void updateStudent(Student student) {
