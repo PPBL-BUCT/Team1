@@ -35,8 +35,10 @@ public class StudentServiceImpl implements StudentService {
 		return studentDao.getTotal();
 	}
 
-	public void addStudent(Student student) {
+	public String addStudent(Student student) {
 		studentDao.addStudent(student);
+		return null;
+
 	}
 
 	public String deleteStudent(int id) {
@@ -48,8 +50,9 @@ public class StudentServiceImpl implements StudentService {
 		return null;
 	}
 
-	public void updateStudent(Student student) {
+	public String updateStudent(Student student) {
 		studentDao.updateStudent(student);
+		return null;
 	}
 
 	public Student getStudent(int id) {
