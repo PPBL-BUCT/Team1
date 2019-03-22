@@ -26,7 +26,7 @@ public interface StudentService {
      * 删除一条数据
      * @param id
      */
-    void deleteStudent(int id);
+    String deleteStudent(int id);
 
     /**
      * 更新一条数据
