@@ -10,7 +10,7 @@
     <script src="../springmvc/js/bootstrap.min.js"></script>
     <script src="../springmvc/js/bootstrap-table.min.js"></script>
     <script src="../springmvc/js/jquery.bootstrap-growl.js"></script>
-    <script src="../springmvc/js/jquery.datagrid-toolbar.js"></script>
+    <!-- <script src="../springmvc/js/jquery.datagrid-toolbar.js"></script> -->
     
     
     <link rel="stylesheet" href="../springmvc/js/bootstrap.min.css">
@@ -18,16 +18,20 @@
     <link rel="stylesheet" href="../springmvc/js/bootstrap-table.min.css">
     
     <script>
-    queryList();//刷新表格方法
+   /*  function load(){
+        var uri = "";
+        document.getElementById("ClassList").setAttribute('data-url',uri);
+        //$('#ClassList').setAttribute('data-url',uri);
+        //$('#ClassList').attributes['data-url']=uri;
+        queryList();//刷新表格方法
+        console.log("shuaxin");
+    } */
+    var t=setTimeout("load()",1000);
     function queryList() {
         $('#ClassList').bootstrapTable('refresh');
     }
     function operatorFormatter(value, row, index) {
         var operator = "";
-        operator += '<button class="btn btn-success btn-round btn-xs" onclick="viewById(\''
-            + row.id
-            + '\');"><i class="glyphicon glyphicon-list-alt"></i> 查看</button>&nbsp;&nbsp;';
-        
         operator += '<button class="btn btn-warning btn-round btn-xs" onclick="editById(\''
                 + row.id
                 + '\');"><i class="glyphicon glyphicon-pencil"></i> 修改</button>&nbsp;&nbsp;';
@@ -63,8 +67,8 @@
        function editById(id) {
             window.location = '../springmvc/toAddStudent.do?id='+id;
         }
-       function add() {
-           window.location = "../springmvc/toAddStudent.do?id=0";
+       function toAdd() {
+           window.location = "../springmvc/toAddStudent.do";
        }
     </script>
 </head>
@@ -81,7 +85,7 @@
     </div>
     <div>
         <table id="ClassList" data-toggle="table"
-            data-url="../springmvc/StudentList.do" data-pagination="true"
+            data-url="../springmvc/StudentList.do?id=${id}" data-pagination="true"
             data-side-pagination="server" data-cache="false"
             data-query-params="postQueryParams"             
             data-page-list="[10, 15, 20, 30, 50,100]" data-method="post"

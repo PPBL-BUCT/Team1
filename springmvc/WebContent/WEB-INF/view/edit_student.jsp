@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java"
          pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -54,7 +53,7 @@
         </div>
         <div class="panel-body">
 
-            <form method="post" id="editForm" action="/updateStudent" role="form">
+            <form method="post" id="editForm" action="../springmvc/addStudent.do" role="form">
                 <table class="editTable">
                     <tr>
                         <td>学号：</td>
@@ -72,8 +71,8 @@
                     </tr>
                     <tr>
                         <td>性别：</td>
-                        <td><input type="radio" <c:if test="${student.sex == '男'}">checked</c:if> class="radio radio-inline" name="sex" value="男"> 男
-                            <input type="radio" <c:if test="${student.sex == '女'}">checked</c:if> class="radio radio-inline" name="sex" value="女"> 女
+                        <td><input type="radio"   class="radio radio-inline" name="sex" value="男"> 男
+                            <input type="radio"   class="radio radio-inline" name="sex" value="女"> 女
                         </td>
                     </tr>
                     <tr>
