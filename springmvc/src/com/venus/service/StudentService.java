@@ -19,8 +19,9 @@ public interface StudentService {
     /**
      * 增加一条数据
      * @param student
+     * @return 
      */
-    void addStudent(Student student);
+    String addStudent(Student student);
     
     /**
      * 删除一条数据
@@ -31,8 +32,9 @@ public interface StudentService {
     /**
      * 更新一条数据
      * @param student
+     * @return 
      */
-    void updateStudent(Student student);
+    String updateStudent(Student student);
     
     /**
      * 找到一条数据
