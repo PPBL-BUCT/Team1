@@ -10,7 +10,7 @@
         <result column="sex" property="sex" jdbcType="VARCHAR" />  
         <result column="birthday" property="birthday" jdbcType="DATE" />  
         <result column="nation" property="nation" jdbcType="VARCHAR" />  
-        <result column="status" property="stutas" jdbcType="INTEGER" />  
+        <result column="status" property="status" jdbcType="INTEGER" />  
     </resultMap>  
     <!-- 查询单条记录 -->  
     <select id="selectStudentById" parameterType="java.lang.Integer" resultMap="BaseResultMap">  
@@ -21,7 +21,10 @@
     <select id="selectAllStudent" resultMap="BaseResultMap">  
         SELECT * FROM student WHERE status=1
     </select>  
-
+<select id="selectStudentByClass" parameterType="java.lang.Integer" resultMap="BaseResultMap">  
+        SELECT * FROM student WHERE status=1 and 
+        classId ={#classId}
+    </select>  
 
     <!-- 增加学生信息 -->
     <insert id="addStudent" parameterType="com.venus.domain.Student"
