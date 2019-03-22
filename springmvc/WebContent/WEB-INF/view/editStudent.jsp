@@ -18,16 +18,16 @@
 	<link rel="stylesheet" href="../springmvc/js/bootstrap-select.min.css">
 	<link rel="stylesheet" href="../springmvc/js/bootstrap-table.min.css">
 
-    <title>学生管理系统 - 班级编辑页面</title>
+    <title>学生管理系统 - 学生编辑页面</title>
 
     <script>
         $(function () {
             $("#editForm").submit(function () {
-                if (!checkEmpty("id", "班号"))
+                if (!checkEmpty("id", "学号"))
                     return false;
-                if (!checkEmpty("name", "名称"))
+                if (!checkEmpty("name", "姓名"))
                     return false;
-                if (!checkEmpty("yearValue", "入学年份"))
+                if (!checkEmpty("age", "年龄"))
                     return false;
                 return true;
             });
@@ -50,33 +50,44 @@
 
     <div class="panel panel-success">
         <div class="panel-heading">
-            <h3 class="panel-title">编辑班级</h3>
+            <h3 class="panel-title">编辑学生</h3>
         </div>
         <div class="panel-body">
 
             <form method="post" id="editForm" action="/updateStudent" role="form">
                 <table class="editTable">
                     <tr>
-                        <td>班号：</td>
-                        <td><input type="text" name="id" id="id" value="${class1.id}"
-                                   placeholder="请在这里输入班号"></td>
+                        <td>学号：</td>
+                        <td><input type="text" name="id" id="id" value="${student.Id}"
+                                   placeholder="请在这里输入学号"></td>
                     </tr>
                     <tr>
-                        <td>名称：</td>
-                        <td><input type="text" name="name" id="name" value="${class1.name}" placeholder="请在这里输入班级名称">
+                        <td>姓名：</td>
+                        <td><input type="text" name="name" id="name" value="${student.name}" placeholder="请在这里输入名字">
                         </td>
                     </tr>
                     <tr>
-                        <td>人数：</td>
-                        <td><input type="text" name="number" id="number" value="${class1.number}" placeholder="请在这里输入人数"></td>
+                        <td>班级：</td>
+                        <td><input type="text" name="classId" id="classId" value="${student.ClassId}" placeholder="请在这里输入班级"></td>
                     </tr>
                     <tr>
-                        <td>入学年份：</td>
-                        <td><input type="text" name="yearValue" id="yearValue" value="${class1.yearValue}" placeholder="请在这里输入入学年份"></td>
+                        <td>性别：</td>
+                        <td><input type="radio" <c:if test="${student.sex == '男'}">checked</c:if> class="radio radio-inline" name="sex" value="男"> 男
+                            <input type="radio" <c:if test="${student.sex == '女'}">checked</c:if> class="radio radio-inline" name="sex" value="女"> 女
+                        </td>
                     </tr>
-                    
+                    <tr>
+                        <td>籍贯：</td>
+                        <td><input type="text" name="nation" id="nation" value="${student.nation}" placeholder="请在这里输入籍贯"></td>
+                    </tr>
+                    <tr>
+                        <td>出生日期：</td>
+                        <td><input type="date" name="birthday" id="birthday" value="${student.birthday}"
+                                   placeholder="请在这里输入出生日期"></td>
+                    </tr>
                     <tr class="submitTR">
                         <td colspan="2" align="center">
+                            <input type="hidden" name="id" value="${student.id}">
                             <button type="submit" class="btn btn-success">提 交</button>
                         </td>
 

@@ -13,8 +13,8 @@ public class StudentServiceImpl implements StudentService {
 	@Autowired
 	private StudentDao studentDao;
 
-	public Student selectStudentById(Integer Id) {
-		return studentDao.selectStudentById(Id);
+	public Student selectStudentById(Integer id) {
+		return studentDao.selectStudentById(id);
 
 	}
 

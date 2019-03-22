@@ -52,7 +52,7 @@ public class StudentController {
 
         studentService.addStudent(student);
 
-        return "redirect:listStudent";
+        return "redirect:student_list";
     }
 
     @RequestMapping("/listStudent")
@@ -77,13 +77,13 @@ public class StudentController {
         request.setAttribute("students", students);
         request.setAttribute("page", page);
 
-        return "listStudent";
+        return "student_list";
     }
 
     @RequestMapping("/deleteStudent")
     public String deleteStudent(int id) {
         studentService.deleteStudent(id);
-        return "redirect:listStudent";
+        return "redirect:student_list";
     }
 
     @RequestMapping("/editStudent")
@@ -122,6 +122,6 @@ public class StudentController {
         
 
         studentService.updateStudent(student);
-        return "redirect:listStudent";
+        return "redirect:student_list";
     }
 }

@@ -3,61 +3,61 @@ import java.util.Date;
 
 public class Student {
 
-	private Integer Id;
-	private String Name;
-	private int ClassId;
-	private String Sex;
-	private Date Birthday;
-	private String Nation;
-	private int Status;
+	private Integer id;
+	private String name;
+	private int classId;
+	private String sex;
+	private Date birthday;
+	private String nation;
+	private int status;
 	
 	public Integer getId() {
-		return Id;
+		return id;
 	}
 	public void setId(Integer id) {
-		Id = id;
+		this.id = id;
 	}
 	public String getName() {
-		return Name;
+		return name;
 	}
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 	public int getClassId() {
-		return ClassId;
+		return classId;
 	}
 	public void setClassId(int classId) {
-		ClassId = classId;
+		this.classId = classId;
 	}
 	public String getSex() {
-		return Sex;
+		return sex;
 	}
 	public void setSex(String Sex) {
-		this.Sex = Sex;
+		this.sex = Sex;
 	}
 	public Date getBirthday() {
-		return Birthday;
+		return birthday;
 	}
 	public void setBirthday(Date birthday) {
-		Birthday = birthday;
+		this.birthday = birthday;
 	}
 	public String getNation() {
-		return Nation;
+		return nation;
 	}
 	public void setNation(String nation) {
-		Nation = nation;
+		this.nation = nation;
 	}
 	public int getStatus() {
-		return Status;
+		return status;
 	}
 	public void setStatus(int status) {
-		Status = status;
+		this.status = status;
 	}
 
-	@Override
-	public String toString() {
-		return "Student [Id=" + Id + ", Name=" + Name + ", ClassId=" + ClassId + ", "
-				+ "Sex="+Sex + ",Birthday="+Birthday+",Nation="+Nation+",Status"+Status+"]";
-	
-	}
+//	@Override
+//	public String toString() {
+//		return "Student [Id=" + Id + ", Name=" + Name + ", ClassId=" + ClassId + ", "
+//				+ "Sex="+Sex + ",Birthday="+Birthday+",Nation="+Nation+",Status"+Status+"]";
+//	
+//	}
 }

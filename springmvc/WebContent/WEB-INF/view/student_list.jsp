@@ -31,7 +31,7 @@
                     return false;
                 if (!checkEmpty("name", "姓名"))
                     return false;
-                if (!checkEmpty("age", "年龄"))
+                if (!checkEmpty("sex", "性别"))
                     return false;
                 return true;
             });
@@ -82,7 +82,7 @@
         <c:forEach items="${students}" var="s" varStatus="status">
             <tr>
                 <td>${s.id}</td>
-                <td>${s.classid}</td>
+                <td>${s.classId}</td>
                 <td>${s.name}</td>
                 <td>${s.sex}</td>
                 <td>${s.birthday}</td>
@@ -153,7 +153,7 @@
                     </tr>
                     <tr>
                         <td>班级：</td>
-                        <td><input type="text" name="classid" id="classid" placeholder="请在这里输入班级"></td>
+                        <td><input type="text" name="classId" id="classId" placeholder="请在这里输入班级"></td>
                     </tr>
                     <tr>
                         <td>姓名：</td>

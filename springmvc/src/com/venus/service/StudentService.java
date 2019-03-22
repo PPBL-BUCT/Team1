@@ -6,7 +6,7 @@ import com.venus.domain.Student;
 
 public interface StudentService {
 
-	Student selectStudentById(Integer Id);
+	Student selectStudentById(Integer id);
     
     List<Student> selectAllStudent();
     
