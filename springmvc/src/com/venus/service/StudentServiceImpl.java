@@ -37,9 +37,9 @@ public class StudentServiceImpl implements StudentService {
     public void deleteStudent(int id) {
         //studentDao.deleteStudent(id);
     	        // 先从数据库取出来
-    			Student student = studentDao.selectStudentById(Integer Id);
+    			Student student = studentDao.selectStudentById(Integer id);
     			student.setStatus(0);
-    			studentDao.update(class1);
+    			studentDao.update(student);
     			return null;
     }
 
