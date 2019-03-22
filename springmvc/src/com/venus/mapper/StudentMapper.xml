@@ -7,7 +7,7 @@
         <id column="id" property="Id" jdbcType="INTEGER" />  
         <result column="name" property="Name" jdbcType="VARCHAR" />  
         <result column="classId" property="ClassId" jdbcType="INTEGER" />  
-        <result column="sex" property="Sex" jdbcType="INTEGER" />  
+        <result column="sex" property="Sex" jdbcType="VARCHAR" />  
         <result column="birthday" property="Birthday" jdbcType="DATE" />  
         <result column="nation" property="Nation" jdbcType="VARCHAR" />  
         <result column="status" property="Stutas" jdbcType="INTEGER" />  

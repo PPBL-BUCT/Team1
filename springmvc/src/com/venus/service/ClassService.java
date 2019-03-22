@@ -5,7 +5,13 @@ import java.util.List;
 import com.venus.domain.Class1;
 
 public interface ClassService {
-
+	
+	/**
+	 * 找到一条数据
+	 * 
+	 * @param id
+	 * @return
+	 */
 	Class1 selectById(Integer id);
 
 	List<Class1> selectAll();
@@ -16,13 +22,6 @@ public interface ClassService {
 	 * @return
 	 */
 	int getTotal();
-
-	/**
-	 * 找到一条数据
-	 * 
-	 * @param id
-	 * @return
-	 */
 	/**
 	 * 列举出从 start 位置开始的 count 条数据
 	 * 

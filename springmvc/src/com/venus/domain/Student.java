@@ -6,7 +6,7 @@ public class Student {
 	private Integer Id;
 	private String Name;
 	private int ClassId;
-	private int Sex;
+	private String Sex;
 	private Date Birthday;
 	private String Nation;
 	private int Status;
@@ -29,10 +29,10 @@ public class Student {
 	public void setClassId(int classId) {
 		ClassId = classId;
 	}
-	public int getSex() {
+	public String getSex() {
 		return Sex;
 	}
-	public void setSex(int Sex) {
+	public void setSex(String Sex) {
 		this.Sex = Sex;
 	}
 	public Date getBirthday() {
