@@ -1,2 +1,4 @@
-/config/
+/.DS_Store
 /com/
+/config/
+/log4j.properties

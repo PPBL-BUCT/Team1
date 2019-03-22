@@ -24,5 +24,27 @@ public class ClassServiceImpl implements ClassService {
 		// TODO Auto-generated method stub
 		return classDao.selectAll();
 	}
+	
+	public int getTotal() {
+	    return classDao.getTotal();
+	}
 
+	public void addClass(Class1 class1) {
+	    classDao.addClass(class1);
+	}
+
+	public void deleteClass(Integer id) {
+	    classDao.deleteClass(id);
+	}
+
+	public void updateClass(Class1 class1) {
+	    classDao.updateClass(class1);
+	}
+
+	public Class1 getClass(Integer id) {
+	    return classDao.getClass(id);
+	}
+	public List<Class1> list(int start, int count) {
+	    return classDao.list(start, count);
+	}
 }

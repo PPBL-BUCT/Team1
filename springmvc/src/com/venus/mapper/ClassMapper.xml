@@ -10,6 +10,7 @@
         <result column="status" property="status" jdbcType="INTEGER" />  
         <result column="yearValue" property="yearValue" jdbcType="INTEGER" /> 
     </resultMap>  
+    
     <!-- 查询单条记录 -->  
     <select id="selectById" parameterType="int" resultMap="BaseResultMap">  
         SELECT * FROM class WHERE id = #{id}  
@@ -20,14 +21,19 @@
         SELECT * FROM class
     </select>  
     
-    <!-- 查询所有记录 -->  
-    <insert id="insert" >  
-        insert class values(
-        
-        ) 
-    </insert> 
-    <!-- 查询所有记录 -->  
-    <delete id="delete" >  
-        delete from class where id = #{id}  
-    </delete> 
+    <!-- 查询数据条目 -->
+    <select id="getTotal" resultType="int">
+        SELECT COUNT(*) FROM class
+    </select>
+    
+    <!-- 增加一个班级 -->
+    <insert id="addClass" parameterType="Class1">
+        INSERT INTO class VALUES(#{id}, #{name}, #{number}, #{yearValue}, #{status})
+    </insert>
+    
+    <!-- 删除一个班级 -->
+    <delete id="deleteClass" parameterType="int">
+        DELETE FROM class WHERE id = #{id}
+    </delete>
+    
 </mapper>
