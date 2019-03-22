@@ -12,7 +12,7 @@
     </resultMap>  
     
     <!-- 查询单条记录 -->  
-    <select id="selectById" parameterType="int" resultMap="BaseResultMap">  
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">  
         SELECT * FROM class WHERE id = #{id}  
     </select>
     
@@ -22,18 +22,42 @@
     </select>  
     
     <!-- 查询数据条目 -->
-    <select id="getTotal" resultType="int">
+    <select id="getTotal" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM class
     </select>
     
-    <!-- 增加一个班级 -->
-    <insert id="addClass" parameterType="Class1">
-        INSERT INTO class VALUES(#{id}, #{name}, #{number}, #{yearValue}, #{status})
-    </insert>
-    
     <!-- 删除一个班级 -->
-    <delete id="deleteClass" parameterType="int">
+    <delete id="deleteClass" parameterType="java.lang.Integer">
         DELETE FROM class WHERE id = #{id}
     </delete>
     
+    
+    <update id="update" parameterType="com.venus.domain.Class1">
+        update class set
+            <if test="name != null ">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="number != null ">
+                number = #{number,jdbcType=INTEGER},
+            </if>
+            <if test="status != null ">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="yearValue != null ">
+                yearValue = #{yearValue,jdbcType=INTEGER},
+            </if>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    
+    <insert id="insert" parameterType="com.venus.domain.Class1"
+        useGeneratedKeys="true" keyProperty="id">
+        insert into class (
+        name,number,status,yearValue)values
+        (
+        #{name,jdbcType=VARCHAR},
+        #{number,jdbcType=INTEGER},
+        #{status,jdbcType=INTEGER},
+        #{yearValue,jdbcType=INTEGER}
+        )
+    </insert>
 </mapper>

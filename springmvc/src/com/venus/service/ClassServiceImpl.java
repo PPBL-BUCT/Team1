@@ -21,30 +21,39 @@ public class ClassServiceImpl implements ClassService {
 
 	@Override
 	public List<Class1> selectAll() {
-		// TODO Auto-generated method stub
 		return classDao.selectAll();
 	}
-	
+
 	public int getTotal() {
-	    return classDao.getTotal();
+		return classDao.getTotal();
 	}
 
-	public void addClass(Class1 class1) {
-	    classDao.addClass(class1);
-	}
-
-	public void deleteClass(Integer id) {
-	    classDao.deleteClass(id);
-	}
-
-	public void updateClass(Class1 class1) {
-	    classDao.updateClass(class1);
-	}
-
-	public Class1 getClass(Integer id) {
-	    return classDao.getClass(id);
-	}
 	public List<Class1> list(int start, int count) {
-	    return classDao.list(start, count);
+		return classDao.list(start, count);
 	}
+
+	@Override
+	public String deleteById(Integer id) {
+		// 先从数据库取出来
+
+		// 判断人数是否为0
+
+		// 可以删的话把class的status改为0
+
+		// 如果任何一步出错就return "错误提醒"
+		return null;
+	}
+
+	@Override
+	public String insert(Class1 c) {
+		classDao.insert(c);
+		return null;
+	}
+
+	@Override
+	public String update(Class1 c) {
+		classDao.update(c);
+		return null;
+	}
+
 }

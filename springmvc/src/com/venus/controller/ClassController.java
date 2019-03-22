@@ -7,12 +7,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.venus.domain.Class1;
 import com.venus.domain.DataGrid;
+import com.venus.domain.JsonData;
 import com.venus.domain.Pagination;
 import com.venus.service.ClassService;
 
@@ -41,13 +44,37 @@ public class ClassController {
 		return dataGrid;
 	}
 
-	/*
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value="DeleteClass.do") public JsonData
-	 * DeleteClass(HttpServletRequest request, HttpServletResponse response ) {
-	 * 
-	 * return classService.delete(); }
-	 */
+	@ResponseBody
+	@RequestMapping(value = "deleteClass.do")
+	public JsonData DeleteClass(HttpServletRequest request,
+			HttpServletResponse response,
+			@RequestParam(value = "id", required = true) Integer id) {
+		JsonData json = new JsonData();
+		String msg = classService.deleteById(id);
+		if (msg != null) {
+			json.setSuccess(false);
+			json.setMsg(msg);
+		} else {
+			json.setSuccess(true);
+		}
+		return json;
+
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "addClass.do")
+	public JsonData addClass(HttpServletRequest request,
+			HttpServletResponse response, @ModelAttribute Class1 vo) {
+		JsonData json = new JsonData();
+		String msg = classService.insert(vo);
+		if (msg != null) {
+			json.setSuccess(false);
+			json.setMsg(msg);
+		} else {
+			json.setSuccess(true);
+		}
+		return json;
+
+	}
 
 }
