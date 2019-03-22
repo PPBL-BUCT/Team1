@@ -34,12 +34,12 @@ public class StudentServiceImpl implements StudentService {
         studentDao.addStudent(student);
     }
 
-    public void deleteStudent(int id) {
+    public String deleteStudent(int id) {
         //studentDao.deleteStudent(id);
     	        // 先从数据库取出来
-    			Student student = studentDao.selectStudentById(Integer id);
+    			Student student = studentDao.selectStudentById(id);
     			student.setStatus(0);
-    			studentDao.update(student);
+    			studentDao.updateStudent(student);
     			return null;
     }
 
