@@ -61,8 +61,7 @@
         window.location = "../springmvc/toStudentList.do?id="+id;
     }
        function editById(id) {
-            //window.location = '../springmvc/toAddClass.do?id="+id;
-            window.location = "./edit_class.html?id="+id;
+            window.location = '../springmvc/toAddClass.do?id='+id;
         }
        function add() {
            window.location = "../springmvc/toAddClass.do?id=0";

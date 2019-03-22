@@ -54,13 +54,10 @@
         </div>
         <div class="panel-body">
 
-            <form method="post" id="editForm" action="/updateStudent" role="form">
+            <form method="post" id="editForm" action="../springmvc/addClass.do" role="form">
                 <table class="editTable">
-                    <tr>
-                        <td>班号：</td>
-                        <td><input type="text" name="id" id="id" value="${class1.id}"
+                        <td><input type="hidden" name="id" id="id" value="${class1.id}"
                                    placeholder="请在这里输入班号"></td>
-                    </tr>
                     <tr>
                         <td>名称：</td>
                         <td><input type="text" name="name" id="name" value="${class1.name}" placeholder="请在这里输入班级名称">

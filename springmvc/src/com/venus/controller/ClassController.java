@@ -35,7 +35,7 @@ public class ClassController {
 	public ModelAndView toAdd(HttpServletRequest request,
 			HttpServletResponse response,
 			@RequestParam(value = "id", required = true) Integer id) {
-		ModelAndView mav = new ModelAndView("class_edit"); // html文件名
+		ModelAndView mav = new ModelAndView("edit_class"); // html文件名
 		if (id == 0) {
 			return mav;
 		} else {
@@ -81,9 +81,15 @@ public class ClassController {
 	public JsonData addClass(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute Class1 vo) {
 		JsonData json = new JsonData();
-		vo.setStatus(1);
-		vo.setNumber(0);
-		String msg = classService.insert(vo);
+		String msg = "";
+		if (vo.getId() > 0) {
+			vo.setStatus(1);
+			vo.setNumber(0);
+			msg = classService.insert(vo);
+		} else {
+			msg = classService.update(vo);
+		}
+
 		if (msg != null) {
 			json.setSuccess(false);
 			json.setMsg(msg);
