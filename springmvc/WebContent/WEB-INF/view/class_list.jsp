@@ -63,7 +63,7 @@
        function editById(id) {
             window.location = '../springmvc/toAddClass.do?id='+id;
         }
-       function add() {
+       function toAdd() {
            window.location = "../springmvc/toAddClass.do?id=0";
        }
     </script>

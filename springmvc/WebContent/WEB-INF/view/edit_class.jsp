@@ -71,6 +71,9 @@
                         <td>入学年份：</td>
                         <td><input type="text" name="yearValue" id="yearValue" value="${class1.yearValue}" placeholder="请在这里输入入学年份"></td>
                     </tr>
+                    <td><input type="hidden" name="status" id="status" value="${class1.status}"
+                                   placeholder="请在这里输入班号">
+                    </td>
                     
                     <tr class="submitTR">
                         <td colspan="2" align="center">

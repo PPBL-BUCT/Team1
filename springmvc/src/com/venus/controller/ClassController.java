@@ -82,12 +82,13 @@ public class ClassController {
 			HttpServletResponse response, @ModelAttribute Class1 vo) {
 		JsonData json = new JsonData();
 		String msg = "";
-		if (vo.getId() > 0) {
+		if (vo.getId() <= 0) {
 			vo.setStatus(1);
 			vo.setNumber(0);
 			msg = classService.insert(vo);
 		} else {
 			msg = classService.update(vo);
+			
 		}
 
 		if (msg != null) {
