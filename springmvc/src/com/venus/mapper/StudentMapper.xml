@@ -23,7 +23,7 @@
         SELECT * FROM student WHERE status=1
     </select>  
         <select id="selectStudentByClass" parameterType="java.lang.Integer" resultMap="BaseResultMap">  
-            SELECT * FROM student WHERE status=1
+            SELECT s.*,c.name as className FROM student s LEFT JOIN class c on s.classId = c.id  WHERE s.status=1 and classId =#{classId}
        </select> 
 
     <!-- 增加学生信息 -->
