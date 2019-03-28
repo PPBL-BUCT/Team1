@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 
-<mapper namespace="demo.springboot.dao">     
+<mapper namespace="demo.springboot.dao.UserDao">     
 <!--设置domain类和数据库中表的字段一一对应，注意数据库字段和domain类中的字段名称不致，此处一定要！-->  
-        <resultMap id="BaseResultMap" type="demo.springboot.domain">  
+        <resultMap id="BaseResultMap" type="demo.springboot.domain.User">  
         <id column="user_id" property="user_id" jdbcType="INTEGER" />  
         <result column="real_name" property="real_name" jdbcType="VARCHAR" />  
         <result column="social_id" property="social_id" jdbcType="VARCHAR" />  
@@ -19,7 +19,7 @@
     </resultMap>  
     
     <!-- 根据user查找 -->  
-    <select id="selectByUsername" parameterType="java.lang.Long" resultMap="BaseResultMap">  
+    <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">  
         SELECT * FROM bank WHERE username = #{username}  
     </select>
     
@@ -29,28 +29,28 @@
                 username = #{username,jdbcType=VARCHAR},
             </if>
             <if test="real_name != null ">
-                id = #{real_name,jdbcType=VARCHAR},
+                real_name = #{real_name,jdbcType=VARCHAR},
             </if>
             <if test="social_id != null ">
-                id = #{social_id,jdbcType=INTEGER},
+                social_id = #{social_id,jdbcType=INTEGER},
             </if>
             <if test="password != null ">
-                id = #{password,jdbcType=VARCHAR},
+                password = #{password,jdbcType=VARCHAR},
             </if>
             <if test="status != null ">
-                id = #{status,jdbcType=INTEGER},
+                status = #{status,jdbcType=INTEGER},
             </if>
             <if test="sex != null ">
-                id = #{sex,jdbcType=INTEGER},
+                sex = #{sex,jdbcType=INTEGER},
             </if>
             <if test="email != null ">
-                id = #{email,jdbcType=VARCHAR},
+                email = #{email,jdbcType=VARCHAR},
             </if>
             <if test="phone_number!= null ">
-                id = #{phone_number,jdbcType=INTEGER},
+                phone_number = #{phone_number,jdbcType=INTEGER},
             </if>
             <if test="count!= null ">
-                id = #{count,jdbcType=INTEGER},
+                count = #{count,jdbcType=INTEGER}
             </if>
                        
         where user_id = #{user_id,jdbcType=INTEGER}
