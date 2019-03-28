@@ -17,6 +17,7 @@ import demo.springboot.service.BookService;
  *
  * Created by bysocket on 27/09/2017.
  */
+
 @RestController
 @RequestMapping(value = "/book")
 public class BookController {
