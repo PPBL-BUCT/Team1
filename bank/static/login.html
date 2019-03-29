@@ -25,7 +25,7 @@
 </head>
 
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-
+<script src="../../js/md5.js" type="text/javascript"></script>
 <body class="layui-layout-body" cz-shortcut-listen="true">
 
 <!-- 你的HTML代码 -->
@@ -58,7 +58,7 @@
 							<label class="layui-form-label">用户名</label>
 							<div class="layui-input-inline">
 								<!--<i class="layui-icon layui-icon-username"></i>-->
-								<input id="username" type="text" name="uname" value=""
+								<input id="username" type="text" name="username" value=""
 									   lay-verify="uname" required autocomplete="off"
 									   placeholder="请输入用户名" class="layui-input">
 							</div>
@@ -66,14 +66,16 @@
 						<div class="layui-form-item">
 							<label class="layui-form-label">密码</label>
 							<div class="layui-input-inline">
-								<input type="password" name="password" required lay-verify="password"
-									   placeholder="请输入密码" autocomplete="off" class="layui-input">
+								<input id="realPassWord" type="password" name="password1" required lay-verify="password"
+									   placeholder="请输入密码"  autocomplete="off" class="layui-input">
+								<input id="passWord" type="hidden" name="password" required lay-verify="password"
+                                       placeholder="请输入密码" autocomplete="off" class="layui-input">
 							</div>
 						</div>
 						<div class="layui-form-item">
 							<label class="layui-form-label">验证码</label>
 							<div class="layui-input-inline">
-								<input type="text" name="password" required lay-verify="required"
+								<input type="text" name="required" required lay-verify="required"
 									   placeholder="请输入验证码" autocomplete="off" class="layui-input input-val">
 								<canvas class="pic" id="canvas" width="90" height="40"></canvas>
 							</div>
@@ -112,6 +114,12 @@
 			if(val==''){
 				alert('请输入验证码！');
 			}else if(val == num){
+				
+				//提交表单方法
+				var md5Pass = $('#realPassWord').val();
+				md5Pass = hex_md5(md5Pass);
+				$('#passWord').val(md5Pass);
+				console.log(md5Pass);
 				alert('登录成功！');
 				$(".input-val").val('');
 				draw(show_num);
@@ -191,5 +199,23 @@
 	});
 
 </script>
+
+<!-- function deleteById(id){
+         $.ajax({//  /login
+             url : "../springmvc/deleteClass.do?id="+id,
+             //data : id,  $("#form").
+             cache : false,
+             dataType : 'JSON',
+             type : 'post',
+             success : function(data) {
+                 if(data.success){
+                     alert("删除成功");
+                     queryList();
+                 }else{
+                     alert(data.msg);
+                 }
+             }
+         });
+    } -->
 
 </html>
