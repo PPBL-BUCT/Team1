@@ -7,8 +7,9 @@
 <!--设置domain类和数据库中表的字段一一对应，注意数据库字段和domain类中的字段名称不致，此处一定要！-->  
         <resultMap id="BaseResultMap" type="demo.springboot.domain.User">  
         <id column="user_id" property="user_id" jdbcType="INTEGER" />  
-        <result column="real_name" property="real_name" jdbcType="VARCHAR" />  
-        <result column="social_id" property="social_id" jdbcType="VARCHAR" />  
+        <result column="real_name" property="real_name" jdbcType="VARCHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="social_id" property="social_id" jdbcType="VARCHAR" />
         <result column="password" property="password" jdbcType="VARCHAR" />  
         <result column="status" property="status" jdbcType="INTEGER" /> 
         <result column="sex" property="sex" jdbcType="INTEGER" />  
