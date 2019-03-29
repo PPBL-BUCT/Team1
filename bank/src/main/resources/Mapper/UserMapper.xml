@@ -21,7 +21,7 @@
     
     <!-- 根据user查找 -->  
     <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">  
-        SELECT * FROM bank WHERE username = #{username}  
+        SELECT * FROM user WHERE username = #{username}  
     </select>
     
     <update id="update" parameterType="demo.springboot.domain.User">

@@ -10,6 +10,6 @@ public interface UserDao {
 
 	public User selectByUsername(@Param("username") String username);
 
-	String update(User user);
+	void update(User user);
 
 }
