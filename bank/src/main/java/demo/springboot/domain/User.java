@@ -13,7 +13,7 @@ public class User implements Serializable {
 	private String email;
 	private int phone_number;
 	private int count;
-
+	private String passKey;
 	public String getReal_name() {
 		return real_name;
 	}
@@ -93,5 +93,14 @@ public class User implements Serializable {
 	public void setCount(int count) {
 		this.count = count;
 	}
+
+	public String getPassKey() {
+		return passKey;
+	}
+
+	public void setPassKey(String passKey) {
+		this.passKey = passKey;
+	}
+
 
 }

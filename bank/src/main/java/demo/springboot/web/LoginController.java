@@ -31,11 +31,15 @@ public class LoginController {
 
 		JsonData json = new JsonData();
 		// 先验证验证码 TODO
+		HttpSession session = request.getSession();
+		String codeKey = (String) session.getAttribute("CodeKey");
+		if (!codeKey.equals(user.getPassKey())) {
+			json.setSuccess(false);
+			json.setMsg("验证码错误");
+			System.out.println(codeKey + "您输入的：" + user.getPassKey());
+			return json;
 
-		/*
-		 * if (false) { json.setSuccess(false); json.setMsg("验证码错误"); return
-		 * json; }
-		 */
+		}
 		// 再从库中取出来
 		User realUser = userService.selectByUsername(user.getUsername());
 		if (realUser == null) {
