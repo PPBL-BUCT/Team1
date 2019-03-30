@@ -58,6 +58,7 @@ public class LoginController {
 		if (realUser.getPassword().equals(user.getPassword())) {
 			json.setSuccess(true);
 			// onlineUserMap.put(request.getCookies(), realUser);
+
 			// request.getSession();
 			System.out.println("登陆成功");
 			return json;

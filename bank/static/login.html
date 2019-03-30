@@ -18,9 +18,6 @@
 		}
 		.input-val {
 		}
-		.pic{
-
-		}
 	</style>
 </head>
 
@@ -45,12 +42,13 @@
 	</div>
 	<div class="layui-body" style="left: 0px;overflow:scroll;overflow-x:hidden">
 		<div style="background: url(登录背景.jpg) no-repeat center top;height: 100%;width:100%;background-size:100%;padding-top: 150px">
-			<div class="layui-card" style="height: 350px;width: 410px;transform: translateX(125%);opacity: 0.92">
+			<div class="layui-card" style="height: 350px;width: 410px;margin-left: 35%;opacity: 0.92">
 				<div class="layui-card-header" style="height:50px;font-size:18px;text-align: center;line-height:50px;vertical-align:middle;color:white;background: #01AAED">账户登录</div>
 				<div class="layui-card-body">
-					<form class="layui-form layui-form-pane"  style="padding-top: 20px">
+					<form class="layui-form "  style="padding-top: 20px">
 						<div class="layui-form-item">
-							<label class="layui-form-label">用户名</label>
+							<label class="layui-form-label" style="text-align: left">
+								<i class="layui-icon layui-icon-username"></i> 用户名</label>
 							<div class="layui-input-block">
 								<!--<i class="layui-icon layui-icon-username"></i>-->
 								<input id="username" type="text" name="username" value=""
@@ -59,7 +57,8 @@
 							</div>
 						</div>
 						<div class="layui-form-item">
-							<label class="layui-form-label">密码</label>
+							<label class="layui-form-label" style="text-align: left">
+								<i class="layui-icon layui-icon-password"></i> 密码</label>
 							<div class="layui-input-block">
 								<input id="realPassWord" type="password" name="password1" required lay-verify="password"
 									   placeholder="请输入密码"  autocomplete="off" class="layui-input">
@@ -68,12 +67,14 @@
 							</div>
 						</div>
 						<div class="layui-form-item">
-							<label class="layui-form-label">验证码</label>
-							<div class="layui-input-inline">
+							<label class="layui-form-label" style="text-align: left">
+								<i class="layui-icon layui-icon-auz"></i> 验证码</label>
+							<div class="layui-input-block">
 								<input type="text" id="passKey" name="passKey" 
-									   placeholder="请输入验证码" autocomplete="off" class="layui-input input-val">
+									   placeholder="请输入验证码" autocomplete="off" class="layui-input input-val"
+									   style="width:180px;float: left">
 								<!-- <canvas class="pic" id="canvas" width="90" height="40"></canvas> -->
-								<img alt="验证码" id="passkey_img" onclick="refreshCode()" src="/Login/loadPasskey" >
+								<img alt="验证码" id="passkey_img" style="float: right;height:38px;width: 85px" onclick="refreshCode()" src="/Login/loadPasskey" >
 							</div>
 						</div>
 						<div class="layui-form-item">
@@ -100,7 +101,7 @@ layui.use(['layer', 'form'], function(){
     var layer = layui.layer
             ,form = layui.form;
     
-    layer.msg('您好');
+    //layer.msg('您好');
     form.on('submit(login)',function(){
         var md5Pass = $('#realPassWord').val();
         md5Pass = hex_md5(md5Pass);
@@ -114,16 +115,16 @@ layui.use(['layer', 'form'], function(){
         var password = $("#passWord").val();
         var passKey = $("#passKey").val();
         if(username==""||username==null){
-            alert("请输入用户名");
+            layer.msg("请输入用户名");
             return;
         }
         if(password==""||password==null){
-            alert("请输入密码");
+			layer.msg("请输入密码");
             return;
-            
+
         }
         if(passKey==""||passKey==null){
-            alert("请输入验证码");
+			layer.msg("请输入验证码");
             return;
         }
         //alert(passKey);
@@ -138,10 +139,10 @@ layui.use(['layer', 'form'], function(){
             dataType: 'json',
             success: function (data) {
                 if(data.success){
-                    alert("success");
+					alert("登录成功");
                     window.location.href='./index.html';
                 }else {
-                    alert(data.msg);
+					alert(data.msg);
                     window.location.reload();
                 }
             }
