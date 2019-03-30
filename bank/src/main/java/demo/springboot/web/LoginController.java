@@ -38,8 +38,8 @@ public class LoginController {
 			json.setMsg("验证码错误");
 			System.out.println(codeKey + "您输入的：" + user.getPassKey());
 			return json;
-
 		}
+
 		// 再从库中取出来
 		User realUser = userService.selectByUsername(user.getUsername());
 		if (realUser == null) {
@@ -59,6 +59,7 @@ public class LoginController {
 			json.setSuccess(true);
 			// onlineUserMap.put(request.getCookies(), realUser);
 			// request.getSession();
+			System.out.println("登陆成功");
 			return json;
 		} else {
 			realUser.setCount(realUser.getCount() + 1);

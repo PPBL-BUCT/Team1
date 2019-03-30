@@ -33,12 +33,7 @@
 <script src="../layui/layui.js"></script>
 <script>
 	//一般直接写在一个js文件中
-	layui.use(['layer', 'form'], function(){
-		var layer = layui.layer
-				,form = layui.form;
-
-		layer.msg('您好');
-	});
+	 
 </script>
 
 <div class="layui-layout layui-layout-admin">
@@ -83,7 +78,7 @@
 						</div>
 						<div class="layui-form-item">
 							<div class="layui-input-block">
-								<button class="layui-btn" lay-submit lay-filter="loginSubmit" style="background-color:#01AAED">登录</button>
+								<button class="layui-btn" lay-submit lay-filter="login" style="background-color:#01AAED">登录</button>
 								<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 							</div>
 						</div>
@@ -101,8 +96,63 @@
 
 </body>
 <script>
+layui.use(['layer', 'form'], function(){
+    var layer = layui.layer
+            ,form = layui.form;
+    
+    layer.msg('您好');
+    form.on('submit(login)',function(){
+        var md5Pass = $('#realPassWord').val();
+        md5Pass = hex_md5(md5Pass);
+        $('#passWord').val(md5Pass);
+        console.log(md5Pass);
+        //$(".input-val").val('');
+        //draw(show_num);
+        //  ajax提交用户名和密码
+        var username = $("#username").val();
+        
+        var password = $("#passWord").val();
+        var passKey = $("#passKey").val();
+        if(username==""||username==null){
+            alert("请输入用户名");
+            return;
+        }
+        if(password==""||password==null){
+            alert("请输入密码");
+            return;
+            
+        }
+        if(passKey==""||passKey==null){
+            alert("请输入验证码");
+            return;
+        }
+        //alert(passKey);
+        $.ajax({
+            type:'POST',
+            url:'/Login',
+            data:{
+                username: username,
+                password: password,
+                passKey: passKey
+            },
+            dataType: 'json',
+            success: function (data) {
+                if(data.success){
+                    alert("success");
+                    window.location.href='./index.html';
+                }else {
+                    alert(data.msg);
+                    window.location.reload();
+                }
+            }
+        });
+        
+        return false;
+    });
 
-	$(function(){
+}); 
+
+	/* $(function(){
 		
 		$(".layui-btn").on('click',function(){
 			var md5Pass = $('#realPassWord').val();
@@ -115,7 +165,7 @@
             var username = $("#username").val();
             var password = $("#passWord").val();
             var passKey = $("#passKey").val();
-            alert(passKey);
+            //alert(passKey);
             $.ajax({
                 type:'POST',
                 url:'/Login',
@@ -127,14 +177,15 @@
                 dataType: 'json',
                 success: function (data) {
                     if(data.success){
-                        window.location.href='index.html';
+                    	alert("success");
+                        window.location.href='./index.html';
                     }else {
                         alert(data.msg);
                     }
                 }
             });
 		})
-	})
+	}) */
     function refreshCode(){
         $("#passkey_img").attr("src","/Login/loadPasskey?timestamp="+ new Date().getTime());
     } 

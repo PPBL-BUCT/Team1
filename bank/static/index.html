@@ -56,13 +56,15 @@
 
 <body cz-shortcut-listen="true" class="layui-layout-body">
 <div class="layui-layer-move">
-
+<button id ="logout" onclick="logout()">登出</button>
     
 登陆成功
 </div>
 </body>
 <script>
-
+function logout(){
+	 window.location.href='./login.html';
+}
     $(function(){
         var show_num = [];
         draw(show_num);
