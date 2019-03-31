@@ -60,6 +60,7 @@ public class LoginController {
 			json.setSuccess(true);
 			session.setAttribute("isLogin", "1");
 			// onlineUserMap.put(request.getCookies(), realUser);
+
 			// request.getSession();
 			System.out.println("登陆成功");
 			return json;
