@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import demo.springboot.domain.JsonData;
 import demo.springboot.domain.User;
-import demo.springboot.domain.VerifyCodeUtils;
 import demo.springboot.service.UserService;
+import demo.springboot.util.JsonData;
+import demo.springboot.util.VerifyCodeUtils;
 
 @RestController
 @RequestMapping(value = "/Login")

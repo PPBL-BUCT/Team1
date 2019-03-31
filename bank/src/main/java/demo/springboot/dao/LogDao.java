@@ -1,7 +1,10 @@
 package demo.springboot.dao;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import demo.springboot.domain.Log;
 
+@Mapper
 public interface LogDao {
     int deleteByPrimaryKey(Integer id);
 

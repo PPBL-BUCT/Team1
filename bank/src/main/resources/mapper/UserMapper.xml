@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="demo.springboot.dao.UserDao">     
+<!--设置domain类和数据库中表的字段一一对应，注意数据库字段和domain类中的字段名称不致，此处一定要！-->  
+        <resultMap id="BaseResultMap" type="demo.springboot.domain.User">  
+        <id column="user_id" property="user_id" jdbcType="INTEGER" />  
+        <result column="real_name" property="real_name" jdbcType="VARCHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="social_id" property="social_id" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />  
+        <result column="status" property="status" jdbcType="INTEGER" /> 
+        <result column="sex" property="sex" jdbcType="INTEGER" />  
+        <result column="email" property="email" jdbcType="VARCHAR" />  
+        <result column="phone_number" property="phone_number" jdbcType="INTEGER" /> 
+        <result column="count" property="count" jdbcType="INTEGER" /> 
+       
+    </resultMap>  
+    
+    <!-- 根据user查找 -->  
+    <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">  
+        SELECT * FROM user WHERE username = #{username}  
+    </select>
+    
+    <update id="update" parameterType="demo.springboot.domain.User">
+        update user set
+            <if test="username != null ">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="real_name != null ">
+                real_name = #{real_name,jdbcType=VARCHAR},
+            </if>
+            <if test="social_id != null ">
+                social_id = #{social_id,jdbcType=INTEGER},
+            </if>
+            <if test="password != null ">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null ">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="sex != null ">
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="email != null ">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone_number!= null ">
+                phone_number = #{phone_number,jdbcType=INTEGER},
+            </if>
+            <if test="count!= null ">
+                count = #{count,jdbcType=INTEGER}
+            </if>
+                       
+        where user_id = #{user_id,jdbcType=INTEGER}
+    </update>
+    
+    
+   
+    
+</mapper>
+    
+    

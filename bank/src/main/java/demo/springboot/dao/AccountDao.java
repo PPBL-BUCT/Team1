@@ -1,7 +1,10 @@
 package demo.springboot.dao;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import demo.springboot.domain.Account;
 
+@Mapper
 public interface AccountDao {
     int deleteByPrimaryKey(Integer account);
 
