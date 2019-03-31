@@ -18,6 +18,7 @@ import javax.imageio.ImageIO;
 
 public class VerifyCodeUtils {
 	
+	// 这里可以少做一点字符，减少歧义
 	public static final String VERIFY_CODES = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";  
 	  
     /** 

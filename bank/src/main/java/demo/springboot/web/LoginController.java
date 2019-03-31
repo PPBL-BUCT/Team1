@@ -32,6 +32,7 @@ public class LoginController {
 		JsonData json = new JsonData();
 		// 先验证验证码 TODO
 		HttpSession session = request.getSession();
+
 		String codeKey = (String) session.getAttribute("CodeKey");
 		if (!codeKey.equals(user.getPassKey())) {
 			json.setSuccess(false);
@@ -57,6 +58,7 @@ public class LoginController {
 		// 比对密码
 		if (realUser.getPassword().equals(user.getPassword())) {
 			json.setSuccess(true);
+			session.setAttribute("isLogin", "1");
 			// onlineUserMap.put(request.getCookies(), realUser);
 			// request.getSession();
 			System.out.println("登陆成功");
@@ -105,5 +107,50 @@ public class LoginController {
 				responseOutputStream.close();
 			}
 		}
+	}
+
+	/**
+	 * 验证是否登录
+	 * 
+	 * @author xuqi
+	 * @time 2019年3月31日10:14:44
+	 * 
+	 * */
+	@RequestMapping("/isLogin")
+	public JsonData isLogin(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		JsonData json = new JsonData();
+		HttpSession session = request.getSession();
+		try {
+			if (session.getAttribute("isLogin").equals("1")) {
+				json.setSuccess(true);
+			} else {
+				json.setSuccess(false);
+				json.setMsg("无登录信息，请登录");
+			}
+		} catch (Exception e) {
+			json.setSuccess(false);
+			json.setMsg("无登录信息，请登录");
+		}
+
+		return json;
+	}
+
+	/**
+	 * 登出功能
+	 * 
+	 * @author xuqi
+	 * @time 2019年3月31日10:14:44
+	 * 
+	 * */
+	@RequestMapping("/logout")
+	public JsonData logout(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		JsonData json = new JsonData();
+		session.setAttribute("isLogin", "0");
+		json.setSuccess(true);
+		return json;
+
 	}
 }
