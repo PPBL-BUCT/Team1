@@ -100,6 +100,7 @@ public class LoginController {
 			String codeKey = VerifyCodeUtils.outputVerifyImage(width, height,
 					outputStream, 4);
 			session.setAttribute("CodeKey", codeKey);
+			System.out.println(codeKey);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

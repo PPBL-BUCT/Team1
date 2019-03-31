@@ -70,7 +70,7 @@
 							<label class="layui-form-label" style="text-align: left">
 								<i class="layui-icon layui-icon-auz"></i> 验证码</label>
 							<div class="layui-input-block">
-								<input type="text" id="passKey" name="passKey" 
+								<input type="text" id="passKey" name="passKey"
 									   placeholder="请输入验证码" autocomplete="off" class="layui-input input-val"
 									   style="width:180px;float: left">
 								<!-- <canvas class="pic" id="canvas" width="90" height="40"></canvas> -->
@@ -100,32 +100,31 @@
 layui.use(['layer', 'form'], function(){
     var layer = layui.layer
             ,form = layui.form;
-    
-    //layer.msg('您好');
+
     form.on('submit(login)',function(){
         var md5Pass = $('#realPassWord').val();
         md5Pass = hex_md5(md5Pass);
         $('#passWord').val(md5Pass);
         console.log(md5Pass);
         //$(".input-val").val('');
-        //draw(show_num);
+
         //  ajax提交用户名和密码
         var username = $("#username").val();
-        
         var password = $("#passWord").val();
+		var realpassword = $("#realPassWord").val();
         var passKey = $("#passKey").val();
         if(username==""||username==null){
             layer.msg("请输入用户名");
-            return;
+            return false;
         }
-        if(password==""||password==null){
+        if(realpassword==""||realpassword==null){
 			layer.msg("请输入密码");
-            return;
+            return false;
 
         }
         if(passKey==""||passKey==null){
 			layer.msg("请输入验证码");
-            return;
+            return false;
         }
         //alert(passKey);
         $.ajax({
@@ -139,54 +138,23 @@ layui.use(['layer', 'form'], function(){
             dataType: 'json',
             success: function (data) {
                 if(data.success){
-					alert("登录成功");
-                    window.location.href='./index.html';
+					layer.alert('登录成功',function(index) {
+						window.location.href='./index.html';
+						layer.close(index);
+					});
                 }else {
-					alert(data.msg);
-                    window.location.reload();
+					layer.alert(data.msg,function (index) {
+						window.location.reload();
+						layer.close(index);
+					});
                 }
             }
         });
-        
         return false;
     });
 
 }); 
 
-	/* $(function(){
-		
-		$(".layui-btn").on('click',function(){
-			var md5Pass = $('#realPassWord').val();
-            md5Pass = hex_md5(md5Pass);
-            $('#passWord').val(md5Pass);
-            console.log(md5Pass);
-            //$(".input-val").val('');
-            //draw(show_num);
-            //  ajax提交用户名和密码
-            var username = $("#username").val();
-            var password = $("#passWord").val();
-            var passKey = $("#passKey").val();
-            //alert(passKey);
-            $.ajax({
-                type:'POST',
-                url:'/Login',
-                data:{
-                    username: username,
-                    password: password,
-                    passKey: passKey
-                },
-                dataType: 'json',
-                success: function (data) {
-                    if(data.success){
-                    	alert("success");
-                        window.location.href='./index.html';
-                    }else {
-                        alert(data.msg);
-                    }
-                }
-            });
-		})
-	}) */
     function refreshCode(){
         $("#passkey_img").attr("src","/Login/loadPasskey?timestamp="+ new Date().getTime());
     } 
