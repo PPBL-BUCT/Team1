@@ -1,44 +1,51 @@
 package demo.springboot.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import demo.springboot.dao.AccountDao;
 import demo.springboot.domain.Account;
 import demo.springboot.service.AccountService;
 
 public class AccountServiceImpl implements AccountService {
-
+	@Autowired
+	private AccountDao accountDao;
+	
 	@Override
 	public int deleteByPrimaryKey(Integer account) {
+		return accountDao.deleteByPrimaryKey(account);
 		// TODO Auto-generated method stub
-		return 0;
+		//
 	}
 
 	@Override
 	public int insert(Account record) {
 		// TODO Auto-generated method stub
-		return 0;
+		return accountDao.insert(record);
+		//先和核心业务服务器验证密码,验证成功调用Dao层将Status位置1
 	}
 
 	@Override
 	public int insertSelective(Account record) {
 		// TODO Auto-generated method stub
-		return 0;
+		return accountDao.insertSelective(record);
 	}
 
 	@Override
 	public Account selectByPrimaryKey(Integer account) {
 		// TODO Auto-generated method stub
-		return null;
-	}
+		return accountDao.selectByPrimaryKey(account);
+	};
 
 	@Override
 	public int updateByPrimaryKeySelective(Account record) {
 		// TODO Auto-generated method stub
-		return 0;
+		return accountDao.updateByPrimaryKeySelective(record);
 	}
 
 	@Override
 	public int updateByPrimaryKey(Account record) {
 		// TODO Auto-generated method stub
-		return 0;
+		return accountDao.updateByPrimaryKey(record);
 	}
 	
 }

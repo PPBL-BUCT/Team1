@@ -16,6 +16,10 @@ public class Account implements Serializable {
     private Integer currency;
 
     private Integer type;
+    
+    private Integer balance;
+    
+    private Integer availa_balance;
 
     private static final long serialVersionUID = 1L;
 
@@ -59,7 +63,27 @@ public class Account implements Serializable {
         this.type = type;
     }
 
-    @Override
+    public Integer getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Integer balance) {
+		this.balance = balance;
+	}
+
+	public Integer getAvaila_balance() {
+		return availa_balance;
+	}
+
+	public void setAvaila_balance(Integer availa_balance) {
+		this.availa_balance = availa_balance;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	@Override
     public boolean equals(Object that) {
         if (this == that) {
             return true;
