@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../assets/css/layui.css">
+    <link rel="stylesheet" href="../assets/css/view.css"/>
+    <link rel="icon" href="/favicon.ico">
+    <title>管理后台</title>
+</head>
+<body class="layui-view-body">
+    <div class="layui-content">
+        <div class="layui-row">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="form-box">
+                        <button class="layui-btn layui-btn-blue"><i class="layui-icon">&#xe654;</i>新增</button>
+                        <table id="demo"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/layui.all.js"></script>
+    <script>
+      var element = layui.element;
+  var table = layui.table;
+  var form = layui.form;
+  
+  //展示已知数据
+  table.render({
+    elem: '#demo'
+    	,url: '/Account/list' //数据接口
+    ,cols: [[ //标题栏
+      {field: 'account', title: '账户', minWidth: 180, sort: true,align:'center'}
+      ,{field: 'currency', title: '币种', width: 120 ,align:'center'}
+      ,{field: 'operation', title: '操作', minWidth: 150,toolbar: '#barDemo',align:'center'}
+      ,{field: 'balance', title: '余额', minWidth: 160,align:'center'}
+    ]]
+    
+    ,skin: 'line' //表格风格
+    ,even: true
+    ,page: true //是否显示分页
+    ,limits: [5, 7, 10]
+    ,limit: 5 //每页默认显示的数量
+  });
+    </script>
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">查询余额</a>
+        {{#  if(d.state == '在读'){ }}
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="leftSchool">查看明细</a>
+        {{#  } else { }}
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="inSchool">转账</a>
+        {{#  } }}
+    </script>
+</body>
+</html>

@@ -1,107 +1,98 @@
 <!DOCTYPE html>
-<html>
-<!-- head -->
+<html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>程序员银行个人网上银行</title>
-    <link rel="stylesheet" href="../../layui/css/layui.css" media="all">
-
-    <style>
-        .layui-nav .layui-this:after, .layui-nav-bar{
-            background-color: #01AAED;
-        }
-        .layui-row{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .layui-row img{
-            width: 960px;
-            height: 120px;
-        }
-        .layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a:hover {
-            background-color: #93d1ff;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/layui.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="icon" href="/favicon.ico">
+    <title>管理后台</title>
 </head>
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header custom-header">
+            
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item slide-sidebar" lay-unselect>
+                    <a href="javascript:;" class="icon-font"><i class="ai ai-menufold"></i></a>
+                </li>
+            </ul>
 
-<body cz-shortcut-listen="true" class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
-    <div class="layui-header">
-        <div class="layui-main">
-            <div class="layui-logo" style="width:250px;margin-left: 20px;color:#01AAED;font-weight:bold;font-size: 18px">程序猿银行 | 个人网上银行</div>
             <ul class="layui-nav layui-layout-right">
                 <li class="layui-nav-item">
-                    <a href=""><i class="layui-icon layui-icon-username" style="margin-right:5px;font-size: 16px"></i>个人用户
-                    </a>
-                </li>
-                <li class="layui-nav-item"><a href='./login.html'>退出登录</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="layui-container">
-        <div class="layui-row">
-            <img src="title.jpg">
-        </div>
-    </div>
-    <div class="layui-header layui-bg-cyan">
-        <ul class="layui-nav layui-bg-cyan" style="left: 200px">
-            <li class="layui-nav-item layui-this">
-                <a href="">账户管理</a>
-            </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">转账汇款</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">本人转账</a></dd>
-                    <dd><a href="">本行转账</a></dd>
-                    <dd><a href="">对外转账限额设置</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">信用卡</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">账户信息查询</a></dd>
-                    <dd><a href="">已出账单查询</a></dd>
-                    <dd><a href="">未出账单查询</a></dd>
-                    <dd><a href="">催收信息查询</a></dd>
-                    <dd><a href="">信用卡还款</a></dd>
-                </dl>
-            </li>
-        </ul>
-    </div>
-    <div class="layui-side layui-bg-blue" style="top:240px">
-        <div class="layui-side-scroll">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree layui-bg-blue"  lay-filter="test">
-                <li class="layui-nav-item"><a class="" href="">我的账户</a></li>
-                <li class="layui-nav-item"><a href="">我的财务</a></li>
-                <li class="layui-nav-item"><a href="">账户设置</a></li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">账户挂失</a>
+                    <a id="userName" href="javascript:;">用户名</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">普通账户口头挂失</a></dd>
-                        <dd><a href="javascript:;">信用卡挂失</a></dd>
+                        <dd><a href="">帮助中心</a></dd>
+                        <dd><a href="login.html">退出</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="">交易日志</a></li>
             </ul>
         </div>
-    </div>
-    <div class="layui-body" style="top:240px">
-        <!-- 内容主体区域 -->
-        <div style="padding: 15px;">内容主体区域</div>
-    </div>
-</div>
 
+        <div class="layui-side custom-admin">
+            <div class="layui-side-scroll">
+
+                <div class="custom-logo">
+                    <img src="assets/images/logo.png" alt=""/>
+                    <h1>欢迎您，用户名</h1>
+                </div>
+                <ul id="Nav" class="layui-nav layui-nav-tree">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <i class="layui-icon">&#xe609;</i>
+                            <em>主页</em>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="views/account.html">账户列表</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <i class="layui-icon">&#xe857;</i>
+                            <em>组件</em>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="views/form.html">表单</a></dd>
+                            <dd>
+                                <a href="javascript:;">页面</a>
+                                <dl class="layui-nav-child">
+                                    <dd>
+                                        <a href="login.html">登录页</a>
+                                    </dd>
+                                </dl>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <i class="layui-icon">&#xe612;</i>
+                            <em>用户</em>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="views/users.html">用户组</a></dd>
+                            <dd><a href="views/operaterule.html">权限配置</a></dd>
+                        </dl>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="layui-body">
+             <div class="layui-tab app-container" lay-allowClose="true" lay-filter="tabs">
+                <ul id="appTabs" class="layui-tab-title custom-tab"></ul>
+                <div id="appTabPage" class="layui-tab-content"></div>
+            </div>
+        </div>
+
+        <div class="layui-footer">
+            <p>© 2018程序员银行<a href="#" target="_blank">代码一编就队</a></p>
+        </div>
+
+        <div class="mobile-mask"></div>
+    </div>
+    <script src="assets/layui.js"></script>
+    <script src="index.js" data-main="home"></script>
 </body>
-<script src="../../layui/layui.js"></script>
-<script>
-layui.use('element', function(){
-    var element = layui.element;
-
-});
-</script>
 </html>
