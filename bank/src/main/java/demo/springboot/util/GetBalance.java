@@ -2,13 +2,15 @@ package demo.springboot.util;
 
 import java.security.Timestamp;
 
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class GetBalance {
+	@JSONField(name = "Header")
+	private String Header;
+	@JSONField(name = "Body")
+	private String Body;
 
-	
 	    @JSONField(name = "MESSNO")
 	    private String MESSNO;
 	 
@@ -77,31 +79,56 @@ public class GetBalance {
 			this.accountNo = accountNo;
 		}
 
+	public String getHeader() {
+		return Header;
+	}
 
+	public void setHeader(String header) {
+		Header = header;
+	}
 
-		public void header() {
+	public String getBody() {
+		return Body;
+	}
+
+	public void setBody(String body) {
+		Body = body;
+	}
+
+	public static String header() {
 	        GetBalance header = new GetBalance();
 	        
-	        header.getMESSNO();
-	        header.getRQTIME();
+		// header.getMESSNO();
+		// header.getRQTIME();
 	        header.setPKG("AccountPasswordCheck");
-	        	 
-	        String s1 = JSON.toJSONString(header);
+		return JSON.toJSONString(header);
 	            
 	        }
 		
-		public void body() {
+	public static String body() {
+		GetBalance body = new GetBalance();
+		body.setAccountNo(13);
+		/*
+		 * body.getCustomerID(); body.getPassword(); body.getAccountNo();
+		 */
+		return JSON.toJSONString(body);
+		// String s2 = JSON.toJSONString(body);
+	}
+
+	// 在s1前加上"Header"，在s2前加上“Body”再组成一个报文
+	public static String shape() {
 	        GetBalance body = new GetBalance();
 	        
-	        body.getCustomerID();
-	        body.getPassword();
-	        body.getAccountNo();
-	        	 
-	        String s2 = JSON.toJSONString(body);
+		body.setBody(body());
+		body.setHeader(header());
+		System.out.println(JSON.toJSONString(body));
+		return JSON.toJSONString(body);
+		// String s2 = JSON.toJSONString(body);
 	        }
 
-		//在s1前加上"Header"，在s2前加上“Body”再组成一个报文
-
+	public static void main(String[] args) {
+		shape();
+	}
 		
 
 	 
