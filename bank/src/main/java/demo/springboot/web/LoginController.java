@@ -146,7 +146,6 @@ public class LoginController {
 						   HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		JsonData json = new JsonData();
-		session.setAttribute("isLogin", "0");
 		userService.selectById(Integer.valueOf(
 				(Integer) session.getAttribute("user_id")));
 		json.setSuccess(true);
