@@ -59,6 +59,7 @@ public class LoginController {
 		if (realUser.getPassword().equals(user.getPassword())) {
 			json.setSuccess(true);
 			session.setAttribute("isLogin", "1");
+			session.setAttribute("user_id", realUser.getUser_id());
 			// onlineUserMap.put(request.getCookies(), realUser);
 
 			// request.getSession();
@@ -136,6 +137,21 @@ public class LoginController {
 		}
 
 		return json;
+	}
+	/**
+	 * 获取用户名
+	 */
+	@RequestMapping("/getUser")
+	public JsonData getUser(HttpServletRequest request,
+						   HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		JsonData json = new JsonData();
+		session.setAttribute("isLogin", "0");
+		userService.selectById(Integer.valueOf(
+				(Integer) session.getAttribute("user_id")));
+		json.setSuccess(true);
+		return json;
+
 	}
 
 	/**
