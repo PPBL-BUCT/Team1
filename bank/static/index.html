@@ -22,6 +22,9 @@
             width: 960px;
             height: 120px;
         }
+        .layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a:hover {
+            background-color: #93d1ff;
+        }
     </style>
 </head>
 
@@ -41,7 +44,7 @@
     </div>
     <div class="layui-container">
         <div class="layui-row">
-            <img src="banner.jpg">
+            <img src="title.jpg">
         </div>
     </div>
     <div class="layui-header layui-bg-cyan">
@@ -73,27 +76,23 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree layui-bg-blue"  lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">所有商品</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="javascript:;">列表三</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
+                <li class="layui-nav-item"><a class="" href="">我的账户</a></li>
+                <li class="layui-nav-item"><a href="">我的财务</a></li>
+                <li class="layui-nav-item"><a href="">账户设置</a></li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;">解决方案</a>
+                    <a href="javascript:;">账户挂失</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="">超链接</a></dd>
+                        <dd><a href="javascript:;">普通账户口头挂失</a></dd>
+                        <dd><a href="javascript:;">信用卡挂失</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="">云市场</a></li>
-                <li class="layui-nav-item"><a href="">发布商品</a></li>
+                <li class="layui-nav-item"><a href="">交易日志</a></li>
             </ul>
         </div>
+    </div>
+    <div class="layui-body" style="top:240px">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">内容主体区域</div>
     </div>
 </div>
 
