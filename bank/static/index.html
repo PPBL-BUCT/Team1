@@ -18,6 +18,7 @@
             height: 50px;
         }
     </style>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 </head>
 <body class="layui-layout-body">
     <div class="layui-header layui-layout-admin" style="background-color: #001529">
@@ -38,7 +39,7 @@
 
             <ul class="layui-nav layui-layout-right">
                 <li class="layui-nav-item">
-                    <a id="userName" href="javascript:;">用户名</a>
+                    <a id="menu_userName" href="javascript:;">用户名</a>
                     <dl class="layui-nav-child">
                         <dd><a href="">帮助中心</a></dd>
                         <dd><a href="login.html">退出</a></dd>
@@ -52,7 +53,7 @@
 
                 <div class="custom-logo">
                     <img src="assets/images/logo.png" alt=""/>
-                    <h1 id="userName">用户名，欢迎您</h1>
+                    <h1 id="welcome_userName" style="margin-left: 10px">用户名，</h1><h1>欢迎您</h1>
                 </div>
                 <ul id="Nav" class="layui-nav layui-nav-tree">
                     <li class="layui-nav-item">
@@ -110,5 +111,32 @@
     </div>
     <script src="assets/layui.js"></script>
     <script src="index.js" data-main="home"></script>
+    <script>
+
+        function setText(name){
+            var menuName =  document.getElementById('menu_userName'),
+                welcomeName = document.getElementById('welcome_userName');
+
+            menuName.innerHTML = name;
+            welcomeName.innerHTML = name;
+        }
+
+        function getUserName(){
+            $.ajax({
+                type:'GET',
+                url:'/Login/getUser',
+                success: function (data) {
+                    if(data.success){
+                            var name = data.obj.real_name;
+                            setText(name)
+                    }else {
+
+                    }
+
+                }
+            });
+        }
+        getUserName()
+    </script>
 </body>
 </html>
