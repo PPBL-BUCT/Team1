@@ -7,10 +7,27 @@
     <link rel="stylesheet" href="assets/css/layui.css">
     <link rel="stylesheet" href="assets/css/admin.css">
     <link rel="icon" href="/favicon.ico">
-    <title>管理后台</title>
+    <title>程序猿银行</title>
+
+    <style>
+        .layui-logo{
+            vertical-align: middle;
+        }
+        .layui-logo img{
+            margin-left: 10px;
+            height: 50px;
+        }
+    </style>
 </head>
 <body class="layui-layout-body">
-    <div class="layui-layout layui-layout-admin">
+    <div class="layui-header layui-layout-admin" style="background-color: #001529">
+        <div class="layui-main">
+            <div class="layui-logo" style="width:500px;margin-left: 20px;color:#01AAED;font-weight:bold;font-size: 18px">程序猿银行 | 个人网上银行
+                <img src="assets/images/title.png" alt=""/>
+            </div>
+        </div>
+    </div>
+    <div class="layui-layout layui-layout-admin" style="top: 60px;">
         <div class="layui-header custom-header">
             
             <ul class="layui-nav layui-layout-left">
@@ -30,48 +47,47 @@
             </ul>
         </div>
 
-        <div class="layui-side custom-admin">
+        <div class="layui-side custom-admin" style="top: 60px;">
             <div class="layui-side-scroll">
 
                 <div class="custom-logo">
                     <img src="assets/images/logo.png" alt=""/>
-                    <h1>欢迎您，用户名</h1>
+                    <h1 id="userName">用户名，欢迎您</h1>
                 </div>
                 <ul id="Nav" class="layui-nav layui-nav-tree">
                     <li class="layui-nav-item">
                         <a href="javascript:;">
                             <i class="layui-icon">&#xe609;</i>
-                            <em>主页</em>
+                            <em>账户管理</em>
                         </a>
                         <dl class="layui-nav-child">
                             <dd><a href="views/account.html">账户列表</a></dd>
+                            <dd><a href="views/form.html">账户设置</a></dd>
+                            <dd><a href="views/users.html">交易日志</a></dd>
                         </dl>
                     </li>
                     <li class="layui-nav-item">
                         <a href="javascript:;">
                             <i class="layui-icon">&#xe857;</i>
-                            <em>组件</em>
+                            <em>转账汇款</em>
                         </a>
                         <dl class="layui-nav-child">
-                            <dd><a href="views/form.html">表单</a></dd>
-                            <dd>
-                                <a href="javascript:;">页面</a>
-                                <dl class="layui-nav-child">
-                                    <dd>
-                                        <a href="login.html">登录页</a>
-                                    </dd>
-                                </dl>
-                            </dd>
+                            <dd><a href="views/form.html">本人转账</a></dd>
+                            <dd><a href="views/operaterule.html">本行转账</a></dd>
+                            <dd><a href="views/operaterule.html">对外转账限额设置</a></dd>
                         </dl>
                     </li>
                     <li class="layui-nav-item">
                         <a href="javascript:;">
                             <i class="layui-icon">&#xe612;</i>
-                            <em>用户</em>
+                            <em>信用卡</em>
                         </a>
                         <dl class="layui-nav-child">
-                            <dd><a href="views/users.html">用户组</a></dd>
-                            <dd><a href="views/operaterule.html">权限配置</a></dd>
+                            <dd><a href="views/users.html">账户信息查询</a></dd>
+                            <dd><a href="views/operaterule.html">已出账单查询</a></dd>
+                            <dd><a href="views/operaterule.html">未出账单查询</a></dd>
+                            <dd><a href="views/operaterule.html">催收信息查询</a></dd>
+                            <dd><a href="views/operaterule.html">信用卡还款</a></dd>
                         </dl>
                     </li>
                 </ul>
@@ -87,7 +103,7 @@
         </div>
 
         <div class="layui-footer">
-            <p>© 2018程序员银行<a href="#" target="_blank">代码一编就队</a></p>
+            <p>© 程序猿银行<a href="#" target="_blank"> Design by代码一编就队</a></p>
         </div>
 
         <div class="mobile-mask"></div>
