@@ -23,6 +23,10 @@
     <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">  
         SELECT * FROM user WHERE username = #{username}  
     </select>
+
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT * FROM user WHERE user_id = #{user_id}
+    </select>
     
     <update id="update" parameterType="demo.springboot.domain.User">
         update user set

@@ -3,6 +3,8 @@ package demo.springboot.service;
 import demo.springboot.domain.User;
 
 public interface UserService {
+
+	public User selectById(int user_id);
       	
 	public User selectByUsername(String username);
 	

@@ -22,6 +22,7 @@ public class LoginController {
 
 	@Autowired
 	UserService userService;
+	private User user;
 
 	// Map<Cookie[], User> onlineUserMap = new HashMap<Cookie[], User>();
 
@@ -59,6 +60,7 @@ public class LoginController {
 		if (realUser.getPassword().equals(user.getPassword())) {
 			json.setSuccess(true);
 			session.setAttribute("isLogin", "1");
+			session.setAttribute("user_id", realUser.getUser_id());
 			// onlineUserMap.put(request.getCookies(), realUser);
 
 			// request.getSession();
@@ -135,6 +137,20 @@ public class LoginController {
 			json.setMsg("无登录信息，请登录");
 		}
 
+		return json;
+	}
+	/**
+	 * 获取用户名
+	 */
+	@RequestMapping("/getUser")
+	public JsonData getUser(HttpServletRequest request,
+						   HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		JsonData json = new JsonData();
+		user=userService.selectById(Integer.valueOf(
+				(Integer) session.getAttribute("user_id")));
+		json.setSuccess(true);
+		json.setObj(user);
 		return json;
 	}
 
