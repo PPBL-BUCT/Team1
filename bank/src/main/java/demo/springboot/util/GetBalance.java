@@ -1,6 +1,5 @@
 package demo.springboot.util;
 
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -8,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.annotation.JSONField;
 
 public class GetBalance {
 
@@ -113,8 +111,11 @@ public class GetBalance {
 //     
 	  public static String shape(String accountNo) {
 		  Map header= new HashMap();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Calendar calendar = Calendar.getInstance();
+		String dateName = df.format(calendar.getTime());
 		  header.put("MESSNO"," BF4CE7ACC9AA402CAC6BE5CE6E4186CB");
-		  header.put("RQ-TIME",new Timestamp(System.currentTimeMillis()));
+		header.put("RQ-TIME", dateName);
 		  header.put("PKG", "GetBalance");
 		  
 		  Map body = new HashMap();
@@ -124,6 +125,7 @@ public class GetBalance {
 		  map.put("Header", header);
 		  map.put("Body", body);
 		  String jsonString =JSON.toJSONString(map);
+		System.out.println(jsonString);
 		  return jsonString;
 	  }
 	

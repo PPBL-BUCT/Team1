@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../assets/css/layui.css">
     <link rel="stylesheet" href="../assets/css/view.css"/>
     <link rel="icon" href="/favicon.ico">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <title>程序猿银行</title>
 </head>
 <body class="layui-view-body">
@@ -20,22 +21,26 @@
                     <div class="form-box">
                         <div class="layui-form layui-form-item">
                             <div class="layui-inline">
-                                <div class="layui-form-mid">用户名:</div>
+                                <div class="layui-form-mid">开始时间:</div>
                                 <div class="layui-input-inline" style="width: 100px;">
-                                  <input type="text" autocomplete="off" class="layui-input">
+                                  <input type="text" class="layui-input" id="begin_date" name="begin_date">
                                 </div>
-                                <div class="layui-form-mid">邮箱:</div>
+                                <div class="layui-form-mid">结束时间:</div>
                                 <div class="layui-input-inline" style="width: 100px;">
-                                  <input type="text" autocomplete="off" class="layui-input">
+                                  <input type="text" class="layui-input" id="end_date" name="end_date">
                                 </div>
-                                <div class="layui-form-mid">性别:</div>
+                                <div class="layui-form-mid">操作类型</div>
                                 <div class="layui-input-inline" style="width: 100px;">
-                                    <select name="sex">
-                                        <option value="1">男</option>
-                                        <option value="2">女</option>
+                                    <select name="type" id="type">
+                                        <option value="0">登入登出</option>
+                                        <option value="1">转账汇款</option>
+                                        <option value="3">账户加挂</option>
+                                        <option value="4">账户列表</option>
+                                        <option value="5">交易明细</option>
+                                        <option value="6">日志查询</option>
                                     </select>     
                                 </div>
-                                <button class="layui-btn layui-btn-blue">查询</button>
+                                <button class="layui-btn layui-btn-blue" onclick="search()">查询</button>
                                 <button class="layui-btn layui-btn-primary">重置</button>
                             </div>
                         </div>
@@ -57,109 +62,52 @@
     elem: '#demo'
     ,cols: [[ //标题栏
       {field: 'id', title: 'ID', width: 80, sort: true}
-      ,{field: 'username', title: '用户名', width: 120}
-      ,{field: 'email', title: '邮箱', minWidth: 150}
-      ,{field: 'sign', title: '签名', minWidth: 160}
-      ,{field: 'sex', title: '性别', width: 80}
-      ,{field: 'city', title: '城市', width: 100}
-      ,{field: 'experience', title: '积分', width: 80, sort: true}
+      ,{field: 'create_time', title: '时间', width: 120}
+      ,{field: 'type', title: '操作类型', minWidth: 150}
+      ,{field: 'success', title: '是否成功', minWidth: 160}
+      ,{field: 'ip', title: '操作ip', width: 80}
+      ,{field: 'operation', title: '具体操作', width: 100}
     ]]
-    ,data: [{
-      "id": "10001"
-      ,"username": "杜甫"
-      ,"email": "xianxin@layui.com"
-      ,"sex": "男"
-      ,"city": "浙江杭州"
-      ,"sign": "人生恰似一场修行"
-      ,"experience": "116"
-      ,"ip": "192.168.0.8"
-      ,"logins": "108"
-      ,"joinTime": "2016-10-14"
-    }, {
-      "id": "10002"
-      ,"username": "李白"
-      ,"email": "xianxin@layui.com"
-      ,"sex": "男"
-      ,"city": "浙江杭州"
-      ,"sign": "人生恰似一场修行"
-      ,"experience": "12"
-      ,"ip": "192.168.0.8"
-      ,"logins": "106"
-      ,"joinTime": "2016-10-14"
-      ,"LAY_CHECKED": true
-    }, {
-      "id": "10003"
-      ,"username": "王勃"
-      ,"email": "xianxin@layui.com"
-      ,"sex": "男"
-      ,"city": "浙江杭州"
-      ,"sign": "人生恰似一场修行"
-      ,"experience": "65"
-      ,"ip": "192.168.0.8"
-      ,"logins": "106"
-      ,"joinTime": "2016-10-14"
-    }, {
-      "id": "10004"
-      ,"username": "贤心"
-      ,"email": "xianxin@layui.com"
-      ,"sex": "男"
-      ,"city": "浙江杭州"
-      ,"sign": "人生恰似一场修行"
-      ,"experience": "666"
-      ,"ip": "192.168.0.8"
-      ,"logins": "106"
-      ,"joinTime": "2016-10-14"
-    }, {
-      "id": "10005"
-      ,"username": "贤心"
-      ,"email": "xianxin@layui.com"
-      ,"sex": "男"
-      ,"city": "浙江杭州"
-      ,"sign": "人生恰似一场修行"
-      ,"experience": "86"
-      ,"ip": "192.168.0.8"
-      ,"logins": "106"
-      ,"joinTime": "2016-10-14"
-    }, {
-      "id": "10006"
-      ,"username": "贤心"
-      ,"email": "xianxin@layui.com"
-      ,"sex": "男"
-      ,"city": "浙江杭州"
-      ,"sign": "人生恰似一场修行"
-      ,"experience": "12"
-      ,"ip": "192.168.0.8"
-      ,"logins": "106"
-      ,"joinTime": "2016-10-14"
-    }, {
-      "id": "10007"
-      ,"username": "贤心"
-      ,"email": "xianxin@layui.com"
-      ,"sex": "男"
-      ,"city": "浙江杭州"
-      ,"sign": "人生恰似一场修行"
-      ,"experience": "16"
-      ,"ip": "192.168.0.8"
-      ,"logins": "106"
-      ,"joinTime": "2016-10-14"
-    }, {
-      "id": "10008"
-      ,"username": "贤心"
-      ,"email": "xianxin@layui.com"
-      ,"sex": "男"
-      ,"city": "浙江杭州"
-      ,"sign": "人生恰似一场修行"
-      ,"experience": "106"
-      ,"ip": "192.168.0.8"
-      ,"logins": "106"
-      ,"joinTime": "2016-10-14"
-    }]
     ,skin: 'line' //表格风格
     ,even: true
     ,page: true //是否显示分页
     ,limits: [5, 7, 10]
     ,limit: 5 //每页默认显示的数量
   });
+  function search(){
+	  console.log($("#type").val());
+	  console.log($("#begin_date").val());
+	  console.log($("#end_date").val());
+	  
+	  //获取类型，起止时间
+	  table.reload('demo', {
+	      where: { //设定异步数据接口的额外参数，任意设
+	        type: $("#type").val()
+	        ,begin_date: $("#begin_date").val()
+	        ,end_date:$("#end_date").val()
+	      }
+	      ,page: {
+	        curr: 1 //重新从第 1 页开始
+	      }
+	    });
+  }
+  layui.use('laydate', function(){
+	  var laydate = layui.laydate;
+	  
+	  //执行一个laydate实例
+	  laydate.render({
+	    elem: '#begin_date' //指定元素
+	  });
+	});
+  layui.use('laydate', function(){
+	  var laydate = layui.laydate;
+	  
+	  //执行一个laydate实例
+	  laydate.render({
+	    elem: '#end_date' //指定元素
+	  });
+	});
+  
     </script>
 </body>
 </html>
