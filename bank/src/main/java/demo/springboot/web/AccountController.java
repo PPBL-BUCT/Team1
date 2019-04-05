@@ -1,5 +1,6 @@
 package demo.springboot.web;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,8 @@ import demo.springboot.domain.Log;
 import demo.springboot.service.AccountService;
 import demo.springboot.service.LogService;
 import demo.springboot.service.UserService;
+import demo.springboot.util.CusAccessObjectUtil;
+import demo.springboot.util.JsonData;
 
 @RestController
 @RequestMapping(value = "/Account")
@@ -32,11 +35,19 @@ public class AccountController {
 	@Autowired
 	LogService logService;
 
+	// 查询账户列表
 	@RequestMapping("/list")
 	@ResponseBody
 	public Map<String, Object> list(HttpServletRequest request,
 			HttpServletResponse response, @RequestParam int page,
 			@RequestParam int limit) {
+		Log log = new Log();
+		log.setUser_id((String) request.getSession().getAttribute("user_id"));
+		log.setCreate_time(new Date());
+		log.setIp(CusAccessObjectUtil.getIpAddress(request));
+		log.setType(3);
+		log.setSuccess(1);
+		logService.insertSelective(log);
 		Map<String, Object> map = new HashMap<>();
 		HttpSession session = request.getSession();
 		List<Account> users = accountService.getAll((String) session
@@ -55,13 +66,19 @@ public class AccountController {
 		return map;
 	}
 
+	// 查询日志
 	@RequestMapping("/log")
 	@ResponseBody
 	public Map<String, Object> log(HttpServletRequest request,
 			HttpServletResponse response, @RequestParam int page,
 			@RequestParam int limit, @ModelAttribute Log log) {
 		Map<String, Object> map = new HashMap<>();
-		HttpSession session = request.getSession();
+		try {
+			log.setEnd_date(new Date(Long.parseLong(log.getEnd_dates())));
+			log.setStart_date((new Date(Long.parseLong(log.getStart_dates()))));
+		} catch (Exception e) {
+
+		}
 
 		List<Log> logs = logService.selectList(log);
 		List<Log> logs2;
@@ -75,5 +92,58 @@ public class AccountController {
 		map.put("count", logs.size());
 		map.put("data", logs2);
 		return map;
+	}
+
+	// 加挂账户
+	@RequestMapping("/add")
+	@ResponseBody
+	public JsonData add(HttpServletRequest request,
+			HttpServletResponse response, @RequestParam int page,
+			@RequestParam int limit, @ModelAttribute Account account) {
+		JsonData json = new JsonData();
+
+		String msg = null;
+		try {
+			// 调用远程数据库 ,查询结果
+
+		} catch (Exception e) {
+			json.setSuccess(false);
+			json.setMsg("未知错误，请联系管理员");
+			return json;
+		}
+		if (msg == null) {
+			json.setSuccess(true);
+		} else {
+			json.setSuccess(false);
+			json.setMsg(msg);
+		}
+
+		return json;
+	}
+
+	// 加挂账户
+	@RequestMapping("/getBalance")
+	@ResponseBody
+	public JsonData getBalance(HttpServletRequest request,
+			HttpServletResponse response, @ModelAttribute Account account) {
+		JsonData json = new JsonData();
+
+		String msg = null;
+		try {
+			// 调用远程数据库 ,查询结果
+
+		} catch (Exception e) {
+			json.setSuccess(false);
+			json.setMsg("未知错误，请联系管理员");
+			return json;
+		}
+		if (msg == null) {
+			json.setSuccess(true);
+		} else {
+			json.setSuccess(false);
+			json.setMsg(msg);
+		}
+
+		return json;
 	}
 }
