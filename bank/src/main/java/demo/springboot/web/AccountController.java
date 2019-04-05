@@ -72,6 +72,15 @@ public class AccountController {
 	public Map<String, Object> log(HttpServletRequest request,
 			HttpServletResponse response, @RequestParam int page,
 			@RequestParam int limit, @ModelAttribute Log log) {
+		
+		Log log5 = new Log();
+		log5.setUser_id((String) request.getSession().getAttribute("user_id"));
+		log5.setCreate_time(new Date());
+		log5.setIp(CusAccessObjectUtil.getIpAddress(request));
+		log5.setType(5);
+		log5.setSuccess(1);
+		logService.insertSelective(log5);
+		
 		Map<String, Object> map = new HashMap<>();
 		try {
 			log.setEnd_date(new Date(Long.parseLong(log.getEnd_dates())));
@@ -100,6 +109,14 @@ public class AccountController {
 	public JsonData add(HttpServletRequest request,
 			HttpServletResponse response, @RequestParam int page,
 			@RequestParam int limit, @ModelAttribute Account account) {
+		Log log2 = new Log();
+		log2.setUser_id((String) request.getSession().getAttribute("user_id"));
+		log2.setCreate_time(new Date());
+		log2.setIp(CusAccessObjectUtil.getIpAddress(request));
+		log2.setType(2);
+		log2.setSuccess(1);
+		logService.insertSelective(log2);
+		
 		JsonData json = new JsonData();
 
 		String msg = null;
@@ -126,6 +143,9 @@ public class AccountController {
 	@ResponseBody
 	public JsonData getBalance(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute Account account) {
+		
+	
+		
 		JsonData json = new JsonData();
 
 		String msg = null;
