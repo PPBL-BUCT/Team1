@@ -1,11 +1,9 @@
 package demo.springboot.util;
 
-import java.security.Timestamp;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 
-public class GetBalance {
+public class AccountCheck {
 	@JSONField(name = "Header")
 	private String Header;
 	@JSONField(name = "Body")
@@ -15,7 +13,7 @@ public class GetBalance {
 	    private String MESSNO;
 	 
 	    @JSONField(name = "RQ-TIME")
-	    private Timestamp RQTIME;
+	private String RQTIME;
 	
 	    @JSONField(name = "PKG")
 	    private String PKG;
@@ -27,7 +25,7 @@ public class GetBalance {
 	    private Integer password;
 	  
 	    @JSONField(name = "accountNo")
-	    private Integer accountNo;
+	private String accountNo;
   	    
 	    
 		public String getMESSNO() {
@@ -38,11 +36,11 @@ public class GetBalance {
 			MESSNO = mESSNO;
 		}
 
-		public Timestamp getRQTIME() {
+	public String getRQTIME() {
 			return RQTIME;
 		}
 
-		public void setRQTIME(Timestamp rQTIME) {
+	public void setRQTIME(String rQTIME) {
 			RQTIME = rQTIME;
 		}
 
@@ -70,13 +68,13 @@ public class GetBalance {
 			this.password = password;
 		}
 
-		public Integer getAccountNo() {
+	public String getAccountNo() {
 			return accountNo;
 		}
 
 
-		public void setAccountNo(Integer accountNo) {
-			this.accountNo = accountNo;
+	public void setAccountNo(String accountNo2) {
+		this.accountNo = accountNo2;
 		}
 
 	public String getHeader() {
@@ -96,7 +94,7 @@ public class GetBalance {
 	}
 
 	public static String header() {
-	        GetBalance header = new GetBalance();
+		AccountCheck header = new AccountCheck();
 	        
 		// header.getMESSNO();
 		// header.getRQTIME();
@@ -106,8 +104,9 @@ public class GetBalance {
 	        }
 		
 	public static String body() {
-		GetBalance body = new GetBalance();
-		body.setAccountNo(13);
+		AccountCheck body = new AccountCheck();
+		// body.setAccountNo(13);
+
 		/*
 		 * body.getCustomerID(); body.getPassword(); body.getAccountNo();
 		 */
@@ -117,7 +116,7 @@ public class GetBalance {
 
 	// 在s1前加上"Header"，在s2前加上“Body”再组成一个报文
 	public static String shape() {
-	        GetBalance body = new GetBalance();
+		AccountCheck body = new AccountCheck();
 	        
 		body.setBody(body());
 		body.setHeader(header());

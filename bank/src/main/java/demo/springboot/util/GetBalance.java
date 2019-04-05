@@ -1,6 +1,8 @@
 package demo.springboot.util;
 
-import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
@@ -74,34 +76,35 @@ public class GetBalance {
 	}
     
 	 public static String header() {
-	    	AccountCheck header = new AccountCheck();
-	        
-	           Date date = new Date();
+		GetBalance header = new GetBalance();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Calendar calendar = Calendar.getInstance();
+		String dateName = df.format(calendar.getTime());
 	           header.setMESSNO("BF4CE7ACC9AA402CAC6BE5CE6E4186CB");
-	           header.setRQTIME(date.toString());
+		header.setRQTIME(dateName);
 	           header.setPKG("GetBalance");
-		       return JSON.toJSONString(header);
+		return JSON.toJSONString(header).replace("\\", "");
 		       
 	            	        }
 	
-	 public static String body(String accountNo) {
-    	 AccountCheck body = new AccountCheck();
+	public static String body(String accountNo) {
+		GetBalance body = new GetBalance();
     	
     	 body.setAccountNo(accountNo);
 	     
 	     
-	     return JSON.toJSONString(body);
+		return JSON.toJSONString(body).replace("\\", "");
 	
     }
 	 
-	 public static String shape(String accountNo) {
-			AccountCheck body = new AccountCheck();
-		    body.setHeader(header());
-			body.setBody(body(accountNo));
-			System.out.println(JSON.toJSONString(body));
-			return JSON.toJSONString(body);
-			// String s2 = JSON.toJSONString(body);
-		        }
+	public static String shape(String accountNo) {
+		GetBalance body = new GetBalance();
+
+		body.setBody(body(accountNo));
+		body.setHeader(header());
+		System.out.println(JSON.toJSONString(body));
+		return JSON.toJSONString(body).replace("\\", "");
+	}
        
 }
     

@@ -12,15 +12,14 @@ import java.net.URL;
 public class HttpConnection {
 	
 	public static void main(String[] args) {
-		String aa = doPost("http://192.168.43.34:8080/HostSimulator/AccountPasswordValidate.do", "{\"Header\":{\"MESSNO\":\"39E37FB1F62947D8AA52E88D5CF7D9B0\",\"RQ-TIME\":\"2019-30-31 " + 
-				"" + 
-				"16:30:01\",\"PKG\":\"AccountPasswordCheck\"}," + 
-				"\"Body\":" + 
-				"" + 
-				"{\"customerID\":\"748347\",\"password\":\"888888\",\"accountNo\":\"6218129087231776\"}" + 
-				"}" + 
-				" ");
-		System.out.println(aa);
+
+		String res = doPost(Core.getUrl_GetBalance(),
+				GetBalance.shape("6218129087231776"));
+
+		// String res = doPost(
+		// Core.getUrl_GetBalance(),
+		// "{\"Header\":{\"MESSNO\":\"BF4CE7ACC9AA402CAC6BE5CE6E4186CB\",\"RQ-TIME\":\"2019-4-5 11:41:01\",\"PKG\":\"GetBalance\"},\"Body\":{\"accountNo\":\"6218129084844853\"}}");
+		System.out.println(res);
 	}
     public static String doGet(String httpurl) {
         HttpURLConnection connection = null;

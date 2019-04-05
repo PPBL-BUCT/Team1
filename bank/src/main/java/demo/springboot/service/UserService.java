@@ -4,7 +4,7 @@ import demo.springboot.domain.User;
 
 public interface UserService {
 
-	public User selectById(int user_id);
+	public User selectById(String user_id);
       	
 	public User selectByUsername(String username);
 	
