@@ -14,11 +14,11 @@ public class HttpConnection {
 	public static void main(String[] args) {
 
 		String res = doPost(Core.getUrl_GetBalance(),
-				GetBalance.shape("6218129087231776"));
+			GetBalance.shape("6218129087231776"));
 
-		// String res = doPost(
-		// Core.getUrl_GetBalance(),
-		// "{\"Header\":{\"MESSNO\":\"BF4CE7ACC9AA402CAC6BE5CE6E4186CB\",\"RQ-TIME\":\"2019-4-5 11:41:01\",\"PKG\":\"GetBalance\"},\"Body\":{\"accountNo\":\"6218129084844853\"}}");
+//		String res = doPost(
+//	 Core.getUrl_GetBalance(),
+//		 "{\"Header\":{\"MESSNO\":\"BF4CE7ACC9AA402CAC6BE5CE6E4186CB\",\"RQ-TIME\":\"2019-4-5 11:41:01\",\"PKG\":\"GetBalance\"},\"Body\":{\"accountNo\":\"6218129084844853\"}}");
 		System.out.println(res);
 	}
     public static String doGet(String httpurl) {
