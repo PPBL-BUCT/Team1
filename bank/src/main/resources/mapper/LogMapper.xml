@@ -25,11 +25,11 @@
     <include refid="Base_Column_List" />
     from log
     where 1 = 1
-    <if test="start_date != null and start_date != ''">
-        AND create_time &gt; #{start_date,jdbcType=TIMESTAMP}
+    <if test="start_dates != null and start_dates != ''">
+        AND create_time &gt; #{start_dates }
     </if> 
-    <if test="end_date != null and end_date != ''">
-        AND create_time &lt; #{end_date,jdbcType=TIMESTAMP}
+    <if test="end_dates != null and end_dates != ''">
+        AND create_time &lt; #{end_dates }
     </if>
     <if test="type != null and type != null">
          AND type =  #{type,jdbcType=INTEGER}

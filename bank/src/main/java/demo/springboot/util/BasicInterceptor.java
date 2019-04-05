@@ -14,20 +14,19 @@ public class BasicInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
- 
-		/*
-		 * User user = (User)request.getSession().getAttribute("user");
-		 * if(user==null) { response.sendRedirect(request.getContextPath()+"/");
-		 * logger.info("用户未登录，不允许进行请求:"+request.getRequestURL()); return false;
-		 * }
-		 * 
-		 * String url = request.getRequestURI(); if(url.indexOf("/admin") >= 0)
-		 * { if(user==null || user.getIdentity()!=0) {
-		 * response.sendRedirect(request.getContextPath()+"/");
-		 * logger.info("用户权限错误，不允许进行请求:"+request.getRequestURL()); return false;
-		 * } }
-		 */
-		return true;
+		System.out.println("拦截session");
+		try {
+			String status = (String) request.getSession().getAttribute(
+					"isLogin");
+			if (status.equals("1")) {
+				System.out.println("放行用户"
+						+ request.getSession().getAttribute("user_id"));
+				return true;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+		return false;
 	}
  
 }

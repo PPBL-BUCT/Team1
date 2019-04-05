@@ -21,7 +21,8 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new BasicInterceptor())
-			.addPathPatterns("/admin/**","/news/admin/**","/team/admin/**","/user/info");
+				.addPathPatterns("/Account/**")
+				.excludePathPatterns("/Login/**");
 	}
  
 }
