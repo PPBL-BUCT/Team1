@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 
 public class ReceiveBalance{
 	
-	public double getBalance() {
+	public String getBalance() {
     String res = HttpConnection.doPost(Core.getUrl_GetBalance(),
 	GetBalance.shape("6218129087231776"));
 
@@ -18,7 +18,8 @@ public class ReceiveBalance{
 	Map<String,Object>returnBody=(Map<String,Object>)returnJson.get("Body");
 	
 	System.out.println(returnBody.get("Balance"));
-	return (double) returnBody.get("Balance");
+	
+	return (String) returnBody.get("Balance");
 	}
 
 	
