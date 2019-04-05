@@ -9,6 +9,8 @@ import java.io.Serializable;
 public class Account implements Serializable {
 	private String account;
 
+	private String password;
+
 	private String userId;
 
     private Integer status;
@@ -85,5 +87,13 @@ public class Account implements Serializable {
 
 	public void setAvaila_balance(double availa_balance) {
 		this.availa_balance = availa_balance;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

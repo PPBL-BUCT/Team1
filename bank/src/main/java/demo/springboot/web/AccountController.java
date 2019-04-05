@@ -42,6 +42,7 @@ public class AccountController {
 			HttpServletResponse response, @RequestParam int page,
 			@RequestParam int limit) {
 		Log log = new Log();
+		log.setOperation("查询账户列表");
 		log.setUser_id((String) request.getSession().getAttribute("user_id"));
 		log.setCreate_time(new Date());
 		log.setIp(CusAccessObjectUtil.getIpAddress(request));
@@ -74,6 +75,7 @@ public class AccountController {
 			@RequestParam int limit, @ModelAttribute Log log) {
 		
 		Log log5 = new Log();
+		log5.setOperation("日志查询");
 		log5.setUser_id((String) request.getSession().getAttribute("user_id"));
 		log5.setCreate_time(new Date());
 		log5.setIp(CusAccessObjectUtil.getIpAddress(request));
@@ -110,6 +112,7 @@ public class AccountController {
 			HttpServletResponse response, @RequestParam int page,
 			@RequestParam int limit, @ModelAttribute Account account) {
 		Log log2 = new Log();
+		log2.setOperation("加挂账户");
 		log2.setUser_id((String) request.getSession().getAttribute("user_id"));
 		log2.setCreate_time(new Date());
 		log2.setIp(CusAccessObjectUtil.getIpAddress(request));
