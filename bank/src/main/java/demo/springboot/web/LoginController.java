@@ -1,5 +1,7 @@
 package demo.springboot.web;
 
+import java.util.Date;
+
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import demo.springboot.domain.Log;
 import demo.springboot.domain.User;
+import demo.springboot.service.LogService;
 import demo.springboot.service.UserService;
+import demo.springboot.util.CusAccessObjectUtil;
 import demo.springboot.util.JsonData;
 import demo.springboot.util.VerifyCodeUtils;
 
@@ -22,7 +27,8 @@ public class LoginController {
 
 	@Autowired
 	UserService userService;
-
+	@Autowired
+	LogService logService;
 	//
 
 	// Map<Cookie[], User> onlineUserMap = new HashMap<Cookie[], User>();
@@ -30,6 +36,8 @@ public class LoginController {
 	@RequestMapping(method = RequestMethod.POST)
 	public JsonData postBook(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute User user) {
+		
+		
 
 		JsonData json = new JsonData();
 		// 先验证验证码 TODO
@@ -65,6 +73,16 @@ public class LoginController {
 			// onlineUserMap.put(request.getCookies(), realUser);
 
 			// request.getSession();
+			
+			Log log0 = new Log();
+			log0.setUser_id((String) request.getSession().getAttribute("user_id"));
+			log0.setCreate_time(new Date());
+			log0.setIp(CusAccessObjectUtil.getIpAddress(request));
+			log0.setType(0);
+			log0.setSuccess(1);
+			log0.setOperation("登录成功");
+			logService.insertSelective(log0);
+			
 			System.out.println("登陆成功");
 			return json;
 		} else {
@@ -73,6 +91,16 @@ public class LoginController {
 			json.setSuccess(false);
 			json.setMsg("用户名/密码错误，您已累计输入错误" + realUser.getCount()
 					+ "次，累计输入3次错误，账户将被锁定，次日解锁");
+			
+			Log log0 = new Log();
+			log0.setUser_id((String) request.getSession().getAttribute("user_id"));
+			log0.setCreate_time(new Date());
+			log0.setIp(CusAccessObjectUtil.getIpAddress(request));
+			log0.setType(0);
+			log0.setSuccess(0);
+			log0.setOperation("登录失败");
+			logService.insertSelective(log0);
+			
 			return json;
 		}
 	}
@@ -165,6 +193,16 @@ public class LoginController {
 	@RequestMapping("/logout")
 	public JsonData logout(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		
+		Log log0 = new Log();
+		log0.setUser_id((String) request.getSession().getAttribute("user_id"));
+		log0.setCreate_time(new Date());
+		log0.setIp(CusAccessObjectUtil.getIpAddress(request));
+		log0.setType(0);
+		log0.setSuccess(1);
+		log0.setOperation("登出成功");
+		logService.insertSelective(log0);
+		
 		HttpSession session = request.getSession();
 		JsonData json = new JsonData();
 		session.setAttribute("isLogin", "0");
