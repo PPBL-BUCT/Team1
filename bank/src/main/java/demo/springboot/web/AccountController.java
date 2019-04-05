@@ -141,7 +141,7 @@ public class AccountController {
 		return json;
 	}
 
-	// 加挂账户
+	// 余额查询
 	@RequestMapping("/getBalance")
 	@ResponseBody
 	public JsonData getBalance(HttpServletRequest request,
