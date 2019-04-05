@@ -1,5 +1,7 @@
 package demo.springboot.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import demo.springboot.domain.Account;
@@ -17,4 +19,6 @@ public interface AccountDao {
     int updateByPrimaryKeySelective(Account record);
 
     int updateByPrimaryKey(Account record);
+
+	List<Account> getAll(String user_id);
 }

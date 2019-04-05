@@ -10,7 +10,11 @@ import java.util.Date;
 public class Log implements Serializable {
     private Integer id;
 
-    private Integer user_id;
+	private String user_id;
+
+	private Date begin_date;
+
+	private Date end_date;
 
     private Date create_time;
 
@@ -32,15 +36,16 @@ public class Log implements Serializable {
         this.id = id;
     }
 
-    public Integer getUser_id() {
-        return user_id;
-    }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
-    }
+	public String getUser_id() {
+		return user_id;
+	}
 
-    public Date getCreate_time() {
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+
+	public Date getCreate_time() {
         return create_time;
     }
 
@@ -132,4 +137,20 @@ public class Log implements Serializable {
         sb.append("]");
         return sb.toString();
     }
+
+	public Date getBegin_date() {
+		return begin_date;
+	}
+
+	public void setBegin_date(Date begin_date) {
+		this.begin_date = begin_date;
+	}
+
+	public Date getEnd_date() {
+		return end_date;
+	}
+
+	public void setEnd_date(Date end_date) {
+		this.end_date = end_date;
+	}
 }

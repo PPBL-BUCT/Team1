@@ -22,7 +22,8 @@ public class LoginController {
 
 	@Autowired
 	UserService userService;
-	private User user;
+
+	//
 
 	// Map<Cookie[], User> onlineUserMap = new HashMap<Cookie[], User>();
 
@@ -147,7 +148,8 @@ public class LoginController {
 						   HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		JsonData json = new JsonData();
-		user = userService.selectById((String) session.getAttribute("user_id"));
+		User user = userService.selectById((String) session
+				.getAttribute("user_id"));
 		json.setSuccess(true);
 		json.setObj(user);
 		return json;

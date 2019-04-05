@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="../assets/layui.js"></script>
+    <link rel="stylesheet" href="../assets/css/layui.css">
+    <link rel="stylesheet" href="../assets/css/view.css"/>
+    <link rel="icon" href="/favicon.ico">
+    <title>程序猿银行</title>
+</head>
+<body class="layui-view-body">
+<!--     <div class="layui-btn-group demoTable">
+  <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
+  <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
+  <button class="layui-btn" data-type="isAll">验证是否全选</button>
+</div> -->
+ <div class="layui-content">
+        <div class="layui-row">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="form-box">
+                        <button class="layui-btn layui-btn-blue" onclick="addAccount()"><i class="layui-icon" >&#xe654;</i>新增</button>
+                        <table class="layui-table" lay-data="{width: 800, height:332, url:'/Account/list', page:true, id:'idTest'}" lay-filter="demo">
+  <thead>
+    <tr>
+      <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+      <th lay-data="{field:'account', width:80, sort: true, fixed: true}">账户</th>
+      <th lay-data="{field:'currency', width:80,templet: '#currencyTool'}">币种</th>
+      <th lay-data="{field:'balance', width:80, sort: true,templet: '#balanceTool'}">余额</th>
+      <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}">操作</th>
+    </tr>
+  </thead>
+</table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+<script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="getBalance">查询余额</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="currencyTool">
+     {{#  if(d.currency ==1){ }}
+                         人民币
+  {{#  } else { }}
+    美元
+  {{#  } }}
+</script>  
+<script type="text/html" id="balanceTool">
+     ***
+</script>
+          
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+layui.use('table', function(){
+  var table = layui.table;
+  //监听表格复选框选择
+  table.on('checkbox(demo)', function(obj){
+    console.log(obj)
+  });
+  //监听工具条
+  table.on('tool(demo)', function(obj){
+	  console.log(obj)
+    var data = obj.data;
+    if(obj.event === 'getBalance'){
+      layer.msg('查询余额');
+      obj.data.balance=10;
+      getBalance(data.account);
+    } else if(obj.event === 'del'){
+      layer.confirm('真的删除行么', function(index){
+        obj.del();
+        layer.close(index);
+      });
+    } else if(obj.event === 'edit'){
+      layer.alert('编辑行：<br>'+ JSON.stringify(data))
+    }
+  });
+  table.render({ //其它参数在此省略
+	  done: function(res, curr, count){
+	    //如果是异步请求数据方式，res即为你接口返回的信息。
+	    //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+	    console.log(res);
+	    
+	    //得到当前页码
+	    console.log(curr); 
+	    
+	    //得到数据总量
+	    console.log(count);
+	  }
+	});
+  var $ = layui.$, active = {
+    getCheckData: function(){ //获取选中数据
+      var checkStatus = table.checkStatus('idTest')
+      ,data = checkStatus.data;
+      layer.alert(JSON.stringify(data));
+    }
+    ,getCheckLength: function(){ //获取选中数目
+      var checkStatus = table.checkStatus('idTest')
+      ,data = checkStatus.data;
+      layer.msg('选中了：'+ data.length + ' 个');
+    }
+    ,isAll: function(){ //验证是否全选
+      var checkStatus = table.checkStatus('idTest');
+      layer.msg(checkStatus.isAll ? '全选': '未全选')
+    }
+  };
+  
+  $('.demoTable .layui-btn').on('click', function(){
+    var type = $(this).data('type');
+    active[type] ? active[type].call(this) : '';
+  });
+});
+
+function addAccount(){
+	console.log("添加账户");
+	
+}
+
+function getBalance(account){
+	//ajax请求
+	
+}
+</script>
+</body>
+</html>

@@ -1,11 +1,15 @@
 package demo.springboot.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import demo.springboot.dao.LogDao;
 import demo.springboot.domain.Log;
 import demo.springboot.service.LogService;
 
+@Service
 public class LogServiceImpl implements LogService{
 	@Autowired
 	private LogDao logDao;
@@ -45,5 +49,11 @@ public class LogServiceImpl implements LogService{
 		// TODO Auto-generated method stub
 		return logDao.updateByPrimaryKeySelective(record);
 	}
+	@Override
+	public List<Log> selectList(Log log) {
+		// TODO Auto-generated method stub
+		return logDao.selectList(log);
+	}
+
 
 }

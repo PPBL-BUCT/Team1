@@ -1,5 +1,7 @@
 package demo.springboot.service;
 
+import java.util.List;
+
 import demo.springboot.domain.Account;
 
 public interface AccountService {
@@ -14,4 +16,6 @@ public interface AccountService {
     int updateByPrimaryKeySelective(Account record);
 
     int updateByPrimaryKey(Account record);
+
+	List<Account> getAll(String user_id);
 }

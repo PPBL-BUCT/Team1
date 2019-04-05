@@ -3,7 +3,7 @@
 <mapper namespace="demo.springboot.dao.LogDao">
   <resultMap id="BaseResultMap" type="demo.springboot.domain.Log">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="user_id" jdbcType="VARCHAR" property="user_id" />
     <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="operation" jdbcType="VARCHAR" property="operation" />
@@ -19,6 +19,26 @@
     from log
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectList" parameterType="demo.springboot.domain.Log" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from log
+    where 1 = 1
+    <if test="start_date != null and start_date != ''">
+        AND create_time &gt; #{start_date,jdbcType=TIMESTAMP}
+    </if> 
+    <if test="end_date != null and end_date != ''">
+        AND create_time &lt; #{end_date,jdbcType=TIMESTAMP}
+    </if>
+    <if test="type != null and type != null">
+         AND type =  #{type,jdbcType=INTEGER}
+    </if>
+    <if test="user_id != null and user_id != null">
+         AND user_id =  #{type,jdbcType=VARCHAR}
+    </if>
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from log
     where id = #{id,jdbcType=INTEGER}
@@ -55,7 +75,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="user_id != null">
-        #{user_id,jdbcType=INTEGER},
+        #{user_id,jdbcType=VARCHAR},
       </if>
       <if test="create_time != null">
         #{create_time,jdbcType=TIMESTAMP},
@@ -78,7 +98,7 @@
     update log
     <set>
       <if test="user_id != null">
-        user_id = #{user_id,jdbcType=INTEGER},
+        user_id = #{user_id,jdbcType=VARCHAR},
       </if>
       <if test="create_time != null">
         create_time = #{create_time,jdbcType=TIMESTAMP},
@@ -100,7 +120,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="demo.springboot.domain.Log">
     update log
-    set user_id = #{user_id,jdbcType=INTEGER},
+    set user_id = #{user_id,jdbcType=VARCHAR},
       create_time = #{create_time,jdbcType=TIMESTAMP},
       `type` = #{type,jdbcType=INTEGER},
       `operation` = #{operation,jdbcType=VARCHAR},

@@ -1,5 +1,7 @@
 package demo.springboot.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import demo.springboot.domain.Log;
@@ -17,4 +19,6 @@ public interface LogDao {
     int updateByPrimaryKeySelective(Log record);
 
     int updateByPrimaryKey(Log record);
+
+	List<Log> selectList(Log log);
 }

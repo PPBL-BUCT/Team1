@@ -1,11 +1,15 @@
 package demo.springboot.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import demo.springboot.dao.AccountDao;
 import demo.springboot.domain.Account;
 import demo.springboot.service.AccountService;
 
+@Service
 public class AccountServiceImpl implements AccountService {
 	@Autowired
 	private AccountDao accountDao;
@@ -46,6 +50,12 @@ public class AccountServiceImpl implements AccountService {
 	public int updateByPrimaryKey(Account record) {
 		// TODO Auto-generated method stub
 		return accountDao.updateByPrimaryKey(record);
+	}
+
+	@Override
+	public List<Account> getAll(String user_id) {
+		// TODO Auto-generated method stub
+		return accountDao.getAll(user_id);
 	}
 	
 }

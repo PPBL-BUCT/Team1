@@ -1,5 +1,7 @@
 package demo.springboot.service;
 
+import java.util.List;
+
 import demo.springboot.domain.Log;
 
 public interface LogService {
@@ -14,4 +16,6 @@ public interface LogService {
 	    int updateByPrimaryKeySelective(Log record);
 
 	    int updateByPrimaryKey(Log record);
+
+	List<Log> selectList(Log log);
 }
