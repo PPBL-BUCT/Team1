@@ -78,11 +78,11 @@ layui.use('table', function(){
     //obj.data.balance=10;
     $.ajax({
         type: 'GET',
-        url: '/Account/getBalance',
+        url: '/Account/getBalance?account='+data.account,
         success:function (data) {
             if(data.success){
                 obj.update({
-                    balance: data.obj
+                    balance: data.obj.balance
                 });
             }
         }
