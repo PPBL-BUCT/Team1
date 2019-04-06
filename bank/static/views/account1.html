@@ -80,6 +80,7 @@ layui.use('table', function(){
         type: 'GET',
         url: '/Account/getBalance?account='+data.account,
         success:function (data) {
+        	console.log(data.obj);
             if(data.success){
                 obj.update({
                     balance: data.obj.balance

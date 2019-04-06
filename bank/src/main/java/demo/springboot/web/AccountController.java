@@ -152,8 +152,9 @@ public class AccountController {
 			// 调用远程数据库 ,查询结果
 			String balance = ReceiveBalance
 					.receiveBalance(account.getAccount());
-			json.setObj(account);
+
 			account.setBalance(balance);
+			json.setObj(account);
 			json.setSuccess(true);
 		} catch (Exception e) {
 			json.setSuccess(false);
