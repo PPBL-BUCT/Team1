@@ -207,6 +207,7 @@ public class LoginController {
 		session.setAttribute("isLogin", "0");
 		session.setAttribute("user_id", null);
 		json.setSuccess(true);
+		System.out.println("退出成功");
 		return json;
 
 	}

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../assets/css/view.css"/>
     <title></title>
 </head>
+
 <body class="layui-view-body">
     <div class="layui-content">
         <div class="layui-row">
@@ -94,10 +95,10 @@
 </body>
 <script>
 
-    layui.use(['layer','form'],function(){
+    layui.use(['jquery','layer','form'],function(){
         var layer = layui.layer
             ,form = layui.form;
-
+        $=layui.jquery;
         form.on('submit(add_account)',function(){
             var account = $("#account").val();
             var user_id = $("#user_id").val();
