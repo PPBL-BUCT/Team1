@@ -104,8 +104,7 @@ public class AccountController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public JsonData add(HttpServletRequest request,
-			HttpServletResponse response, @RequestParam int page,
-			@RequestParam int limit, @ModelAttribute Account account) {
+			HttpServletResponse response, @ModelAttribute Account account) {
 		Log log2 = new Log();
 		log2.setOperation("加挂账户");
 		log2.setUser_id((String) request.getSession().getAttribute("user_id"));
@@ -113,29 +112,30 @@ public class AccountController {
 		log2.setIp(CusAccessObjectUtil.getIpAddress(request));
 		log2.setType(2);
 		log2.setSuccess(1);
-		logService.insertSelective(log2);
 		
+
 		JsonData json = new JsonData();
 
-		String msg = null;
 		try {
 			// 调用远程数据库 ,查询结果
+			if (true) {
+				account.setUserId((String) request.getSession().getAttribute(
+						"user_id"));
+				account.setCurrency(1);
+				account.setStatus(1);
+				accountService.insert(account);
+				json.setSuccess(true);
+			} else {
+				json.setMsg("账户验证失败");
+				log2.setSuccess(0);
+			}
 
 		} catch (Exception e) {
 			json.setSuccess(false);
 			json.setMsg("未知错误，请联系管理员");
 			log2.setSuccess(0);
-			logService.updateByPrimaryKeySelective(log2);
-			return json;
 		}
-		if (msg == null) {
-			json.setSuccess(true);
-		} else {
-			json.setSuccess(false);
-			json.setMsg(msg);
-			log2.setSuccess(0);
-			logService.updateByPrimaryKeySelective(log2);
-		}
+		logService.insertSelective(log2);
 
 		return json;
 	}
