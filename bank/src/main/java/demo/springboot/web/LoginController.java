@@ -202,10 +202,10 @@ public class LoginController {
 		log0.setSuccess(1);
 		log0.setOperation("登出成功");
 		logService.insertSelective(log0);
-		
 		HttpSession session = request.getSession();
 		JsonData json = new JsonData();
 		session.setAttribute("isLogin", "0");
+		session.setAttribute("user_id", null);
 		json.setSuccess(true);
 		return json;
 
