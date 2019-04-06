@@ -17,22 +17,23 @@
   <button class="layui-btn" data-type="isAll">验证是否全选</button>
 </div> -->
  <div class="layui-content">
-    <div class="layui-row">
-        <div class="layui-card">
-            <div class="layui-card-body">
-                <div class="form-box">
-                    <button class="layui-btn layui-btn-blue" onclick="addAccount()"><i class="layui-icon" >&#xe654;</i>新增</button>
-                    <table class="layui-table" lay-data="{height:340, url:'/Account/list', page:true, id:'idTest'}" lay-filter="demo">
-                      <thead>
-                        <tr>
-                          <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
-                          <th lay-data="{field:'account', width:300, sort: true, fixed: true}">账户</th>
-                          <th lay-data="{field:'currency', width:150,templet: '#currencyTool'}">币种</th>
-                          <th lay-data="{field:'balance', width:300, sort: true,templet: '#balanceTool'}">余额</th>
-                          <th lay-data="{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'}">操作</th>
-                        </tr>
-                      </thead>
-                    </table>
+        <div class="layui-row">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="form-box">
+                        <button class="layui-btn layui-btn-blue" onclick="addAccount()"><i class="layui-icon" >&#xe654;</i>新增</button>
+                        <table class="layui-table" lay-data="{width: 800, height:332, url:'/Account/list', page:true, id:'idTest'}" lay-filter="demo">
+  <thead>
+    <tr>
+      <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+      <th lay-data="{field:'account', width:80, sort: true, fixed: true}">账户</th>
+      <th lay-data="{field:'currency', width:80,templet: '#currencyTool'}">币种</th>
+<!--       <th lay-data="{field:'balance', width:80, sort: true,templet: '#balanceTool'}">余额</th> -->
+      <th lay-data="{field:'balance', width:80, sort: true,templet: '#balanceTool'}">余额</th>
+      <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}">操作</th>
+    </tr>
+  </thead>
+</table>
                     </div>
                 </div>
             </div>
@@ -53,95 +54,88 @@
   {{#  } }}
 </script>  
 <script type="text/html" id="balanceTool">
-     ***
+{{#  if(d.balance !=0){ }}
+                        {{d.balance}}
+  {{#  } else { }}
+ ***
+  {{#  } }}
 </script>
           
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
-    layui.use('table', function(){
-      var table = layui.table;
-      //监听表格复选框选择
-      table.on('checkbox(demo)', function(obj){
-        console.log(obj)
-      });
-      //监听工具条
-      table.on('tool(demo)', function(obj){
-          console.log(obj)
-        var data = obj.data;
-        if(obj.event === 'getBalance'){
-          layer.msg('查询余额');
-          obj.data.balance=10;
-          getBalance(data.account);
-        } else if(obj.event === 'del'){
-          layer.confirm('真的删除行么', function(index){
-            obj.del();
-            layer.close(index);
-          });
-        } else if(obj.event === 'edit'){
-          layer.alert('编辑行：<br>'+ JSON.stringify(data))
-        }
-      });
-      table.render({ //其它参数在此省略
-          done: function(res, curr, count){
-            //如果是异步请求数据方式，res即为你接口返回的信息。
-            //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
-            console.log(res);
-
-            //得到当前页码
-            console.log(curr);
-
-            //得到数据总量
-            console.log(count);
-          }
+layui.use('table', function(){
+  var table = layui.table;
+  //监听表格复选框选择
+  table.on('checkbox(demo)', function(obj){
+    console.log(obj)
+  });
+  //监听工具条
+  table.on('tool(demo)', function(obj){
+	 // console.log(obj)
+    var data = obj.data;
+    if(obj.event === 'getBalance'){
+      layer.msg('查询余额');
+      //obj.data.balance=10;
+      
+      obj.update({
+    	  balance: '123'
         });
-      var $ = layui.$, active = {
-        getCheckData: function(){ //获取选中数据
-          var checkStatus = table.checkStatus('idTest')
-          ,data = checkStatus.data;
-          layer.alert(JSON.stringify(data));
-        }
-        ,getCheckLength: function(){ //获取选中数目
-          var checkStatus = table.checkStatus('idTest')
-          ,data = checkStatus.data;
-          layer.msg('选中了：'+ data.length + ' 个');
-        }
-        ,isAll: function(){ //验证是否全选
-          var checkStatus = table.checkStatus('idTest');
-          layer.msg(checkStatus.isAll ? '全选': '未全选')
-        }
-      };
-
-      $('.demoTable .layui-btn').on('click', function(){
-        var type = $(this).data('type');
-        active[type] ? active[type].call(this) : '';
+     var balance = getBalance(data.account);
+    } else if(obj.event === 'del'){
+      layer.confirm('真的删除行么', function(index){
+        obj.del();
+        layer.close(index);
       });
-    });
-
-    function addAccount(){
-        console.log("添加账户");
-
+    } else if(obj.event === 'edit'){
+      layer.alert('编辑行：<br>'+ JSON.stringify(data))
     }
-    // function setBalance(balance){
-    //     var accountbalance =  document.getElementById('balanceTool'),
-    //
-    //         accountbalance.innerHTML = balance;
-    // }
-    function getBalance(){
-        //ajax请求
-        // $.ajax({
-        //     type:'GET',
-        //     url:'/Account/getBalance',
-        //     success: function (data) {
-        //         if(data.success){
-        //             var name = data.obj.real_name;
-        //             setBalance(balance)
-        //         }else {
-        //
-        //         }
-        //
-        //     }
-        // });
+  });
+  table.render({ //其它参数在此省略
+	  done: function(res, curr, count){
+	    //如果是异步请求数据方式，res即为你接口返回的信息。
+	    //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+	    console.log(res);
+	    
+	    //得到当前页码
+	    console.log(curr); 
+	    
+	    //得到数据总量
+	    console.log(count);
+	  }
+	});
+  var $ = layui.$, active = {
+    getCheckData: function(){ //获取选中数据
+      var checkStatus = table.checkStatus('idTest')
+      ,data = checkStatus.data;
+      layer.alert(JSON.stringify(data));
     }
+    ,getCheckLength: function(){ //获取选中数目
+      var checkStatus = table.checkStatus('idTest')
+      ,data = checkStatus.data;
+      layer.msg('选中了：'+ data.length + ' 个');
+    }
+    ,isAll: function(){ //验证是否全选
+      var checkStatus = table.checkStatus('idTest');
+      layer.msg(checkStatus.isAll ? '全选': '未全选')
+    }
+  };
+  
+  $('.demoTable .layui-btn').on('click', function(){
+    var type = $(this).data('type');
+    active[type] ? active[type].call(this) : '';
+  });
+});
+
+function addAccount(){
+	console.log("添加账户");
+	
+}
+
+function getBalance(account){
+	//ajax请求
+	
+}
 </script>
 </body>
+
 </html>
