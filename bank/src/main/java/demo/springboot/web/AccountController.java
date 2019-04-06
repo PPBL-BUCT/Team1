@@ -84,12 +84,6 @@ public class AccountController {
 		logService.insertSelective(log5);
 		
 		Map<String, Object> map = new HashMap<>();
-		try {
-			log.setEnd_date(new Date(Long.parseLong(log.getEnd_dates())));
-			log.setStart_date((new Date(Long.parseLong(log.getStart_dates()))));
-		} catch (Exception e) {
-
-		}
 
 		List<Log> logs = logService.selectList(log);
 		List<Log> logs2;
@@ -129,6 +123,8 @@ public class AccountController {
 		} catch (Exception e) {
 			json.setSuccess(false);
 			json.setMsg("未知错误，请联系管理员");
+			log2.setSuccess(0);
+			logService.updateByPrimaryKeySelective(log2);
 			return json;
 		}
 		if (msg == null) {
@@ -136,6 +132,8 @@ public class AccountController {
 		} else {
 			json.setSuccess(false);
 			json.setMsg(msg);
+			log2.setSuccess(0);
+			logService.updateByPrimaryKeySelective(log2);
 		}
 
 		return json;
@@ -146,8 +144,6 @@ public class AccountController {
 	@ResponseBody
 	public JsonData getBalance(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute Account account) {
-		
-	
 		
 		JsonData json = new JsonData();
 

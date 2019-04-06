@@ -77,9 +77,9 @@
     ,limit: 5 //每页默认显示的数量
   });
   function search(){
-	   var begin_dates = Date.parse($("#begin_date").val()) ;
-	  var end_dates = Date.parse($("#end_date").val()) ;
-	  console.log($("#type").val()); 
+	   var begin_dates = $("#begin_date").val();
+	  var end_dates = $("#end_date").val();
+	  console.log(begin_dates); 
 	  
 	  //获取类型，起止时间
 	 table.reload('demo', {
