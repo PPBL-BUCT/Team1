@@ -26,10 +26,10 @@
     from log
     where 1 = 1
     <if test="start_dates != null and start_dates != ''">
-        AND create_time &gt; #{start_dates }
+        AND create_time &gt; STR_TO_DATE(#{start_dates},'%Y-%m-%d %H:%i:%s')
     </if> 
     <if test="end_dates != null and end_dates != ''">
-        AND create_time &lt; #{end_dates }
+        AND create_time &lt; STR_TO_DATE(#{end_dates},'%Y-%m-%d %H:%i:%s')
     </if>
     <if test="type != null and type != null">
          AND type =  #{type,jdbcType=INTEGER}
