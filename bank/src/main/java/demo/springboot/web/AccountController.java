@@ -118,7 +118,9 @@ public class AccountController {
 
 		try {
 			// 调用远程数据库 ,查询结果
-			if (true) {
+			if (ReceiveBalance.checkAccount(account.getAccount(), account
+					.getPassword(),
+					(String) request.getSession().getAttribute("user_id"))) {
 				account.setUserId((String) request.getSession().getAttribute(
 						"user_id"));
 				account.setCurrency(1);

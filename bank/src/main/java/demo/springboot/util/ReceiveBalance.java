@@ -19,7 +19,26 @@ public class ReceiveBalance {
 
 	public static boolean checkAccount(String accNumber, String password,
 			String user_id) {
+		String res = HttpConnection.doPost(Core.getUrl_AccountCheck(),
+				VerifyPassword.shape(user_id, accNumber, password));
 
-		return true;
+		System.out.println("res json=================" + res);
+
+		Map map = JSONObject.parseObject(res, Map.class);
+		System.out.println("res map=================" + map);
+
+		Map header = (Map) JSONObject.parseObject(
+				((JSONObject) map.get("Header")).toJSONString(), Map.class);
+		Map body = (Map) JSONObject.parseObject(
+				((JSONObject) map.get("Body")).toJSONString(), Map.class);
+
+		String flag = (String) body.get("INFO");
+		System.out.println("res info=================" + flag);
+
+		if (flag.equals("Password Correct")) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
