@@ -23,6 +23,7 @@ import demo.springboot.service.LogService;
 import demo.springboot.service.UserService;
 import demo.springboot.util.CusAccessObjectUtil;
 import demo.springboot.util.JsonData;
+import demo.springboot.util.ReceiveBalance;
 
 @RestController
 @RequestMapping(value = "/Account")
@@ -147,22 +148,18 @@ public class AccountController {
 		
 		JsonData json = new JsonData();
 
-		String msg = null;
 		try {
 			// 调用远程数据库 ,查询结果
-
+			String balance = ReceiveBalance
+					.receiveBalance(account.getAccount());
+			json.setObj(account);
+			account.setBalance(balance);
+			json.setSuccess(true);
 		} catch (Exception e) {
 			json.setSuccess(false);
 			json.setMsg("未知错误，请联系管理员");
-			return json;
-		}
-		if (msg == null) {
-			json.setSuccess(true);
-		} else {
-			json.setSuccess(false);
-			json.setMsg(msg);
-		}
 
+		}
 		return json;
 	}
 }
