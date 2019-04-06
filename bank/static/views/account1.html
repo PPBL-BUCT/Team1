@@ -23,17 +23,17 @@
                     <div class="form-box">
                         <button class="layui-btn layui-btn-blue" onclick="addAccount()"><i class="layui-icon" >&#xe654;</i>新增</button>
                         <table class="layui-table" lay-data="{width: 800, height:332, url:'/Account/list', page:true, id:'idTest'}" lay-filter="demo">
-  <thead>
-    <tr>
-      <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
-      <th lay-data="{field:'account', width:80, sort: true, fixed: true}">账户</th>
-      <th lay-data="{field:'currency', width:80,templet: '#currencyTool'}">币种</th>
-<!--       <th lay-data="{field:'balance', width:80, sort: true,templet: '#balanceTool'}">余额</th> -->
-      <th lay-data="{field:'balance', width:80, sort: true,templet: '#balanceTool'}">余额</th>
-      <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}">操作</th>
-    </tr>
-  </thead>
-</table>
+                          <thead>
+                            <tr>
+                              <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+                              <th lay-data="{field:'account', width:200, sort: true, fixed: true}">账户</th>
+                              <th lay-data="{field:'currency', width:100,templet: '#currencyTool'}">币种</th>
+                        <!--       <th lay-data="{field:'balance', width:80, sort: true,templet: '#balanceTool'}">余额</th> -->
+                              <th lay-data="{field:'balance', width:150, sort: true,templet: '#balanceTool'}">余额</th>
+                              <th lay-data="{fixed: 'right', width:300, align:'center', toolbar: '#barDemo'}">操作</th>
+                            </tr>
+                          </thead>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -74,12 +74,19 @@ layui.use('table', function(){
 	 // console.log(obj)
     var data = obj.data;
     if(obj.event === 'getBalance'){
-      layer.msg('查询余额');
-      //obj.data.balance=10;
-      
-      obj.update({
-    	  balance: '123'
-        });
+    layer.msg('查询余额');
+    //obj.data.balance=10;
+    $.ajax({
+        type: 'GET',
+        url: '/Account/getBalance',
+        success:function (data) {
+            if(data.success){
+                obj.update({
+                    balance: data.obj
+                });
+            }
+        }
+    })
      var balance = getBalance(data.account);
     } else if(obj.event === 'del'){
       layer.confirm('真的删除行么', function(index){

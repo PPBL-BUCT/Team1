@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../assets/css/view.css"/>
     <title></title>
 </head>
+
 <body class="layui-view-body">
     <div class="layui-content">
         <div class="layui-row">
@@ -90,18 +91,20 @@
             </div>
         </div>
     </div>
-    <script src="../assets/layui.all.js"></script>
+    <script src="../assets/layui.js"></script>
 </body>
 <script>
-    ;!function(){
+
+    layui.use(['jquery','layer','form'],function(){
         var layer = layui.layer
             ,form = layui.form;
-
+        $=layui.jquery;
         form.on('submit(add_account)',function(){
             var account = $("#account").val();
             var user_id = $("#user_id").val();
             var password = $("#password").val();
             var phone_number = $("#phone_number").val();
+            console.log("test");
             if(account==""||account==null){
                 layer.msg("请输入账号");
                 return false;
@@ -144,6 +147,6 @@
             });
             return false;
         });
-    }();
+    });
 </script>
 </html>

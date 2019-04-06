@@ -42,7 +42,7 @@
                     <a id="menu_userName" href="javascript:;">用户名</a>
                     <dl class="layui-nav-child">
                         <dd><a href="">帮助中心</a></dd>
-                        <dd><a href="login.html">退出</a></dd>
+                        <dd><a id="logout">退出</a></dd>
                     </dl>
                 </li>
             </ul>
@@ -112,7 +112,20 @@
     <script src="assets/layui.js"></script>
     <script src="index.js" data-main="home"></script>
     <script>
-
+        $("#logout").bind("click",function(){
+            $.ajax({
+                type: 'GET',
+                url: '/Login/logout',
+                success:function (data) {
+                    if(data.success){
+                        layer.alert('退出成功',function(index) {
+                            window.location.href='./login.html';
+                            layer.close(index);
+                        });
+                    }
+                }
+            })
+        });
         function setText(name){
             var menuName =  document.getElementById('menu_userName'),
                 welcomeName = document.getElementById('welcome_userName');
