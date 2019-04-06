@@ -12,19 +12,32 @@
         <div class="layui-row">
             <div class="layui-card">
                 <div class="layui-card-header">新增账户</div>
-                <form class="layui-form layui-card-body" action="">
+                <form class="layui-form layui-card-body" action="" style="top: 10px">
                   <div class="layui-form-item">
                     <label class="layui-form-label">卡号</label>
                     <div class="layui-input-block">
-                      <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                      <input id="account" type="text" name="account" required  lay-verify="required" placeholder="请输入卡号" autocomplete="off" class="layui-input">
                     </div>
+                  </div>
+                  <div class="layui-form-item">
+                        <label class="layui-form-label">身份证号</label>
+                        <div class="layui-input-block">
+                            <input id="user_id" type="text" name="user_id" required  lay-verify="required" placeholder="请输入身份证号" autocomplete="off" class="layui-input">
+                        </div>
                   </div>
                   <div class="layui-form-item">
                     <label class="layui-form-label">卡密码</label>
                     <div class="layui-input-inline">
-                      <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                      <input id="password" type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid layui-word-aux">6位密码</div>
+                  </div>
+                  <div class="layui-form-item">
+                        <label class="layui-form-label">手机号</label>
+                        <div class="layui-input-inline">
+                            <input id="phone_number" type="text" name="phone_number" required lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">11位手机号</div>
                   </div>
                   <!-- <div class="layui-form-item">
                     <label class="layui-form-label">选择框</label>
@@ -39,37 +52,37 @@
                       </select>
                     </div>
                   </div> -->
+                  <!--<div class="layui-form-item">-->
+                    <!--<label class="layui-form-label">复选框</label>-->
+                    <!--<div class="layui-input-block">-->
+                      <!--<input type="checkbox" name="like[write]" title="写作">-->
+                      <!--<input type="checkbox" name="like[read]" title="阅读" checked>-->
+                      <!--<input type="checkbox" name="like[dai]" title="发呆">-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="layui-form-item">-->
+                    <!--<label class="layui-form-label">开关</label>-->
+                    <!--<div class="layui-input-block">-->
+                      <!--<input type="checkbox" name="switch" lay-skin="switch">-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="layui-form-item">-->
+                    <!--<label class="layui-form-label">单选框</label>-->
+                    <!--<div class="layui-input-block">-->
+                      <!--<input type="radio" name="sex" value="男" title="男">-->
+                      <!--<input type="radio" name="sex" value="女" title="女" checked>-->
+                    <!--</div>-->
+                    <!--<input type="checkbox" name="" title="写作" lay-skin="primary" checked>-->
+                  <!--</div>-->
+                  <!--<div class="layui-form-item layui-form-text">-->
+                    <!--<label class="layui-form-label">文本域</label>-->
+                    <!--<div class="layui-input-block">-->
+                      <!--<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>-->
+                    <!--</div>-->
+                  <!--</div>-->
                   <div class="layui-form-item">
-                    <label class="layui-form-label">复选框</label>
                     <div class="layui-input-block">
-                      <input type="checkbox" name="like[write]" title="写作">
-                      <input type="checkbox" name="like[read]" title="阅读" checked>
-                      <input type="checkbox" name="like[dai]" title="发呆">
-                    </div>
-                  </div>
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">开关</label>
-                    <div class="layui-input-block">
-                      <input type="checkbox" name="switch" lay-skin="switch">
-                    </div>
-                  </div>
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">单选框</label>
-                    <div class="layui-input-block">
-                      <input type="radio" name="sex" value="男" title="男">
-                      <input type="radio" name="sex" value="女" title="女" checked>
-                    </div>
-                    <input type="checkbox" name="" title="写作" lay-skin="primary" checked>
-                  </div>
-                  <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">文本域</label>
-                    <div class="layui-input-block">
-                      <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
-                    </div>
-                  </div>
-                  <div class="layui-form-item">
-                    <div class="layui-input-block">
-                      <button class="layui-btn layui-btn-blue" onclick="submit();"  >立即提交</button>
+                      <button class="layui-btn layui-btn-blue"lay-submit lay-filter="add_account"  >立即提交</button>
                       <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                   </div>
@@ -78,12 +91,59 @@
         </div>
     </div>
     <script src="../assets/layui.all.js"></script>
-    <script>
-      var form = layui.form
-        ,layer = layui.layer;
-      function submit(){
-    	  console.log("提交");
-      }
-    </script>
 </body>
+<script>
+    ;!function(){
+        var layer = layui.layer
+            ,form = layui.form;
+
+        form.on('submit(add_account)',function(){
+            var account = $("#account").val();
+            var user_id = $("#user_id").val();
+            var password = $("#password").val();
+            var phone_number = $("#phone_number").val();
+            if(account==""||account==null){
+                layer.msg("请输入账号");
+                return false;
+            }
+            if(user_id==""||user_id==null){
+                layer.msg("请输入身份证号");
+                return false;
+
+            }
+            if(password==""||password==null){
+                layer.msg("请输入密码");
+                return false;
+            }
+            if(phone_number==""||phone_number==null){
+                layer.msg("请输入手机号");
+                return false;
+            }
+
+            $.ajax({
+                type:'POST',
+                url:'/Account/add',
+                data:{
+                    account: account,
+                    password: password
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if(data.success){
+                        layer.alert('加挂成功',function(index) {
+
+                            layer.close(index);
+                        });
+                    }else {
+                        layer.alert(data.msg,function (index) {
+                            window.location.reload();
+                            layer.close(index);
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+    }();
+</script>
 </html>
