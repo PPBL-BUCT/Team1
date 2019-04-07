@@ -135,8 +135,8 @@
                 success: function (data) {
                     if(data.success){
                         layer.alert('加挂成功',function(index) {
-
-                            layer.close(index);
+                        window.location.reload();
+                        layer.close(index);
                         });
                     }else {
                         layer.alert(data.msg,function (index) {
