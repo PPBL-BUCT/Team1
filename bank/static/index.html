@@ -1,155 +1,168 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="assets/css/layui.css">
-    <link rel="stylesheet" href="assets/css/admin.css">
-    <link rel="icon" href="/favicon.ico">
-    <title>程序猿银行</title>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>程序员银行个人网上银行</title>
+	<link rel="stylesheet" href="../../layui/css/layui.css" media="all">
 
-    <style>
-        .layui-logo{
-            vertical-align: middle;
-        }
-        .layui-logo img{
-            margin-left: 10px;
-            height: 50px;
-        }
-    </style>
-    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<style>
+		#canvas {
+			float: right;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			cursor: pointer;
+		}
+		.input-val {
+		}
+	</style>
 </head>
-<body class="layui-layout-body">
-    <div class="layui-header layui-layout-admin" style="background-color: #001529">
-        <div class="layui-main">
-            <div class="layui-logo" style="width:500px;margin-left: 20px;color:#01AAED;font-weight:bold;font-size: 18px">程序猿银行 | 个人网上银行
-                <img src="assets/images/title.png" alt=""/>
-            </div>
-        </div>
-    </div>
-    <div class="layui-layout layui-layout-admin" style="top: 60px;">
-        <div class="layui-header custom-header">
-            
-            <ul class="layui-nav layui-layout-left">
-                <li class="layui-nav-item slide-sidebar" lay-unselect>
-                    <a href="javascript:;" class="icon-font"><i class="ai ai-menufold"></i></a>
-                </li>
-            </ul>
 
-            <ul class="layui-nav layui-layout-right">
-                <li class="layui-nav-item">
-                    <a id="menu_userName" href="javascript:;">用户名</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="">帮助中心</a></dd>
-                        <dd><a id="logout">退出</a></dd>
-                    </dl>
-                </li>
-            </ul>
-        </div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="../../js/md5.js" type="text/javascript"></script>
+<body class="layui-layout-body" cz-shortcut-listen="true">
 
-        <div class="layui-side custom-admin" style="top: 60px;">
-            <div class="layui-side-scroll">
+<!-- 你的HTML代码 -->
 
-                <div class="custom-logo">
-                    <img src="assets/images/logo.png" alt=""/>
-                    <h1 id="welcome_userName" style="margin-left: 10px">用户名，</h1><h1>欢迎您</h1>
-                </div>
-                <ul id="Nav" class="layui-nav layui-nav-tree">
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">
-                            <i class="layui-icon">&#xe609;</i>
-                            <em>账户管理</em>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="views/account1.html">账户列表</a></dd>
-                            <dd><a href="views/form.html">账户加挂</a></dd>
-                            <dd><a href="views/loglist.html">日志查询</a></dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">
-                            <i class="layui-icon">&#xe857;</i>
-                            <em>转账汇款</em>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="views/form.html">本人转账</a></dd>
-                            <dd><a href="views/operaterule.html">本行转账</a></dd>
-                            <dd><a href="views/operaterule.html">对外转账限额设置</a></dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">
-                            <i class="layui-icon">&#xe612;</i>
-                            <em>信用卡</em>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="views/loglist.html">账户信息查询</a></dd>
-                            <dd><a href="views/operaterule.html">已出账单查询</a></dd>
-                            <dd><a href="views/operaterule.html">未出账单查询</a></dd>
-                            <dd><a href="views/operaterule.html">催收信息查询</a></dd>
-                            <dd><a href="views/operaterule.html">信用卡还款</a></dd>
-                        </dl>
-                    </li>
-                </ul>
+<script src="../layui/layui.js"></script>
+<script>
+	//一般直接写在一个js文件中
+	 
+</script>
 
-            </div>
-        </div>
+<div class="layui-layout layui-layout-admin">
+	<div class="layui-header" style="background-color: #001529">
+		<div class="layui-main">
+			<div class="layui-logo" style="width:250px;margin-left: 20px;color:#01AAED;font-weight:bold;font-size: 18px">程序猿银行 | 个人网上银行</div>
+			<ul class="layui-nav layui-layout-right">
+				<li class="layui-nav-item"><a href="">欢迎您</a> </li>
+			</ul>
+		</div>
+	</div>
+	<div class="layui-body" style="left: 0px;overflow:scroll;overflow-x:hidden">
+		<div style="background: url(登录背景.jpg) no-repeat center top;height: 100%;width:100%;background-size:100%;padding-top: 150px">
+			<div class="layui-card" style="height: 350px;width: 410px;margin-left: 35%;opacity: 0.92">
+				<div class="layui-card-header" style="height:50px;font-size:18px;text-align: center;line-height:50px;vertical-align:middle;color:white;background: #01AAED">账户登录</div>
+				<div class="layui-card-body">
+					<form class="layui-form "  style="padding-top: 20px">
+						<div class="layui-form-item">
+							<label class="layui-form-label" style="text-align: left">
+								<i class="layui-icon layui-icon-username"></i> 用户名</label>
+							<div class="layui-input-block">
+								<!--<i class="layui-icon layui-icon-username"></i>-->
+								<input id="username" type="text" name="username" value=""
+									   lay-verify="username" required autocomplete="off"
+									   placeholder="请输入用户名" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label" style="text-align: left">
+								<i class="layui-icon layui-icon-password"></i> 密码</label>
+							<div class="layui-input-block">
+								<input id="realPassWord" type="password" name="password1" required lay-verify="password"
+									   placeholder="请输入密码"  autocomplete="off" class="layui-input">
+								<input id="passWord" type="hidden" name="password" required lay-verify="password"
+                                       placeholder="请输入密码" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label" style="text-align: left">
+								<i class="layui-icon layui-icon-auz"></i> 验证码</label>
+							<div class="layui-input-block">
+								<input type="text" id="passKey" name="passKey"
+									   placeholder="请输入验证码" autocomplete="off" class="layui-input input-val"
+									   style="width:180px;float: left">
+								<!-- <canvas class="pic" id="canvas" width="90" height="40"></canvas> -->
+								<img alt="验证码" id="passkey_img" style="float: right;height:38px;width: 85px" onclick="refreshCode()" src="/Login/loadPasskey" >
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<button class="layui-btn" lay-submit lay-filter="login" style="background-color:#01AAED">登录</button>
+								<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
-        <div class="layui-body">
-             <div class="layui-tab app-container" lay-allowClose="true" lay-filter="tabs">
-                <ul id="appTabs" class="layui-tab-title custom-tab"></ul>
-                <div id="appTabPage" class="layui-tab-content"></div>
-            </div>
-        </div>
+	<div class="layui-footer" style="left: 0px">
+		<!-- 底部固定区域 -->
+		© coderBank.com  总行地址：中国北京朝阳区北三环东路15号
+	</div>
+</div>
 
-        <div class="layui-footer">
-            <p>© 程序猿银行<a href="#" target="_blank"> Design by代码一编就队</a></p>
-        </div>
-
-        <div class="mobile-mask"></div>
-    </div>
-    <script src="assets/layui.js"></script>
-    <script src="index.js" data-main="home"></script>
-    <script>
-        $("#logout").bind("click",function(){
-            $.ajax({
-                type: 'GET',
-                url: '/Login/logout',
-                success:function (data) {
-                    if(data.success){
-                        layer.alert('退出成功',function(index) {
-                            window.location.href='./login.html';
-                            layer.close(index);
-                        });
-                    }
-                }
-            })
-        });
-        function setText(name){
-            var menuName =  document.getElementById('menu_userName'),
-                welcomeName = document.getElementById('welcome_userName');
-
-            menuName.innerHTML = name;
-            welcomeName.innerHTML = name;
-        }
-
-        function getUserName(){
-            $.ajax({
-                type:'GET',
-                url:'/Login/getUser',
-                success: function (data) {
-                    if(data.success){
-                            var name = data.obj.real_name;
-                            setText(name)
-                    }else {
-
-                    }
-
-                }
-            });
-        }
-        getUserName()
-    </script>
 </body>
+<script>
+layui.use(['layer', 'form'], function(){
+    var layer = layui.layer
+            ,form = layui.form;
+
+    form.on('submit(login)',function(){
+        var md5Pass = $('#realPassWord').val();
+        md5Pass = hex_md5(md5Pass);
+        $('#passWord').val(md5Pass);
+        console.log(md5Pass);
+        //$(".input-val").val('');
+
+        //  ajax提交用户名和密码
+        var username = $("#username").val();
+        var password = $("#passWord").val();
+		var realpassword = $("#realPassWord").val();
+        var passKey = $("#passKey").val();
+        if(username==""||username==null){
+            layer.msg("请输入用户名");
+            return false;
+        }
+        if(realpassword==""||realpassword==null){
+			layer.msg("请输入密码");
+            return false;
+
+        }
+        if(passKey==""||passKey==null){
+			layer.msg("请输入验证码");
+            return false;
+        }
+        //alert(passKey);
+        $.ajax({
+            type:'POST',
+            url:'/Login',
+            data:{
+                username: username,
+                password: password,
+                passKey: passKey
+            },
+            dataType: 'json',
+            success: function (data) {
+                if(data.success){
+					layer.alert('登录成功',function(index) {
+						window.location.href='homepage.html';
+						layer.close(index);
+					});
+                }else {
+					layer.alert(data.msg,function (index) {
+						window.location.reload();
+						layer.close(index);
+					});
+                }
+            }
+        });
+        return false;
+    });
+
+}); 
+
+    function refreshCode(){
+        $("#passkey_img").attr("src","/Login/loadPasskey?timestamp="+ new Date().getTime());
+    } 
+	
+</script>
+
+
+
 </html>
