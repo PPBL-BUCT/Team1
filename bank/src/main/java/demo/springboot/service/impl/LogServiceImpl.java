@@ -50,9 +50,16 @@ public class LogServiceImpl implements LogService{
 		return logDao.updateByPrimaryKeySelective(record);
 	}
 	@Override
-	public List<Log> selectList(Log log) {
+	public List<Log> selectList(Log log, int page, int limit) {
 		// TODO Auto-generated method stub
-		return logDao.selectList(log);
+
+		return logDao.selectList(log, (page - 1) * limit, limit);
+	}
+
+	@Override
+	public int selectListCount(Log log) {
+		// TODO Auto-generated method stub
+		return logDao.selectListCount(log);
 	}
 
 

@@ -3,8 +3,10 @@ package demo.springboot.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import demo.springboot.domain.Log;
+
 
 @Mapper
 public interface LogDao {
@@ -20,5 +22,10 @@ public interface LogDao {
 
     int updateByPrimaryKey(Log record);
 
-	List<Log> selectList(Log log);
+	// List<Log> selectList(Log log);
+
+	List<Log> selectList(@Param("log") Log log, @Param("page") int page,
+			@Param("limit") int limit);
+
+	int selectListCount(@Param("log") Log log);
 }

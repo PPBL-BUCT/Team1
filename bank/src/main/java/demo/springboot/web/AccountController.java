@@ -75,28 +75,24 @@ public class AccountController {
 			HttpServletResponse response, @RequestParam int page,
 			@RequestParam int limit, @ModelAttribute Log log) {
 		
-		Log log5 = new Log();
-		log5.setOperation("日志查询");
-		log5.setUser_id((String) request.getSession().getAttribute("user_id"));
-		log5.setCreate_time(new Date());
-		log5.setIp(CusAccessObjectUtil.getIpAddress(request));
-		log5.setType(5);
-		log5.setSuccess(1);
-		logService.insertSelective(log5);
+		/*
+		 * Log log5 = new Log(); log5.setOperation("日志查询");
+		 * log5.setUser_id((String)
+		 * request.getSession().getAttribute("user_id"));
+		 * log5.setCreate_time(new Date());
+		 * log5.setIp(CusAccessObjectUtil.getIpAddress(request));
+		 * log5.setType(5); log5.setSuccess(1);
+		 * logService.insertSelective(log5);
+		 */
 		
 		Map<String, Object> map = new HashMap<>();
 
-		List<Log> logs = logService.selectList(log);
-		List<Log> logs2;
-		if (page * limit - 1 < logs.size() - 1) {
-			logs2 = logs.subList((page - 1) * limit, page * limit - 1);
-		} else {
-			logs2 = logs.subList((page - 1) * limit, logs.size());
-		}
+		List<Log> logs = logService.selectList(log, page, limit);
+		
 		map.put("code", 0);
 		map.put("msg", "");
-		map.put("count", logs.size());
-		map.put("data", logs2);
+		map.put("count", logService.selectListCount(log));
+		map.put("data", logs);
 		return map;
 	}
 
