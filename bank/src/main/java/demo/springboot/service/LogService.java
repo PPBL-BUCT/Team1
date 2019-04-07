@@ -17,5 +17,7 @@ public interface LogService {
 
 	    int updateByPrimaryKey(Log record);
 
-	List<Log> selectList(Log log);
+	List<Log> selectList(Log log, int page, int limit);
+
+	int selectListCount(Log log);
 }
