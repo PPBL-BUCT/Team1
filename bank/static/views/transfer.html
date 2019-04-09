@@ -10,20 +10,20 @@
 <body class="layui-view-body">
     <div class="layui-content">
         <div class="layui-page-header">
-            <div class="pagewrap">
+            <div class="pagewrap" style="text-align: center;">
                 <h2 class="title" style="color: #1E9FFF">1.填写信息————2.确认及提交————3.完成</h2>
             </div>
         </div>
         <div class="layui-row">
             <div class="layui-card">
-                <div class="layui-card-header">填写信息</div>
+                <div class="layui-card-header" style="margin-left:15px;font-size: 18px;color: #1E9FFF">填写信息</div>
                 <form class="layui-form layui-card-body">
                     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
                         <legend style="color: #1E9FFF">付款账户信息</legend>
                     </fieldset>
                     <div class="layui-form-item">
                         <label class="layui-form-label"><a style="color: red">*</a> 付款账户</label>
-                        <div class="layui-input-block">
+                        <div class="layui-input-inline" style="width: 40%">
                             <select name="account" lay-verify="required">
                                 <option value="">请选择账户</option>
                                 <option value="0">001</option>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label"><a style="color: red">*</a> 币种</label>
-                        <div class="layui-input-block">
+                        <div class="layui-input-inline">
                             <select name="currency" lay-verify="required">
                                 <option value="">请选择币种</option>
                                 <option value="0">人民币</option>
@@ -55,9 +55,78 @@
                         <legend style="color: #1E9FFF">收款账户信息</legend>
                     </fieldset>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">单行输入框</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                        <label class="layui-form-label"><a style="color: red">*</a> 收款账号</label>
+                        <div class="layui-input-inline" style="width: 40%">
+                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入收款人账号" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">确认账号</label>
+                        </div>
+                        <div class="layui-inline">
+                            <h2 name="balance" style="color: #1E9FFF">111111111</h2>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><a style="color: red">*</a> 收款户名</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="payeename" lay-verify="title" autocomplete="off" placeholder="请输入收款人户名" class="layui-input">
+                        </div>
+                    </div>
+                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                        <legend style="color: #1E9FFF">金额及其他信息</legend>
+                    </fieldset>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><a style="color: red">*</a> 转账方式</label>
+                        <div class="layui-input-inline">
+                            <select name="Transferway" lay-verify="required">
+                                <option value="">请选择转账方式</option>
+                                <option value="0">次日</option>
+                                <option value="1">实时</option>
+                                <option value="2">普通</option>
+                            </select>
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">次日2点后发出</div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><a style="color: red">*</a> 转账金额</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="amount" lay-verify="title" autocomplete="off" placeholder="请输入转账金额" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">金额大写</label>
+                        </div>
+                        <div class="layui-inline">
+                            <h2 name="capitalamount" style="color: #1E9FFF">壹佰圆整</h2>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><a style="color: red">*</a> 交易用途</label>
+                        <div class="layui-input-inline">
+                            <select name="currency" lay-verify="required">
+                                <option value="">请选择交易用途</option>
+                                <option value="0">网银转账</option>
+                                <option value="1">工资</option>
+                                <option value="2">差旅费</option>
+                                <option value="3">劳务费</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><a style="color: red">*</a> 交易密码</label>
+                        <div class="layui-input-inline">
+                            <input type="password" name="password" lay-verify="title" autocomplete="off" placeholder="请输入交易密码" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">请输入6位交易密码</div>
+                    </div>
+                    <hr class="layui-bg-blue">
+                    <div class="layui-form-item">
+                        <div style="text-align: center;margin: 20px auto">
+                            <button class="layui-btn-blue layui-btn" lay-submit lay-filter="next">下一步</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                         </div>
                     </div>
                 </form>
