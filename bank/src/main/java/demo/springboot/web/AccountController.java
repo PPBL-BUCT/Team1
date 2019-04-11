@@ -68,6 +68,24 @@ public class AccountController {
 		return map;
 	}
 
+	@RequestMapping("/allList")
+	@ResponseBody
+	public JsonData allList(HttpServletRequest request,
+			HttpServletResponse response) {
+		JsonData json = new JsonData();
+		try {
+			HttpSession session = request.getSession();
+			List<Account> users = accountService.getAll((String) session
+					.getAttribute("user_id"));
+			json.setSuccess(true);
+			json.setObj(users);
+		} catch (Exception e) {
+			json.setSuccess(false);
+			json.setMsg("错误");
+		}
+		return json;
+
+	}
 	// 查询日志
 	@RequestMapping("/log")
 	@ResponseBody

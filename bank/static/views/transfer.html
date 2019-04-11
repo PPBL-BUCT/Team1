@@ -25,20 +25,15 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label"><a style="color: red">*</a> 付款账户</label>
                         <div class="layui-input-inline" style="width: 40%">
-                            <select id="payaccount1" name="account" lay-verify="required">
-                                <option value="">请选择账户</option>
-                                <option value="001">001</option>
-                                <option value="002">002</option>
-                                <option value="003">003</option>
-                                <option value="004">004</option>
-                                <option value="005">005</option>
+                            <select id="payaccount1" name="account" lay-filter="accountSelect">
+                                <option value="0" select="selected">请选择账户</option>
                             </select>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label"><a style="color: red">*</a> 币种</label>
                         <div class="layui-input-inline">
-                            <select id="currency1" name="currency" lay-verify="required">
+                            <select id="currency1" name="currency" lay-verify="required" onchange="getBalance();">
                                 <option value="">请选择币种</option>
                                 <option value="人民币">人民币</option>
                             </select>
@@ -270,6 +265,19 @@
                 form.render();
                 return false;
             });
+            form.on('select(accountSelect)', function(data){
+            	$.ajax({
+                    type: 'GET',
+                    url: '/Account/getBalance?account='+data.value,
+                    success:function (data) {
+                        console.log(data.obj);
+                        if(data.success){
+                            $("#balance1").html(data.obj.balance);
+                            
+                        }
+                    }
+                })
+            });  
             form.on('submit(confirmSubmit)',function () {
                 layer.close(nextIndex);
                 // alert(sid + " "+ sName+" "+gender+" "+cid+" "+birthday+" "+nativePlace+" "+state);
@@ -301,6 +309,71 @@
                 return false;
             });
         });
+        getAccount();
+       function getAccount(){
+    	   console.log("获取账户");
+        	$.ajax({
+                type:'POST',
+                url:'/Account/allList',
+                success: function (data) {
+                    if(data.success){
+                        var html ="";
+                        var datas = data.obj;
+                        var obj = null;
+                        for(var i = 0 ; i < datas.length ; i ++){
+                            obj = datas[i];
+                            html += '<option value="'+obj.account+'">'+obj.account+'</option>';
+                        }
+                        $("#payaccount1").empty();
+                        $("#payaccount1").append(html);
+                        renderForm();
+                     }
+                     
+                    else {
+                        layer.alert(data.msg);
+                    }
+
+                }
+            });
+        	//绑定输入金额方法
+        	$("#amount1").keyup(function(){
+        		num2word();
+            });
+        }
+     //重新渲染表单
+       function renderForm(){
+    	 console.log("重新渲染");
+        layui.use('form', function(){
+        var form = layui.form;
+        form.render();
+        });
+        }
+		function num2word(){
+			
+			var number = $("#amount1").val();
+			var word = DX(number);
+			console.log(word);
+			$("#capitalamount1").html(word);
+			
+		}
+       function DX(n) {
+             if (!/^(0|[1-9]\d*)(\.\d+)?$/.test(n))
+                 return "数据非法";
+             var unit = "千百拾亿千百拾万千百拾元角分", str = "";
+                 n += "00";
+             var p = n.indexOf('.');
+             if (p >= 0)
+                 n = n.substring(0, p) + n.substr(p+1, 2);
+                 unit = unit.substr(unit.length - n.length);
+             for (var i=0; i < n.length; i++)
+                 str += '零壹贰叁肆伍陆柒捌玖'.charAt(n.charAt(i)) + unit.charAt(i);
+             return str.replace(/零(千|百|拾|角)/g, "零").replace(/(零)+/g, "零").replace(/零(万|亿|元)/g, "$1").replace(/(亿)万|壹(拾)/g, "$1$2").replace(/^元零?|零分/g, "").replace(/元$/g, "元整");
+         }
+       function getBalance(){
+    	   var account = $("#payaccount1").val();
+    	   console.log("查询余额");
+    	   
+       }
     </script>
 </body>
 </html>
