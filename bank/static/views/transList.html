@@ -23,11 +23,18 @@
                         <div class="layui-inline">
                             <div class="layui-form-mid">开始时间:</div>
                             <div class="layui-input-inline" style="width: 100px;">
-                                <input type="text" class="layui-input" id="begin_date" name="begin_date">
+                                <input type="text" required class="layui-input" id="begin_date" name="begin_date">
                             </div>
                             <div class="layui-form-mid">结束时间:</div>
                             <div class="layui-input-inline" style="width: 100px;">
-                                <input type="text" class="layui-input" id="end_date" name="end_date">
+                                <input type="text" required class="layui-input" id="end_date" name="end_date">
+                            </div>
+                            <div class="layui-form-mid">账户列表</div>
+                            <div class="layui-input-inline" style="width: 200px;">
+                                <select name="payaccount" id="payaccount">
+                                    <option value="">请选择账户</option>
+                                    <option value="0"></option>
+                                </select>
                             </div>
                             <button class="layui-btn layui-btn-blue" onclick="search()">查询</button>
                             <button class="layui-btn layui-btn-primary">重置</button>
@@ -105,6 +112,41 @@
             elem: '#end_date' //指定元素
         });
     });
+    getAccount();
+    function getAccount(){
+        console.log("获取账户");
+        $.ajax({
+            type:'POST',
+            url:'/Account/allList',
+            success: function (data) {
+                if(data.success){
+                    var html ="";
+                    var datas = data.obj;
+                    var obj = null;
+                    for(var i = 0 ; i < datas.length ; i ++){
+                        obj = datas[i];
+                        html += '<option value="'+obj.account+'">'+obj.account+'</option>';
+                    }
+                    // $("#payaccount1").empty();
+                    $("#payaccount").append(html);
+                    renderForm();
+                }
+
+                else {
+                    layer.alert(data.msg);
+                }
+
+            }
+        });
+    }
+    //重新渲染表单
+    function renderForm(){
+        console.log("重新渲染");
+        layui.use('form', function(){
+            var form = layui.form;
+            form.render();
+        });
+    }
 
 </script>
 </body>
