@@ -237,6 +237,7 @@
     layui.use(['layer', 'form'],function () {
         var form=layui.form;
         var nextIndex;
+        var $ = layui.jquery;
         form.on('submit(next)',function(){
             var account1 = $("#recieveaccount1").val();
             var account2 = $("#comfirmaccount").val();
@@ -331,7 +332,6 @@
                         console.log(data.obj);
                         layer.alert("转账成功！")
                         layer.close(nextIndex);
-                        window.location.reload();
                     }
                     else {
                         alert("error")
