@@ -311,10 +311,32 @@
             }
         });
         form.on('submit(confirmSubmit)',function () {
-            layer.close(nextIndex);
-            // alert(sid + " "+ sName+" "+gender+" "+cid+" "+birthday+" "+nativePlace+" "+state);
-
-            form.render();
+            $.ajax({
+                type: 'POST',
+                url: '/Account/transfer',
+                data: {
+                    payaccount:$("#payaccount1 option:selected").val(),
+                    currency: $("#currency1 option:selected").val(),
+                    recieveaccount: $("#recieveaccount1").val(),
+                    payeename: $("#payeename1").val(),
+                    transferway: $("#transferway1 option:selected").val(),
+                    amount: $("#amount1").val(),
+                    purpose: $("#purpose1 option:selected").val(),
+                    transferpassword: $("#transferpassword").val(),
+                    dynamicpassword: $("#dynamicpassword").val(),
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if(data.success){
+                        console.log(data.obj);
+                        layer.msg("转账成功！")
+                        layer.close(nextIndex);
+                    }
+                    else {
+                        alert("error")
+                    }
+                }
+            })
             return false;
         });
     });
