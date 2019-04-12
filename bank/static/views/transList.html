@@ -65,7 +65,7 @@
             ,{field: 'transName', title: '交易名称',align:'center'}
             ,{field: 'payerAccountNo', title: '付款账户',align:'center'}
             ,{field: 'payeeAccountNo', title: '收款账户',align:'center'}
-            ,{field: 'payeeAccountName', title: '具体操作',align:'center'}
+            ,{field: 'payeeAccountName', title: '收款人',align:'center'}
             ,{field: 'amount', title: '交易金额', align:'center'}
             ,{field: 'status', title: '交易状态', align:'center'}
             ,{field: 'currency', title: '交易币种', align:'center'}
@@ -82,14 +82,13 @@
     function search(){
         var begin_dates = $("#begin_date").val();
         var end_dates = $("#end_date").val();
-        console.log(begin_dates);
-
+        var payerAccountNo = $("#payaccount").val();
         //获取类型，起止时间
         table.reload('demo', {
             where: { //设定异步数据接口的额外参数，任意设
-                type: $("#type").val()
-                ,start_dates: begin_dates
-                ,end_dates:end_dates
+            	payerAccountNo:payerAccountNo
+                ,dateFrom: begin_dates
+                ,dateTo:end_dates
             }
             ,page: {
                 curr: 1 //重新从第 1 页开始
