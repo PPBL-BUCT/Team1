@@ -244,8 +244,35 @@
             var transferway = $("#transferway1 option:selected").val();
             var amount = $("#amount1").val();
             var capitalamount = $("#capitalamount1").text();
-            var purpose = $("#purpose1 option:selected").val()
+            var purpose = $("#purpose1 option:selected").val();
             form.on('submit(next)',function(){
+            	$.ajax({
+                    type: 'POST',
+                    url: '/Account/confirmTransfer',
+                    data: {
+                        payaccount:$("#payaccount1 option:selected").val(),
+                        currency: $("#currency1 option:selected").val(),
+                        recieveaccount: $("#recieveaccount1").val(),
+                        payeename: $("#payeename1").val(),
+                        transferway: $("#transferway1 option:selected").val(),
+                        amount: $("#amount1").val(),
+                        purpose: $("#purpose1 option:selected").val() 
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.success){
+                            console.log(data.obj);
+                            var transform = data.ogj;
+                            //TODO 达丞在这里吧data.obj的数据填到确认页面的表里
+                            //例子 $("#payaccount2").text(transform.payaccount);
+                            //layer.close(editStudentIndex);
+                            //init();
+                        }
+                        else {
+                            alert("error")
+                        }
+                    }
+                })
                 $("#payaccount2").text(payaccount);
                 $("#currency2").text(currency);
                 $("#recieveaccount2").text(recieveaccount);
@@ -281,30 +308,7 @@
             form.on('submit(confirmSubmit)',function () {
                 layer.close(nextIndex);
                 // alert(sid + " "+ sName+" "+gender+" "+cid+" "+birthday+" "+nativePlace+" "+state);
-                /*$.ajax({
-                    type: 'POST',
-                    url: 'http://localhost:8080/student/update',
-                    data: {
-                        id:id,
-                        sid: sid,
-                        sName: sName,
-                        gender: gender,
-                        cid: cid,
-                        birthday: birthday,
-                        nativePlace: nativePlace,
-                        state:state
-                    },
-                    dataType: 'json',
-                    success: function (result) {
-                        if(result){
-                            layer.close(editStudentIndex);
-                            init();
-                        }
-                        else {
-                            alert("error")
-                        }
-                    }
-                })*/
+                
                 form.render();
                 return false;
             });

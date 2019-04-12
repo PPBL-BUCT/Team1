@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import demo.springboot.domain.Account;
 import demo.springboot.domain.Log;
+import demo.springboot.domain.Transform;
 import demo.springboot.service.AccountService;
 import demo.springboot.service.LogService;
 import demo.springboot.service.UserService;
@@ -176,6 +177,38 @@ public class AccountController {
 			json.setSuccess(false);
 			json.setMsg("未知错误，请联系管理员");
 
+		}
+		return json;
+	}
+
+	// 确认转账页面，把收到的数据全部反倒页面
+	@RequestMapping("/confirmTransfer")
+	@ResponseBody
+	public JsonData confirmTransfer(HttpServletRequest request,
+			HttpServletResponse response, @ModelAttribute Transform transform) {
+		JsonData json = new JsonData();
+		try {
+			json.setObj(transform);
+			json.setSuccess(true);
+		} catch (Exception e) {
+			json.setSuccess(false);
+			json.setMsg("未知错误，请联系管理员");
+		}
+		return json;
+	}
+
+	@RequestMapping("/transfer")
+	@ResponseBody
+	public JsonData transfer(HttpServletRequest request,
+			HttpServletResponse response, @ModelAttribute Transform transform) {
+		JsonData json = new JsonData();
+		try {
+			// 调用远程数据库 ,查询结果
+			// json.setObj(transform);
+			json.setSuccess(true);
+		} catch (Exception e) {
+			json.setSuccess(false);
+			json.setMsg("未知错误，请联系管理员");
 		}
 		return json;
 	}
