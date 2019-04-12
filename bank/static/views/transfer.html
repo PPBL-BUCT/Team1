@@ -54,21 +54,19 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label"><a style="color: red">*</a> 收款账号</label>
                         <div class="layui-input-inline" style="width: 40%">
-                            <input id="recieveaccount1" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入收款人账号" class="layui-input">
+                            <input id="recieveaccount1" type="text" name="title" lay-verify="number" autocomplete="off" placeholder="请输入收款人账号" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">确认账号</label>
-                        </div>
-                        <div class="layui-inline">
-                            <h2 id="confirmaccount" name="balance" style="color: #1E9FFF">111111111</h2>
+                        <label class="layui-form-label"><a style="color: red">*</a> 确认账号</label>
+                        <div class="layui-input-inline" style="width: 40%">
+                            <input id="comfirmaccount" type="text" name="title" lay-verify="number" autocomplete="off" placeholder="请输入收款人账号" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label"><a style="color: red">*</a> 收款户名</label>
                         <div class="layui-input-inline">
-                            <input id="payeename1" type="text" name="payeename" lay-verify="title" autocomplete="off" placeholder="请输入收款人户名" class="layui-input">
+                            <input id="payeename1" type="text" name="payeename" lay-verify="name" autocomplete="off" placeholder="请输入收款人户名" class="layui-input">
                         </div>
                     </div>
                     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
@@ -89,7 +87,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label"><a style="color: red">*</a> 转账金额</label>
                         <div class="layui-input-inline">
-                            <input id="amount1" type="text" name="amount" lay-verify="title" autocomplete="off" placeholder="请输入转账金额" class="layui-input">
+                            <input id="amount1" type="text" name="amount" lay-verify="number" autocomplete="off" placeholder="请输入转账金额" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -206,14 +204,14 @@
                                         <div class="layui-form-item">
                                             <label class="layui-form-label" style="width: 100px"><a style="color: red">*</a> 交易密码</label>
                                             <div class="layui-input-inline">
-                                                <input id="transferpassword" type="password" name="transferpassword" lay-verify="title" autocomplete="off" placeholder="请输入交易密码" class="layui-input">
+                                                <input id="transferpassword" type="password" name="transferpassword" lay-verify="number" autocomplete="off" placeholder="请输入交易密码" class="layui-input">
                                             </div>
                                             <div class="layui-form-mid layui-word-aux">请输入6位交易密码</div>
                                         </div>
                                         <div class="layui-form-item">
                                             <label class="layui-form-label" style="width: 100px"><a style="color: red">*</a> 手机动态密码</label>
                                             <div class="layui-input-inline">
-                                                <input id="dynamicpassword" type="text" name="dynamicpassword" lay-verify="title" autocomplete="off" placeholder="请输入手机动态密码" class="layui-input">
+                                                <input id="dynamicpassword" type="text" name="dynamicpassword" lay-verify="number" autocomplete="off" placeholder="请输入手机动态密码" class="layui-input">
                                             </div>
                                         </div>
                                     </fieldset>
@@ -235,150 +233,151 @@
     </div>
 </body>
         <script src="../assets/layui.all.js"></script>
-    <script>
-        layui.use('form',function () {
-            var form=layui.form;
-            var nextIndex;
-            var payaccount = $("#payaccount1 option:selected").val();
-            var currency = $("#currency1 option:selected").val();
-            var recieveaccount = $("#recieveaccount1").val();
-            var payeename = $("#payeename1").val();
-            var transferway = $("#transferway1 option:selected").val();
-            var amount = $("#amount1").val();
-            var capitalamount = $("#capitalamount1").text();
-            var purpose = $("#purpose1 option:selected").val();
-            form.on('submit(next)',function(){
-            	$.ajax({
-                    type: 'POST',
-                    url: '/Account/confirmTransfer',
-                    data: {
-                        payaccount:$("#payaccount1 option:selected").val(),
-                        currency: $("#currency1 option:selected").val(),
-                        recieveaccount: $("#recieveaccount1").val(),
-                        payeename: $("#payeename1").val(),
-                        transferway: $("#transferway1 option:selected").val(),
-                        amount: $("#amount1").val(),
-                        purpose: $("#purpose1 option:selected").val()
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-                        if(data.success){
-                            console.log(data.obj);
-                            var transform = data.obj;
-                            //TODO 达丞在这里吧data.obj的数据填到确认页面的表里
-                            $("#payaccount2").text(transform.payaccount);
-                            $("#currency2").text(transform.currency);
-                            $("#recieveaccount2").text(transform.recieveaccount);
-                            $("#payeename2").text(transform.payeename);
-                            $("#transferway2").text(transform.transferway);
-                            $("#amount2").text(transform.amount);
-                            $("#purpose2").text(transform.purpose);
-                            //layer.close(editStudentIndex);
-                            //init();
-                        }
-                        else {
-                            alert("error")
-                        }
-                    }
-                })
-                $("#capitalamount2").text(capitalamount);
-                console.log("next");
-
-                nextIndex=layer.open({
-                    type: 1,
-                    title: '确认及提交',
-                    area: ['750px', '450px'],
-                    content: $('#nextpage'),
-                });
-                form.render();
+<script>
+    layui.use(['layer', 'form'],function () {
+        var form=layui.form;
+        var nextIndex;
+        form.on('submit(next)',function(){
+            var account1 = $("#recieveaccount1").val();
+            var account2 = $("#comfirmaccount").val();
+            console.log("查询余额");
+            if (account1 != account2){
+                layer.msg("两个输入账号不相等！");
                 return false;
-            });
-            form.on('select(accountSelect)', function(data){
-            	$.ajax({
-                    type: 'GET',
-                    url: '/Account/getBalance?account='+data.value,
-                    success:function (data) {
-                        console.log(data.obj);
-                        if(data.success){
-                            $("#balance1").html(data.obj.balance);
-
-                        }
-                    }
-                })
-            });
-            form.on('submit(confirmSubmit)',function () {
-                layer.close(nextIndex);
-                // alert(sid + " "+ sName+" "+gender+" "+cid+" "+birthday+" "+nativePlace+" "+state);
-
-                form.render();
-                return false;
-            });
-        });
-        getAccount();
-        function getAccount(){
-    	   console.log("获取账户");
-        	$.ajax({
-                type:'POST',
-                url:'/Account/allList',
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/Account/confirmTransfer',
+                data: {
+                    payaccount:$("#payaccount1 option:selected").val(),
+                    currency: $("#currency1 option:selected").val(),
+                    recieveaccount: $("#recieveaccount1").val(),
+                    payeename: $("#payeename1").val(),
+                    transferway: $("#transferway1 option:selected").val(),
+                    amount: $("#amount1").val(),
+                    purpose: $("#purpose1 option:selected").val()
+                },
+                dataType: 'json',
                 success: function (data) {
                     if(data.success){
-                        var html ="";
-                        var datas = data.obj;
-                        var obj = null;
-                        for(var i = 0 ; i < datas.length ; i ++){
-                            obj = datas[i];
-                            html += '<option value="'+obj.account+'">'+obj.account+'</option>';
-                        }
-                        $("#payaccount1").empty();
-                        $("#payaccount1").append(html);
-                        renderForm();
-                     }
-
-                    else {
-                        layer.alert(data.msg);
+                        console.log(data.obj);
+                        var transform = data.obj;
+                        //TODO 达丞在这里吧data.obj的数据填到确认页面的表里
+                        $("#payaccount2").text(transform.payaccount);
+                        $("#currency2").text(transform.currency);
+                        $("#recieveaccount2").text(transform.recieveaccount);
+                        $("#payeename2").text(transform.payeename);
+                        $("#transferway2").text(transform.transferway);
+                        $("#amount2").text(transform.amount);
+                        $("#capitalamount2").text($("#capitalamount1").text());
+                        $("#purpose2").text(transform.purpose);
+                        //layer.close(editStudentIndex);
+                        //init();
                     }
-
+                    else {
+                        alert("error")
+                    }
                 }
+            })
+            console.log("next");
+
+            nextIndex=layer.open({
+                type: 1,
+                title: '确认及提交',
+                area: ['750px', '450px'],
+                content: $('#nextpage'),
             });
-        	//绑定输入金额方法
-        	$("#amount1").keyup(function(){
-        		num2word();
-            });
-        }
-        //重新渲染表单
-        function renderForm(){
-         console.log("重新渲染");
-        layui.use('form', function(){
-        var form = layui.form;
-        form.render();
+            form.render();
+            return false;
         });
-        }
-		function num2word(){
+        form.on('select(accountSelect)', function(data){
+            $.ajax({
+                type: 'GET',
+                url: '/Account/getBalance?account='+data.value,
+                success:function (data) {
+                    console.log(data.obj);
+                    if(data.success){
+                        $("#balance1").html(data.obj.balance);
 
-			var number = $("#amount1").val();
-			var word = DX(number);
-			console.log(word);
-			$("#capitalamount1").html(word);
+                    }
+                }
+            })
+        });
+        form.verify({
+            name: function (value, item) { //value：表单的值、item：表单的DOM对象
+                if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+                    return '收款账户不能有特殊字符';
+                }
+            }
+        });
+        form.on('submit(confirmSubmit)',function () {
+            layer.close(nextIndex);
+            // alert(sid + " "+ sName+" "+gender+" "+cid+" "+birthday+" "+nativePlace+" "+state);
 
-		}
-       function DX(n) {
-             if (!/^(0|[1-9]\d*)(\.\d+)?$/.test(n))
-                 return "数据非法";
-             var unit = "千百拾亿千百拾万千百拾元角分", str = "";
-                 n += "00";
-             var p = n.indexOf('.');
-             if (p >= 0)
-                 n = n.substring(0, p) + n.substr(p+1, 2);
-                 unit = unit.substr(unit.length - n.length);
-             for (var i=0; i < n.length; i++)
-                 str += '零壹贰叁肆伍陆柒捌玖'.charAt(n.charAt(i)) + unit.charAt(i);
-             return str.replace(/零(千|百|拾|角)/g, "零").replace(/(零)+/g, "零").replace(/零(万|亿|元)/g, "$1").replace(/(亿)万|壹(拾)/g, "$1$2").replace(/^元零?|零分/g, "").replace(/元$/g, "元整");
-         }
-       function getBalance(){
-    	   var account = $("#payaccount1").val();
-    	   console.log("查询余额");
+            form.render();
+            return false;
+        });
+    });
+    getAccount();
+    function getAccount(){
+        console.log("获取账户");
+        $.ajax({
+            type:'POST',
+            url:'/Account/allList',
+            success: function (data) {
+                if(data.success){
+                    var html ="";
+                    var datas = data.obj;
+                    var obj = null;
+                    for(var i = 0 ; i < datas.length ; i ++){
+                        obj = datas[i];
+                        html += '<option value="'+obj.account+'">'+obj.account+'</option>';
+                    }
+                    // $("#payaccount1").empty();
+                    $("#payaccount1").append(html);
+                    renderForm();
+                 }
 
-       }
-    </script>
+                else {
+                    layer.alert(data.msg);
+                }
+
+            }
+        });
+        //绑定输入金额方法
+        $("#amount1").keyup(function(){
+            num2word();
+        });
+    }
+    //重新渲染表单
+    function renderForm(){
+     console.log("重新渲染");
+    layui.use('form', function(){
+    var form = layui.form;
+    form.render();
+    });
+    }
+    function num2word(){
+
+        var number = $("#amount1").val();
+        var word = DX(number);
+        console.log(word);
+        $("#capitalamount1").html(word);
+
+    }
+   function DX(n) {
+         if (!/^(0|[1-9]\d*)(\.\d+)?$/.test(n))
+             return "数据非法";
+         var unit = "千百拾亿千百拾万千百拾元角分", str = "";
+             n += "00";
+         var p = n.indexOf('.');
+         if (p >= 0)
+             n = n.substring(0, p) + n.substr(p+1, 2);
+             unit = unit.substr(unit.length - n.length);
+         for (var i=0; i < n.length; i++)
+             str += '零壹贰叁肆伍陆柒捌玖'.charAt(n.charAt(i)) + unit.charAt(i);
+         return str.replace(/零(千|百|拾|角)/g, "零").replace(/(零)+/g, "零").replace(/零(万|亿|元)/g, "$1").replace(/(亿)万|壹(拾)/g, "$1$2").replace(/^元零?|零分/g, "").replace(/元$/g, "元整");
+     }
+</script>
 
 </html>
