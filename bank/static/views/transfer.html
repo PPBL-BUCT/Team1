@@ -329,8 +329,9 @@
                 success: function (data) {
                     if(data.success){
                         console.log(data.obj);
-                        layer.msg("转账成功！")
+                        layer.alert("转账成功！")
                         layer.close(nextIndex);
+                        window.location.reload();
                     }
                     else {
                         alert("error")
