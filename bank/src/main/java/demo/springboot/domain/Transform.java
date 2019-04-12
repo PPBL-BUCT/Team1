@@ -7,7 +7,7 @@ public class Transform {
 
 	private String payeename; // 收款人名
 	private String transferway;
-	private Integer amount; // 金额
+	private String amount; // 金额
 	private String purpose; // 用途
 	private String transferpassword;
 	private String dynamicpassword;
@@ -52,13 +52,6 @@ public class Transform {
 		this.transferway = transferway;
 	}
 
-	public Integer getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Integer amount) {
-		this.amount = amount;
-	}
 
 	public String getPurpose() {
 		return purpose;
@@ -82,5 +75,13 @@ public class Transform {
 
 	public void setDynamicpassword(String dynamicpassword) {
 		this.dynamicpassword = dynamicpassword;
+	}
+
+	public String getAmount() {
+		return amount;
+	}
+
+	public void setAmount(String amount) {
+		this.amount = amount;
 	}
 }

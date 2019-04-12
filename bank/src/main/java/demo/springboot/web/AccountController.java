@@ -70,6 +70,31 @@ public class AccountController {
 		return map;
 	}
 
+	// 查询账户列表
+	@RequestMapping("/transformList")
+		@ResponseBody
+		public Map<String, Object> transformList(HttpServletRequest request,
+				HttpServletResponse response, @RequestParam int page,
+			@RequestParam int limit, @ModelAttribute TransformRecode recode) {
+			Log log = new Log();
+			log.setOperation("查询账户列表");
+			log.setUser_id((String) request.getSession().getAttribute("user_id"));
+			log.setCreate_time(new Date());
+			log.setIp(CusAccessObjectUtil.getIpAddress(request));
+			log.setType(4);
+			log.setSuccess(1);
+			logService.insertSelective(log);
+			Map<String, Object> map = new HashMap<>();
+			HttpSession session = request.getSession();
+			
+		List<Transform> list = null;
+			map.put("code", 0);
+			map.put("msg", "");
+			map.put("count", list.size());
+			map.put("data", list);
+			return map;
+		}
+
 	@RequestMapping("/allList")
 	@ResponseBody
 	public JsonData allList(HttpServletRequest request,
