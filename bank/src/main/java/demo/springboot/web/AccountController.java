@@ -19,12 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 import demo.springboot.domain.Account;
 import demo.springboot.domain.Log;
 import demo.springboot.domain.Transform;
+import demo.springboot.domain.TransformRecode;
 import demo.springboot.service.AccountService;
 import demo.springboot.service.LogService;
 import demo.springboot.service.UserService;
 import demo.springboot.util.CusAccessObjectUtil;
 import demo.springboot.util.JsonData;
 import demo.springboot.util.ReceiveBalance;
+import demo.springboot.util.ReceiveTransList;
 import demo.springboot.util.ReceiveTransfer;
 
 @RestController
@@ -87,7 +89,9 @@ public class AccountController {
 			Map<String, Object> map = new HashMap<>();
 			HttpSession session = request.getSession();
 			
-		List<Transform> list = null;
+		List<TransformRecode> list = ReceiveTransList.receiveTransList(
+				recode.getPayerAccountNo(), recode.getDateFrom(),
+				recode.getDateTo(), page + "", limit + "");
 			map.put("code", 0);
 			map.put("msg", "");
 			map.put("count", list.size());

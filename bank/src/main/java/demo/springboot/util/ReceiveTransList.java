@@ -28,7 +28,18 @@ public class ReceiveTransList {
 		for (int i = 0; i < items.size(); i++) {
 			row = items.getJSONObject(i);
 			TransformRecode tmp = new TransformRecode();
-			tmp.set;
+			tmp.setAmount((String) row.get("attachInfo"));
+			;
+			tmp.setAttachInfo((String) row.get("attachInfo"));
+			tmp.setChannel((String) row.get("channel"));
+			tmp.setCurrency((String) row.get("currency"));
+			tmp.setPayeeAccountName((String) row.get("payeeAccountName"));
+			tmp.setPayeeAccountNo((String) row.get("payeeAccountNo"));
+			tmp.setPayerAccountNo((String) row.get("payerAccountNo"));
+			tmp.setStatus((String) row.get("status"));
+			tmp.setTransName((String) row.get("transName"));
+			tmp.setTransTime((String) row.get("transTime"));
+			tmp.setUsage((String) row.get("usage"));
 			System.out.println(row.get("attachInfo"));
 		}
 		return list;
