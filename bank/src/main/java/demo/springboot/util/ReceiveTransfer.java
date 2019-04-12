@@ -9,11 +9,8 @@ public class ReceiveTransfer {
 			String accToName, String amount, String currency, String password,
 			String usgae, String comments) {
 	    String res = HttpConnection.doPost(Core.getUrl_GetTransfer(),
-				GetTransfer.shape(acctForm, accTo, "马云", "10.00", "CNY",
-						"Ieor9494854958dfdjkd9fd98f", "还款", "转账"));
-		// GetTransfer.shape("6218129087231776", "6218129084383484", "马云",
-		// "10.00", "CNY", "Ieor9494854958dfdjkd9fd98f", "还款", "转账"));
-
+				GetTransfer.shape(acctForm, accTo, accToName, amount, currency,
+						password, usgae, comments));
 
 	    System.out.println(res);
 		JSONObject jsonObject= JSONObject.parseObject(res);

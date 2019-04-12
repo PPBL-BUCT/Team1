@@ -25,6 +25,7 @@ import demo.springboot.service.UserService;
 import demo.springboot.util.CusAccessObjectUtil;
 import demo.springboot.util.JsonData;
 import demo.springboot.util.ReceiveBalance;
+import demo.springboot.util.ReceiveTransfer;
 
 @RestController
 @RequestMapping(value = "/Account")
@@ -204,8 +205,18 @@ public class AccountController {
 		JsonData json = new JsonData();
 		try {
 			// 调用远程数据库 ,查询结果
+
+			if (ReceiveTransfer.receiveTransfer(transform.getPayaccount(),
+					transform.getRecieveaccount(), transform.getPayeename(),
+					transform.getAmount(), "CNY",
+					transform.getTransferpassword(),
+					transform.getPurpose(), "转账")) {
+				json.setSuccess(true);
+			} else {
+				json.setSuccess(false);
+			}
 			// json.setObj(transform);
-			json.setSuccess(true);
+
 		} catch (Exception e) {
 			json.setSuccess(false);
 			json.setMsg("未知错误，请联系管理员");
