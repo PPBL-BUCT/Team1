@@ -1,5 +1,6 @@
 package demo.springboot.util;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,8 @@ public class ReceiveTransList {
 		for (int i = 0; i < items.size(); i++) {
 			row = items.getJSONObject(i);
 			TransformRecode tmp = new TransformRecode();
-			tmp.setAmount((String) row.get("amount"));
+			BigDecimal amount = (BigDecimal) row.get("amount");
+			tmp.setAmount(amount+"");
 			tmp.setAttachInfo((String) row.get("attachInfo"));
 			tmp.setChannel((String) row.get("channel"));
 			tmp.setCurrency((String) row.get("currency"));
