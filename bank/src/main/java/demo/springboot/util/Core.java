@@ -9,7 +9,9 @@ public class Core {
 	public final static String NAME = "HostSimulator"; // 流类型-流
 	public static final String GET_BALANCE = "GetAccountBalance.do";
     public static final String ACCOUNT_CHECK= "AccountPasswordValidate.do";
-	
+	public static final String GET_TREANSFER = "InnerTransfer.do";
+	public static final String GET_TRANSLIST = "TransList.do";
+
 	public static String getUrl_GetBalance() {
 		
 		String url_GetBalance = "http://" + IP + ":" + PORT + "/" + NAME + "/"
@@ -30,5 +32,19 @@ public class Core {
 	public static void main(String[] args) {
 		System.out.println(getUrl_AccountCheck());
 		System.out.println(getUrl_GetBalance());
+	}
+
+	public static String getUrl_GetTransfer() {
+		String url_GetBalance = "http://" + IP + ":" + PORT + "/" + NAME + "/"
+				+ GET_TREANSFER;
+
+		return url_GetBalance;
+	}
+
+	public static String getUrl_GetTransList() {
+		String url_GetBalance = "http://" + IP + ":" + PORT + "/" + NAME + "/"
+				+ GET_TRANSLIST;
+
+		return url_GetBalance;
 	}
 }

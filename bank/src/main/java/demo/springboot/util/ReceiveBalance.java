@@ -35,10 +35,6 @@ public class ReceiveBalance {
 		String flag = (String) body.get("INFO");
 		System.out.println("res info=================" + flag);
 
-		if (flag.equals("Password Correct")) {
-			return true;
-		} else {
-			return false;
-		}
+		return flag.equals("Password Correct");
 	}
 }
