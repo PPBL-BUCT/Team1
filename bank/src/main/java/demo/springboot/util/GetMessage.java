@@ -9,7 +9,7 @@ import java.util.Map;
 import com.alibaba.fastjson.JSON;
 
 public class GetMessage {
-	 public static String shape(String code) {
+	 public static String shape(String code,String userId) {
 		  Map header= new HashMap();
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Calendar calendar = Calendar.getInstance();
@@ -19,7 +19,7 @@ public class GetMessage {
 		  header.put("PKG", "SendSMS");
 		  
 		  Map body = new HashMap();
-		  body.put("customerID","68923574986311018747");
+		  body.put("customerID",userId);
 		  body.put("code",code);
 		  
 		  Map map=new HashMap();

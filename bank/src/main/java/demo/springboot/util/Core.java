@@ -5,7 +5,7 @@ public class Core {
 
 	public final static String IP = "118.25.143.204"; // 流类型-流
 	public final static String PORT = "8080"; // 流类型-流
-
+    public final static String smsIP="118.25.78.207";
 	public final static String NAME = "HostSimulator"; // 流类型-流
 	public static final String GET_BALANCE = "GetAccountBalance.do";
     public static final String ACCOUNT_CHECK= "AccountPasswordValidate.do";
@@ -51,7 +51,7 @@ public class Core {
 	}
 	
 	public static String getUrl_GetMessage() {
-		String url_GetBalance = "http://" + IP + ":" + PORT + "/" + NAME + "/"
+		String url_GetBalance = "http://" + smsIP + ":" + PORT + "/" + NAME + "/"
 				+ GET_MESSAGE;
 
 		return url_GetBalance;
@@ -59,7 +59,7 @@ public class Core {
 
 
 	public static String getUrl_AccountValidate() {
-		String url_GetBalance = "http://" + IP + ":" + PORT + "/" + NAME + "/"
+		String url_GetBalance = "http://" + smsIP + ":" + PORT + "/" + NAME + "/"
 				+ GET_ACCOUNTMESSAGE;
 
 		return url_GetBalance;
