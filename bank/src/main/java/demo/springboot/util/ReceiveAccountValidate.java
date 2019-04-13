@@ -5,9 +5,9 @@ import java.util.Map;
 import com.alibaba.fastjson.JSONObject;
 
 public class ReceiveAccountValidate {
-	public static  boolean  receiveAccountValidate(String password,String accNumber,String smsCode,String IDType,String IDNO,String phoneNo) {
+	public static  boolean  receiveAccountValidate(String password,String accNumber,String smsCode,String phoneNo) {
 	    String res = HttpConnection.doPost(Core.getUrl_AccountValidate(),
-				GetAccountValidate.shape(password,accNumber,smsCode,IDType,IDNO,phoneNo));
+				GetAccountValidate.shape(password,accNumber,smsCode,phoneNo));
 
 		Map map = JSONObject.parseObject(res, Map.class);
 	
@@ -21,4 +21,7 @@ public class ReceiveAccountValidate {
 
 		return flag.equals("send error");//0为正确1为错误
        }
+	public static void main(String[] args) {
+		receiveAccountValidate("376881","68923574986311018739","9981","18811610528");
+	}
 }

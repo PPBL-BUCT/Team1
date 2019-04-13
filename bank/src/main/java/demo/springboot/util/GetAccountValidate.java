@@ -12,7 +12,7 @@ import java.util.Map;
 import com.alibaba.fastjson.JSON;
 
 public class GetAccountValidate {
-	 public static String shape(String password,String accNumber,String smsCode,String IDType,String IDNO,String phoneNo) {
+	 public static String shape(String password,String accNumber,String smsCode,String phoneNo) {
 		 
 		 
 		  Map header= new HashMap();
@@ -27,8 +27,8 @@ public class GetAccountValidate {
 		  body.put("password", getSHA256(password + "BUCT"));
 		  body.put("accountNo",accNumber);
 		  body.put("smsCode",smsCode);
-		  body.put("IDType",IDType);
-		  body.put("IDNO",IDNO);
+		  body.put("IDType","00");
+		  body.put("IDNO","132629199301102312");
 		  body.put("phoneNo",phoneNo);
 		  
 		  

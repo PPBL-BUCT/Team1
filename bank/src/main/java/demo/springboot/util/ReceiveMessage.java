@@ -5,9 +5,9 @@ import java.util.Map;
 import com.alibaba.fastjson.JSONObject;
 
 public class ReceiveMessage {
-	public static  boolean  receiveMessage(String accNumber) {
+	public static  boolean  receiveMessage(String code) {
 	    String res = HttpConnection.doPost(Core.getUrl_GetMessage(),
-				GetMessage.shape());
+				GetMessage.shape(code));
 
 		Map map = JSONObject.parseObject(res, Map.class);
 	
@@ -21,4 +21,7 @@ public class ReceiveMessage {
 
 		return flag.equals("send error");//0为正确1为错误
        }
+	public static void main(String[] args) {
+		receiveMessage("9981");
+	}
 }
