@@ -235,10 +235,10 @@
 </body>
         <script src="../assets/layui.all.js"></script>
 <script>
-    layui.use(['layer', 'form'],function () {
+    layui.use(['layer', 'form','jquery'],function () {
         var form=layui.form;
         var nextIndex;
-        var $ = layui.jquery;
+        var $ = layui.$;
         form.on('submit(next)',function(){
             var account1 = $("#recieveaccount1").val();
             var account2 = $("#comfirmaccount").val();
@@ -288,6 +288,10 @@
                 title: '确认及提交',
                 area: ['750px', '450px'],
                 content: $('#nextpage'),
+                cancel: function(){//关闭按钮的回调函数
+                    $('#nextpage').css({"display":"none"})
+                //关闭时将选择插入的dom结构结构display设置为none
+                }
             });
             form.render();
             return false;

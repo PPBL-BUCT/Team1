@@ -34,82 +34,107 @@
                                     <select name="type" id="type">
                                         <option value="0">登入登出</option>
                                         <option value="1">转账汇款</option>
-                                        <option value="3">账户加挂</option>
-                                        <option value="4">账户列表</option>
-                                        <option value="5">交易明细</option>
-                                        <option value="6">日志查询</option>
+                                        <option value="2">账户加挂</option>
+                                        <option value="3">账户列表</option>
+                                        <option value="4">交易明细</option>
+                                        <option value="5">日志查询</option>
                                     </select>     
                                 </div>
                                 <button class="layui-btn layui-btn-blue" onclick="search()">查询</button>
                                 <button class="layui-btn layui-btn-primary">重置</button>
                             </div>
                         </div>
-                        <button class="layui-btn layui-btn-blue"><i class="layui-icon">&#xe654;</i>新增</button>
                         <table id="demo"></table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="../assets/layui.all.js"></script>
-    <script>
-      var element = layui.element;
-  var table = layui.table;
-  var form = layui.form;
-  
-  //展示已知数据
-  table.render({
-    elem: '#demo'
-   , id:'demo'
-   ,url: '/Account/log' //数据接口
-    ,cols: [[ //标题栏
-      {field: 'id', title: '序号', width: 80, sort: true,align:'center'}
-      ,{field: 'create_time', title: '时间', width: 120,align:'center'}
-      ,{field: 'type', title: '操作类型', width: 100,align:'center'}
-      ,{field: 'success', title: '是否成功', minWidth: 80,align:'center'}
-      ,{field: 'ip', title: '操作ip', width: 150,align:'center'}
-      ,{field: 'operation', title: '具体操作', minWidth: 120,align:'center'}
-    ]]
-    ,skin: 'line' //表格风格
-    ,even: true
-    ,page: true //是否显示分页
-    ,limits: [5, 7, 10]
-    ,limit: 5 //每页默认显示的数量
-  });
-  function search(){
-	   var begin_dates = $("#begin_date").val();
-	  var end_dates = $("#end_date").val();
-	  console.log(begin_dates); 
-	  
-	  //获取类型，起止时间
-	 table.reload('demo', {
-	      where: { //设定异步数据接口的额外参数，任意设
-	    	  type: $("#type").val()
+</body>
+<script src="../assets/layui.all.js"></script>
+<script type="text/html" id="transNameTool">
+    <div>{{layui.util.toDateString(d.create_time,'yyyy-MM-dd HH:mm:ss')}}</div>
+</script>
+<script type="text/html" id="typeTool">
+    {{#  if(d.type == 0){ }}
+    <a>登入登出</a>
+    {{#  }else if(d.type == 1){ }}
+    <a>转账汇款</a>
+    {{#  } else if(d.type == 2){ }}
+    <a>账户加挂</a>
+    {{#  } else if(d.type == 3){ }}
+    <a>账户列表</a>
+    {{#  } else if(d.type == 4){ }}
+    <a>交易明细</a>
+    {{#  } else if(d.type == 5){ }}
+    <a>日志查询</a>
+    {{#  } }}
+</script>
+<script type="text/html" id="successTool">
+    {{#  if(d.success ==1){ }}
+    成功
+    {{#  } else { }}
+    失败
+    {{#  } }}
+</script>
+<script>
+    var element = layui.element;
+    var table = layui.table;
+    var form = layui.form;
+
+    //展示已知数据
+    table.render({
+        elem: '#demo'
+        , id:'demo'
+        ,url: '/Account/log' //数据接口
+        ,cols: [[ //标题栏
+          {field: 'id', title: '序号', width: 80, sort: true,align:'center'}
+          ,{field: 'create_time', title: '时间', width: 180,align:'center',templet:'#transNameTool'}
+          ,{field: 'type', title: '操作类型', width: 120,align:'center',templet:'#typeTool'}
+          ,{field: 'success', title: '是否成功', width: 100,align:'center',templet:'#successTool'}
+          ,{field: 'ip', title: '操作ip', minWidth: 20,align:'center'}
+          ,{field: 'operation', title: '具体操作', minWidth: 20,align:'center'}
+        ]]
+        ,skin: 'line' //表格风格
+        ,even: true
+        ,page: true //是否显示分页
+        ,limits: [5, 7, 10]
+        ,limit: 5 //每页默认显示的数量
+    });
+    function search(){
+        var begin_dates = $("#begin_date").val();
+        var end_dates = $("#end_date").val();
+        console.log(begin_dates);
+
+        //获取类型，起止时间
+        table.reload('demo', {
+          where: { //设定异步数据接口的额外参数，任意设
+              type: $("#type").val()
               ,start_dates: begin_dates
               ,end_dates:end_dates
-	      }
-	      ,page: {
-	        curr: 1 //重新从第 1 页开始
-	      }
-	    });
-  }
-  layui.use('laydate', function(){
-	  var laydate = layui.laydate;
-	  
-	  //执行一个laydate实例
-	  laydate.render({
-	    elem: '#begin_date' //指定元素
-	  });
-	});
-  layui.use('laydate', function(){
-	  var laydate = layui.laydate;
-	  
-	  //执行一个laydate实例
-	  laydate.render({
-	    elem: '#end_date' //指定元素
-	  });
-	});
+          }
+          ,page: {
+            curr: 1 //重新从第 1 页开始
+          }
+        });
+    }
+    layui.use('laydate', function(){
+      var laydate = layui.laydate;
+
+      //执行一个laydate实例
+      laydate.render({
+        elem: '#begin_date' //指定元素
+      });
+    });
+    layui.use('laydate', function(){
+      var laydate = layui.laydate;
+
+      //执行一个laydate实例
+      laydate.render({
+        elem: '#end_date' //指定元素
+      });
+    });
   
-    </script>
-</body>
+</script>
+
 </html>

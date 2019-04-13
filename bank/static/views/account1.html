@@ -21,7 +21,7 @@
             <div class="layui-card">
                 <div class="layui-card-body">
                     <div class="form-box">
-                        <button class="layui-btn layui-btn-blue" onclick="addAccount()"><i class="layui-icon" >&#xe654;</i>新增</button>
+                        <button class="layui-btn layui-btn-blue" onclick=javascrtpt:addAccount()><i class="layui-icon" >&#xe654;</i>新增</button>
                         <table class="layui-table" lay-data="{width: 800, height:332, url:'/Account/list', page:true, id:'idTest'}" lay-filter="demo">
                           <thead>
                             <tr>
@@ -136,6 +136,7 @@ layui.use('table', function(){
 
 function addAccount(){
 	console.log("添加账户");
+    window.location.href='form.html';
 	
 }
 

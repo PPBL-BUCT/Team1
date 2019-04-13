@@ -40,7 +40,6 @@
                             <button class="layui-btn layui-btn-primary">重置</button>
                         </div>
                     </div>
-                    <button class="layui-btn layui-btn-blue"><i class="layui-icon">&#xe654;</i>新增</button>
                     <table id="demo"></table>
                 </div>
             </div>
@@ -48,11 +47,49 @@
     </div>
 </div>
 <script src="../assets/layui.all.js"></script>
+<script type="text/html" id="currencyTool">
+    {{#  if(d.currency =='CNY'){ }}
+    人民币
+    {{#  } else { }}
+    美元
+    {{#  } }}
+</script>
+<script type="text/html" id="channelTool">
+    {{#  if(d.channel =='EBanking'){ }}
+    网上银行
+    {{#  } else { }}
+    {{d.channel}}
+    {{#  } }}
+</script>
+<script type="text/html" id="attachInfoTool">
+    {{#  if(d.attachInfo =='BLANK'){ }}
+    空白
+    {{#  } else { }}
+    {{d.attachInfo}}
+    {{#  } }}
+</script>
+<script type="text/html" id="transNameTool">
+    {{#  if(d.transName =='InnerTransfer'){ }}
+    行内转账
+    {{#  } else { }}
+    {{d.transName}}
+    {{#  } }}
+</script>
+<script type="text/html" id="statusTool">
+    {{#  if(d.status ==1){ }}
+    正常
+    {{#  } else { }}
+    {{d.status}}
+    {{#  } }}
+</script>
 <script>
     var element = layui.element;
     var table = layui.table;
     var form = layui.form;
 
+    var transTimeTool = function (d){
+        return setTime(d.transTime);
+    }
     //展示已知数据
     table.render({
         elem: '#demo'
@@ -61,17 +98,17 @@
         ,cellMinWidth: 120
         ,cols: [[ //标题栏
             {field: 'id', title: '序号', width: 80, sort: true,align:'center'}
-            ,{field: 'transTime', title: '交易时间',align:'center'}
-            ,{field: 'transName', title: '交易名称',align:'center'}
-            ,{field: 'payerAccountNo', title: '付款账户',align:'center'}
-            ,{field: 'payeeAccountNo', title: '收款账户',align:'center'}
+            ,{field: 'transTime', title: '交易时间',width:180,align:'center',templet:transTimeTool}
+            ,{field: 'transName', title: '交易名称',align:'center',templet:'#transNameTool'}
+            ,{field: 'payerAccountNo', title: '付款账户',width:180,align:'center'}
+            ,{field: 'payeeAccountNo', title: '收款账户',width:180,align:'center'}
             ,{field: 'payeeAccountName', title: '收款人',align:'center'}
             ,{field: 'amount', title: '交易金额', align:'center'}
-            ,{field: 'status', title: '交易状态', align:'center'}
-            ,{field: 'currency', title: '交易币种', align:'center'}
-            ,{field: 'channel', title: '交易渠道', align:'center'}
+            ,{field: 'status', title: '交易状态', align:'center',templet:'#statusTool'}
+            ,{field: 'currency', title: '交易币种', align:'center',templet:'#currencyTool'}
+            ,{field: 'channel', title: '交易渠道', align:'center',templet:'#channelTool'}
             ,{field: 'usage', title: '交易用途', align:'center'}
-            ,{field: 'attachInfo', title: '附言', align:'center'}
+            ,{field: 'attachInfo', title: '附言', align:'center',templet:'#attachInfoTool'}
         ]]
         ,skin: 'line' //表格风格
         ,even: true
@@ -79,6 +116,25 @@
         ,limits: [5, 7, 10]
         ,limit: 5 //每页默认显示的数量
     });
+    function setTime(v){
+        return new Date(parseInt(v)).toLocaleString()
+    }
+    Date.prototype.toLocaleString = function() {
+        var y = this.getFullYear();
+        var m = this.getMonth()+1;
+        m = m<10?'0'+m:m;
+        var d = this.getDate();
+        d = d<10?("0"+d):d;
+        var h = this.getHours();
+        h = h<10?("0"+h):h;
+        var M = this.getMinutes();
+        M = M<10?("0"+M):M;
+        var S=this.getSeconds();
+        S=S<10?("0"+S):S;
+        return y+"-"+m+"-"+d+" "+h+":"+M+":"+S;
+        //返回的时间格式 2018-12-27 15：35
+        //自定义时间格式直接更改return格式即可
+    };
     function search(){
         var begin_dates = $("#begin_date").val();
         var end_dates = $("#end_date").val();

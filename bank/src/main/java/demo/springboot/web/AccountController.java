@@ -73,14 +73,14 @@ public class AccountController {
 		return map;
 	}
 
-	// 查询账户列表
+	// 查询交易明细
 	@RequestMapping("/transformList")
 		@ResponseBody
 		public Map<String, Object> transformList(HttpServletRequest request,
 				HttpServletResponse response, @RequestParam int page,
 			@RequestParam int limit, @ModelAttribute TransformRecode recode) {
 			Log log = new Log();
-			log.setOperation("查询账户列表");
+			log.setOperation("查询交易明细");
 			log.setUser_id((String) request.getSession().getAttribute("user_id"));
 			log.setCreate_time(new Date());
 			log.setIp(CusAccessObjectUtil.getIpAddress(request));
@@ -124,17 +124,15 @@ public class AccountController {
 	public Map<String, Object> log(HttpServletRequest request,
 			HttpServletResponse response, @RequestParam int page,
 			@RequestParam int limit, @ModelAttribute Log log) {
-		
-		/*
-		 * Log log5 = new Log(); log5.setOperation("日志查询");
-		 * log5.setUser_id((String)
-		 * request.getSession().getAttribute("user_id"));
-		 * log5.setCreate_time(new Date());
-		 * log5.setIp(CusAccessObjectUtil.getIpAddress(request));
-		 * log5.setType(5); log5.setSuccess(1);
-		 * logService.insertSelective(log5);
-		 */
-		
+
+			log.setOperation("日志查询");
+			log.setUser_id((String) request.getSession().getAttribute("user_id"));
+			log.setCreate_time(new Date());
+			log.setIp(CusAccessObjectUtil.getIpAddress(request));
+			log.setType(5);
+			log.setSuccess(1);
+			logService.insertSelective(log);
+
 		Map<String, Object> map = new HashMap<>();
 
 		List<Log> logs = logService.selectList(log, page, limit);
