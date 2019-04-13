@@ -9,4 +9,6 @@ public interface UserService {
 	public User selectByUsername(String username);
 	
 	String update(User user);
+
+	public void insert(User user);
 }

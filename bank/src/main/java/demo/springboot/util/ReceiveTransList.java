@@ -39,7 +39,8 @@ public class ReceiveTransList {
 			tmp.setPayerAccountNo((String) row.get("payerAccountNo"));
 			tmp.setStatus((String) row.get("status"));
 			tmp.setTransName((String) row.get("transName"));
-			// tmp.setTransTime((String) row.get("transTime"));
+			Long time = (Long) row.get("transTime");
+			tmp.setTransTime(time + "");
 			tmp.setUsage((String) row.get("usage"));
 			list.add(tmp);
 			System.out.println(row.get("attachInfo"));

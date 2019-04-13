@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import demo.springboot.domain.Log;
@@ -19,6 +20,7 @@ import demo.springboot.service.LogService;
 import demo.springboot.service.UserService;
 import demo.springboot.util.CusAccessObjectUtil;
 import demo.springboot.util.JsonData;
+import demo.springboot.util.ReceiveAccountValidate;
 import demo.springboot.util.VerifyCodeUtils;
 
 @RestController
@@ -210,5 +212,53 @@ public class LoginController {
 		System.out.println("退出成功");
 		return json;
 
+	}
+
+	@RequestMapping("/accountValidate")
+	@ResponseBody
+	public JsonData accountValidate(HttpServletRequest request,
+			HttpServletResponse response, @ModelAttribute User user) {
+		JsonData json = new JsonData();
+		try {
+			// 发送短信验证码
+			String code = getCode();
+			request.getSession().setAttribute("msgCode", code);
+			// request.getSession().setAttribute("user_id", user.getUser_id());
+			ReceiveAccountValidate.receiveAccountValidate(user.getPassword(),
+					user.getUser_id(), code, user.getPhone_number() + "");
+			json.setSuccess(true);
+		} catch (Exception e) {
+			json.setSuccess(false);
+			json.setMsg("未知错误，请联系管理员");
+		}
+		return json;
+	}
+
+	// 注册
+	@RequestMapping("/signin")
+	@ResponseBody
+	public JsonData signin(HttpServletRequest request,
+			HttpServletResponse response, @ModelAttribute User user) {
+		JsonData json = new JsonData();
+		try {
+			if (!request.getAttribute("msgCode").equals(
+					request.getSession().getAttribute("msgCode"))) {
+				json.setSuccess(false);
+				json.setMsg("短信验证码错误");
+				return json;
+			}
+			userService.insert(user);
+
+			json.setSuccess(true);
+		} catch (Exception e) {
+			json.setSuccess(false);
+			json.setMsg("未知错误，请联系管理员");
+		}
+		return json;
+	}
+
+	public String getCode() {
+		int newNum = (int) ((Math.random() * 9 + 1) * 100000);
+		return String.valueOf(newNum);
 	}
 }

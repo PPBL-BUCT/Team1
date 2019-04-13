@@ -233,6 +233,8 @@ public class AccountController {
 		return json;
 	}
 
+	// 确认转账页面，把收到的数据全部反倒页面
+
 	@RequestMapping("/transfer")
 	@ResponseBody
 	public JsonData transfer(HttpServletRequest request,
@@ -264,6 +266,7 @@ public class AccountController {
 			logService.insertSelective(log2);
 			return json;
 		}
+		request.getSession().setAttribute("msgCode", null);
 		try {
 			// 调用远程数据库 ,查询结果
 			System.out.println(request.getParameter("signature"));
