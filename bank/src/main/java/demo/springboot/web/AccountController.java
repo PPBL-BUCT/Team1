@@ -26,6 +26,7 @@ import demo.springboot.service.UserService;
 import demo.springboot.util.CusAccessObjectUtil;
 import demo.springboot.util.JsonData;
 import demo.springboot.util.ReceiveBalance;
+import demo.springboot.util.ReceiveMessage;
 import demo.springboot.util.ReceiveTransList;
 import demo.springboot.util.ReceiveTransfer;
 
@@ -219,6 +220,11 @@ public class AccountController {
 		JsonData json = new JsonData();
 		try {
 			json.setObj(transform);
+			// 发送短信验证码
+			String code = getCode();
+			request.getSession().setAttribute("msgCode", code);
+			ReceiveMessage.receiveMessage(code, (String) request.getSession()
+					.getAttribute("user_id"));
 			json.setSuccess(true);
 		} catch (Exception e) {
 			json.setSuccess(false);
@@ -232,10 +238,30 @@ public class AccountController {
 	public JsonData transfer(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute Transform transform) {
 		JsonData json = new JsonData();
+		// 记录日志
+		Log log2 = new Log();
+		log2.setOperation("转账汇款");
+		log2.setUser_id((String) request.getSession().getAttribute("user_id"));
+		log2.setCreate_time(new Date());
+		log2.setIp(CusAccessObjectUtil.getIpAddress(request));
+		log2.setType(1);
+		log2.setSuccess(1);
+		// 检查密文
 		if (!accountService.checkSHA(request.getParameter("signature"),
 				transform)) {
 			json.setSuccess(false);
+			log2.setSuccess(0);
+			logService.insertSelective(log2);
 			json.setMsg("信息被篡改，请检查网络环境");
+			return json;
+		}
+		// 检查短信验证码
+		if (!transform.getDynamicpassword().equals(
+				request.getSession().getAttribute("msgCode"))) {
+			json.setSuccess(false);
+			json.setMsg("短信验证码错误");
+			log2.setSuccess(0);
+			logService.insertSelective(log2);
 			return json;
 		}
 		try {
@@ -246,9 +272,12 @@ public class AccountController {
 					transform.getAmount(), "CNY",
 					transform.getTransferpassword(),
 					transform.getPurpose(), "转账")) {
+				logService.insertSelective(log2);
 				json.setSuccess(true);
 			} else {
 				json.setSuccess(false);
+				log2.setSuccess(0);
+				logService.insertSelective(log2);
 			}
 			// json.setObj(transform);
 
@@ -257,5 +286,10 @@ public class AccountController {
 			json.setMsg("未知错误，请联系管理员");
 		}
 		return json;
+	}
+
+	public String getCode() {
+		int newNum = (int) ((Math.random() * 9 + 1) * 100000);
+		return String.valueOf(newNum);
 	}
 }

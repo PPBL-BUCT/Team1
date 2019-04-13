@@ -22,6 +22,6 @@ public class ReceiveMessage {
 		return flag.equals("send error");//0为正确1为错误
        }
 	public static void main(String[] args) {
-		receiveMessage("9981","68923574986311018745");
+		receiveMessage("1017", "68923574986311018739");
 	}//测试
 }
