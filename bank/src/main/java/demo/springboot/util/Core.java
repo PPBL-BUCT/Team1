@@ -11,7 +11,9 @@ public class Core {
     public static final String ACCOUNT_CHECK= "AccountPasswordValidate.do";
 	public static final String GET_TREANSFER = "InnerTransfer.do";
 	public static final String GET_TRANSLIST = "TransList.do";
-
+	public static final String GET_MESSAGE = "SendSMS.do";
+	public static final String GET_ACCOUNTMESSAGE = "AccountValidate.do";
+	
 	public static String getUrl_GetBalance() {
 		
 		String url_GetBalance = "http://" + IP + ":" + PORT + "/" + NAME + "/"
@@ -44,6 +46,21 @@ public class Core {
 	public static String getUrl_GetTransList() {
 		String url_GetBalance = "http://" + IP + ":" + PORT + "/" + NAME + "/"
 				+ GET_TRANSLIST;
+
+		return url_GetBalance;
+	}
+	
+	public static String getUrl_GetMessage() {
+		String url_GetBalance = "http://" + IP + ":" + PORT + "/" + NAME + "/"
+				+ GET_MESSAGE;
+
+		return url_GetBalance;
+	}
+
+
+	public static String getUrl_AccountValidate() {
+		String url_GetBalance = "http://" + IP + ":" + PORT + "/" + NAME + "/"
+				+ GET_ACCOUNTMESSAGE;
 
 		return url_GetBalance;
 	}
