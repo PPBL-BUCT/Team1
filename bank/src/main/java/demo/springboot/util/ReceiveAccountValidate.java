@@ -22,6 +22,6 @@ public class ReceiveAccountValidate {
 		return flag.equals("send error");//0为正确1为错误
        }
 	public static void main(String[] args) {
-		receiveAccountValidate("376881","68923574986311018739","9981","18811610528");
+		receiveAccountValidate("871122","6218129187020499","9981","18811610528");
 	}
 }

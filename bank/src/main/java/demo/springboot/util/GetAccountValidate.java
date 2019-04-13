@@ -21,7 +21,6 @@ public class GetAccountValidate {
 	      String dateName = df.format(calendar.getTime());
 		  header.put("MESSNO","73E5D41A84234958A1C997A0B5A6C30D");
 		  header.put("RQ-TIME", dateName);
-		  header.put("RS-CODE", "000708");
 		  header.put("PKG", "AccountValidate");
 		  
 		  Map body = new HashMap();
