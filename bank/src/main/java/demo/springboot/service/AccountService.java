@@ -3,6 +3,7 @@ package demo.springboot.service;
 import java.util.List;
 
 import demo.springboot.domain.Account;
+import demo.springboot.domain.Transform;
 
 public interface AccountService {
 	int deleteByPrimaryKey(Integer account);
@@ -18,4 +19,6 @@ public interface AccountService {
     int updateByPrimaryKey(Account record);
 
 	List<Account> getAll(String user_id);
+
+	boolean checkSHA(String parameter, Transform transform);
 }

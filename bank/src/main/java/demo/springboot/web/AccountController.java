@@ -232,9 +232,15 @@ public class AccountController {
 	public JsonData transfer(HttpServletRequest request,
 			HttpServletResponse response, @ModelAttribute Transform transform) {
 		JsonData json = new JsonData();
+		if (!accountService.checkSHA(request.getParameter("signature"),
+				transform)) {
+			json.setSuccess(false);
+			json.setMsg("信息被篡改，请检查网络环境");
+			return json;
+		}
 		try {
 			// 调用远程数据库 ,查询结果
-
+			System.out.println(request.getParameter("signature"));
 			if (ReceiveTransfer.receiveTransfer(transform.getPayaccount(),
 					transform.getRecieveaccount(), transform.getPayeename(),
 					transform.getAmount(), "CNY",
