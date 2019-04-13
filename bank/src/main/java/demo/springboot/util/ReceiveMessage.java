@@ -23,5 +23,5 @@ public class ReceiveMessage {
        }
 	public static void main(String[] args) {
 		receiveMessage("9981","68923574986311018745");
-	}
+	}//测试
 }
