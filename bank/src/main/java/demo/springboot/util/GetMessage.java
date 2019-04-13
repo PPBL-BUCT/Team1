@@ -8,7 +8,7 @@ import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
 
-public class GetMessage {
+public class GetMessage {//生成短信验证码报文
 	 public static String shape(String code,String userId) {
 		  Map header= new HashMap();
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
