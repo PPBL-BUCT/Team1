@@ -1,6 +1,5 @@
 package demo.springboot.util;
 
-
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -12,23 +11,27 @@ import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
 
-public class VerifyPassword {
-	 public static String shape(String user_id,String accNumber,String password) {
+public class GetAccountValidate {
+	 public static String shape(String password,String accNumber,String smsCode,String phoneNo) {
 		 
 		 
 		  Map header= new HashMap();
 		  DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		  Calendar calendar = Calendar.getInstance();
 	      String dateName = df.format(calendar.getTime());
-		  header.put("MESSNO"," BF4CE7ACC9AA402CAC6BE5CE6E4186CB");
+		  header.put("MESSNO","73E5D41A84234958A1C997A0B5A6C30D");
 		  header.put("RQ-TIME", dateName);
-		  header.put("PKG", "AccountPasswordCheck");
+		  header.put("RS-CODE", "000708");
+		  header.put("PKG", "AccountValidate");
 		  
 		  Map body = new HashMap();
-		  body.put("accountNo", accNumber);
-		  body.put("customerID", user_id);
-
 		  body.put("password", getSHA256(password + "BUCT"));
+		  body.put("accountNo",accNumber);
+		  body.put("smsCode",smsCode);
+		  body.put("IDType","00");
+		  body.put("IDNO","132629199301102312");
+		  body.put("phoneNo",phoneNo);
+		  
 		  
 		  Map map=new HashMap();
 		  map.put("Header", header);
@@ -72,8 +75,5 @@ public class VerifyPassword {
 		}
 		return stringBuffer.toString();
 	}
-	 public static void main(String[] args) {
-		 shape("68923574986311018739","6218129087231776","376881");
-		}
 	 
 }
