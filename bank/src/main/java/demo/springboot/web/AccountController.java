@@ -125,13 +125,13 @@ public class AccountController {
 			HttpServletResponse response, @RequestParam int page,
 			@RequestParam int limit, @ModelAttribute Log log) {
 
-			log.setOperation("日志查询");
-			log.setUser_id((String) request.getSession().getAttribute("user_id"));
-			log.setCreate_time(new Date());
-			log.setIp(CusAccessObjectUtil.getIpAddress(request));
-			log.setType(5);
-			log.setSuccess(1);
-			logService.insertSelective(log);
+//			log.setOperation("日志查询");
+//			log.setUser_id((String) request.getSession().getAttribute("user_id"));
+//			log.setCreate_time(new Date());
+//			log.setIp(CusAccessObjectUtil.getIpAddress(request));
+//			log.setType(5);
+//			log.setSuccess(1);
+//			logService.insertSelective(log);
 
 		Map<String, Object> map = new HashMap<>();
 
