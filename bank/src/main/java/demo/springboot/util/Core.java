@@ -3,7 +3,7 @@ package demo.springboot.util;
 
 public class Core {
 
-	public final static String IP = "118.25.143.204"; // 流类型-流
+	public final static String IP = "118.25.78.207"; // 流类型-流
 	public final static String PORT = "8080"; // 流类型-流
     public final static String smsIP="118.25.78.207";
 	public final static String NAME = "HostSimulator"; // 流类型-流
