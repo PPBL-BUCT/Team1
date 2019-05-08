@@ -2,7 +2,9 @@ package demo.springboot.util;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -10,20 +12,23 @@ import com.alibaba.fastjson.JSONObject;
 import demo.springboot.domain.TransformRecode;
 
 public class ReceiveTransList {
-	public static List<TransformRecode> receiveTransList(String acctNo,
-			String dateFrom, String dateTo, String pageSize, String pageNum) {
-	    String res = HttpConnection.doPost(Core.getUrl_GetTransList(),
+	public static Map<String, Object> receiveTransList(String acctNo,
+													   String dateFrom, String dateTo, String pageSize, String pageNum) {
+
+		String res = HttpConnection.doPost(Core.getUrl_GetTransList(),
  GetTransList.shape(acctNo,
 						dateFrom, dateTo, pageSize, pageNum));
 
 
 	    System.out.println(res);
 		JSONObject jsonObject= JSONObject.parseObject(res);
+		Map<String, Object> map = new HashMap<>();
 		// Map<String,Object>returnJson=(Map<String,Object>)jsonObject;
 		
 		// System.out.println(returnBody.get("TransList"));
 		JSONArray items = jsonObject.getJSONObject("Body").getJSONArray(
 				"TransList");
+		int total = Integer.parseInt(String.valueOf(jsonObject.getJSONObject("Body").getJSONObject("total")));
 		JSONObject row = null;
 		List<TransformRecode> list = new ArrayList<TransformRecode>();
 		for (int i = 0; i < items.size(); i++) {
@@ -45,7 +50,11 @@ public class ReceiveTransList {
 			list.add(tmp);
 			System.out.println(row.get("attachInfo"));
 		}
-		return list;
+		map.put("code", 0);
+		map.put("msg", "");
+		map.put("count", total);
+		map.put("data", list);
+		return map;
 		
 	}
 

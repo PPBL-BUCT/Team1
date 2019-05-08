@@ -87,16 +87,12 @@ public class AccountController {
 			log.setType(4);
 			log.setSuccess(1);
 			logService.insertSelective(log);
-			Map<String, Object> map = new HashMap<>();
 			HttpSession session = request.getSession();
-			
-		List<TransformRecode> list = ReceiveTransList.receiveTransList(
+
+			Map<String, Object> map = ReceiveTransList.receiveTransList(
 				recode.getPayerAccountNo(), recode.getDateFrom(),
-				recode.getDateTo(), page + "", limit + "");
-			map.put("code", 0);
-			map.put("msg", "");
-			map.put("count", list.size());
-			map.put("data", list);
+				recode.getDateTo(),limit + "",page + "");
+
 			return map;
 		}
 
