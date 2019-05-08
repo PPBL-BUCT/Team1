@@ -28,7 +28,8 @@ public class ReceiveTransList {
 		// System.out.println(returnBody.get("TransList"));
 		JSONArray items = jsonObject.getJSONObject("Body").getJSONArray(
 				"TransList");
-		int total = Integer.parseInt(String.valueOf(jsonObject.getJSONObject("Body").getJSONObject("total")));
+		JSONObject total = jsonObject.getJSONObject("Body").getJSONObject("total");
+		Integer Total = Integer.valueOf(String.valueOf(total));
 		JSONObject row = null;
 		List<TransformRecode> list = new ArrayList<TransformRecode>();
 		for (int i = 0; i < items.size(); i++) {
@@ -52,7 +53,7 @@ public class ReceiveTransList {
 		}
 		map.put("code", 0);
 		map.put("msg", "");
-		map.put("count", total);
+		map.put("count", Total);
 		map.put("data", list);
 		return map;
 		
